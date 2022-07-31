@@ -1,0 +1,63 @@
+.tamano-texto-cuerpo-lista{
+    font-size: 15px;
+    font-weight: 500;
+}
+.tamano-texto-cuerpo-boton{
+    font-size: 15px;
+    font-weight: 500;
+}
+/* No tiene Permisos de hoja */
+.centrar-texto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-size: 40px;
+    font-weight: bold;
+}
+.tamano-texto{
+    font-size: 30px;
+}
+/* No tiene Permisos de hoja */
+/*Tabla Familia*/
+.flujocaja-tabla {
+    border-color: #5b9bd5;
+    text-align: center;
+}
+.flujocaja-tabla > thead {
+    background-color: #5b9bd5;
+    border-color: #5b9bd5
+}
+.flujocaja-tabla > thead > tr > th {
+    color: white;
+}
+.flujocaja-tabla > tbody {
+    border-color: #5b9bd5;
+}
+.flujocaja-tabla > tbody > tr:nth-child(odd) {
+    background-color: #ddebf7;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+
+.titulo-flujocaja{
+    font-size: 40px;
+    text-decoration: underline;
+}
+.subtitulo-flujocaja{
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.subtitulo-flujocaja-metalica{
+    font-style: italic;
+    font-size: 25px;
+}
+.fujocajatextolista{
+    text-align: center;
+}
+.fujocajatextoPlatalista{
+    text-align: right;
+}
+/*Fin Tabla Familia*/

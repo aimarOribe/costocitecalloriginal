@@ -1,0 +1,11 @@
+.centrar-texto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-size: 40px;
+    font-weight: bold;
+}
+.tamano-texto{
+    font-size: 30px;
+}

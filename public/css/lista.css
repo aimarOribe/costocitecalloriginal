@@ -1,0 +1,150 @@
+.margen-listas{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.margenes-botones{
+    padding: 15px 0px 15px 0px;
+}
+.boton-actualizar{
+    max-width: 150px;
+}
+.tamano-texto-cuerpo-lista{
+    font-size: 13px;
+    font-weight: 500;
+}
+.tamano-texto-cuerpo-boton{
+    font-size: 15px;
+    font-weight: 500;
+    margin: 5px;
+}
+
+/* No tiene Permisos de hoja */
+.centrar-texto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-size: 40px;
+    font-weight: bold;
+}
+.tamano-texto{
+    font-size: 30px;
+}
+/* No tiene Permisos de hoja */
+
+/*Tabla Lista Unidad de Medidas*/
+.listaUnidadDeMedidas-tabla {
+    border-color: #5b9bd5;
+    text-align: center;
+}
+.listaUnidadDeMedidas-tabla > thead {
+    background-color: #5b9bd5;
+    border-color: #5b9bd5
+}
+.listaUnidadDeMedidas-tabla > thead > tr > th {
+    color: white;
+}
+.listaUnidadDeMedidas-tabla > tbody {
+    border-color: #5b9bd5;
+}
+.listaUnidadDeMedidas-tabla > tbody > tr:nth-child(odd) {
+    background-color: #ddebf7;
+}
+.unidadDeMedidatextolista{
+    text-align: center;
+}
+/*Fin Tabla Lista Unidad de Medidas*/
+
+/*Tabla Lista Procesos*/
+.listaProcesos-tabla {
+    border-color: #5b9bd5;
+    text-align: center;
+}
+.listaProcesos-tabla > thead {
+    background-color: #5b9bd5;
+    border-color: #5b9bd5
+}
+.listaProcesos-tabla > thead > tr > th {
+    color: white;
+}
+.listaProcesos-tabla > tbody {
+    border-color: #5b9bd5;
+}
+.listaProcesos-tabla > tbody > tr:nth-child(odd) {
+    background-color: #ddebf7;
+}
+.listaProcesostextolista{
+    text-align: center;
+}
+/*Fin Tabla Lista Procesos*/
+
+/*Tabla Lista Clasificacions*/
+.listaClasificacions-tabla {
+    border-color: #5b9bd5;
+    text-align: center;
+}
+.listaClasificacions-tabla > thead {
+    background-color: #5b9bd5;
+    border-color: #5b9bd5
+}
+.listaClasificacions-tabla > thead > tr > th {
+    color: white;
+}
+.listaClasificacions-tabla > tbody {
+    border-color: #5b9bd5;
+}
+.listaClasificacions-tabla > tbody > tr:nth-child(odd) {
+    background-color: #ddebf7;
+}
+.listaClasificacionstextolista{
+    text-align: center;
+}
+/*Fin Tabla Lista Clasificacions*/
+
+/*Tabla Lista Unidad de Consumos*/
+.listaUnidadConsumos-tabla {
+    border-color: #5b9bd5;
+    text-align: center;
+}
+.listaUnidadConsumos-tabla > thead {
+    background-color: #5b9bd5;
+    border-color: #5b9bd5
+}
+.listaUnidadConsumos-tabla > thead > tr > th {
+    color: white;
+}
+.listaUnidadConsumos-tabla > tbody {
+    border-color: #5b9bd5;
+}
+.listaUnidadConsumos-tabla > tbody > tr:nth-child(odd) {
+    background-color: #ddebf7;
+}
+.listaUnidadConsumoStextolista{
+    text-align: left;
+}
+/*Fin Tabla Lista Unidad de Consumos*/
+
+/*Tabla Lista Familias de Materiales*/
+.listaFamiliasMateriales-tabla {
+    border-color: #5b9bd5;
+    text-align: center;
+}
+.listaFamiliasMateriales-tabla > thead {
+    background-color: #5b9bd5;
+    border-color: #5b9bd5
+}
+.listaFamiliasMateriales-tabla > thead > tr > th {
+    color: white;
+}
+.listaFamiliasMateriales-tabla > tbody {
+    border-color: #5b9bd5;
+}
+.listaFamiliasMateriales-tabla > tbody > tr:nth-child(odd) {
+    background-color: #ddebf7;
+}
+.listaUnidadConsumoStextolista{
+    text-align: left;
+}
+/*Fin Tabla Lista Familias de Materiales*/
+
+
