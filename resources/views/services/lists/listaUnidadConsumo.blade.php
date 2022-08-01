@@ -1,4 +1,20 @@
 <div class="col-sm-6 col-md-3 offset-md-2 col-lg-2 offset-lg-0">
+    
+    @if (session('errorServidorunidadconsumo'))
+        <div class="alert alert-danger" role="alert">
+            {{session('errorServidorunidadconsumo')}}
+        </div>
+    @endif
+
+    @if (session('mensajeunidadconsumo'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{session('mensajeunidadconsumo')}}!</strong>
+            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                x
+            </button>
+        </div>
+    @endif
+   
     <div class="margenes-botones">
         <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormListaUnidadConsumo(this)" id="checkAactualizar" checked>
         <label class="form-check-label" for="checkActualizar">
@@ -23,7 +39,7 @@
                 @foreach ($listaUnidadConsumos as $listaUnidadConsumo)
                 <tr>
                     <input hidden name="id[]" value="<?php echo $listaUnidadConsumo->id ?>">
-                    <td><input class="form-control listaUnidadConsumoStextolista tamano-texto-cuerpo-lista" name="nombre[<?php echo $listaUnidadConsumo->id ?>]" value="<?php echo $listaUnidadConsumo->nombre ?>"></td>
+                    <td><input type="text" class="form-control listaUnidadConsumoStextolista tamano-texto-cuerpo-lista" name="nombre[<?php echo $listaUnidadConsumo->id ?>]" value="<?php echo $listaUnidadConsumo->nombre ?>"></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -39,7 +55,7 @@
             @csrf
             <table class="listaUnidadConsumos-tabla table table-bordered" id="tablaListaUnidadConsumos">
                 <tr class="fila-fija-listaUnidadConsumos">
-                    <td><input required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    <td><input type="text" required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
                 </tr>
             </table>
             <div class="btn-der">

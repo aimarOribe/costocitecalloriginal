@@ -1,21 +1,24 @@
 $(function(){
-    $("#adicionalManoObra").on('click', function(){
-        $("#tablaManoObra tbody tr:eq(0)").clone().removeClass('fila-fija-manoObra').appendTo("#tablaManoObra");
-    });
-
-    $("#eliminarManoObra").on('click', function(){
-        $("#tablaManoObra tbody tr:eq(0)").remove();
-    });
-
+    const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
+    document.getElementById('familiaSeleccionado').addEventListener('change',(e)=>{
+        fetch('modelos',{
+            method : 'POST',
+            body: JSON.stringify({texto : e.target.value}),
+            headers:{
+                'Content-Type': 'application/json',
+                "X-CSRF-Token": csrfToken
+            }
+        }).then(response =>{
+            return response.json()
+        }).then( data =>{
+            var opciones ="<option value=''>--</option>";
+            data.lista.forEach(modelo => {
+                opciones+= '<option value="'+modelo.id+'">'+modelo.modelo+'</option>';
+            });
+            document.getElementById("modeloSeleccionado").innerHTML = opciones;
+        }).catch(error =>console.error(error));
+    })
 });
-
-$(function(){
-    $('#familiaSeleccionado').on('change', onSelectFamilyChange);
-});
-
-function onSelectFamilyChange(){
-    
-}
 
 function displayFormManoObra(c) {
     if (c.value == "2") {    

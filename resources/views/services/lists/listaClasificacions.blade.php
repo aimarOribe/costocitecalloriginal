@@ -1,4 +1,20 @@
 <div class="col-sm-6 col-md-3 offset-md-2 col-lg-2 offset-lg-0">
+
+    @if (session('errorServidorclasificacion'))
+        <div class="alert alert-danger" role="alert">
+            {{session('errorServidorclasificacion')}}
+        </div>
+    @endif
+    
+    @if (session('mensajeclasificacion'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{session('mensajeclasificacion')}}!</strong>
+            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                x
+            </button>
+        </div>
+    @endif
+
     <div class="margenes-botones">
         <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormListaClasificacion(this)" id="checkAactualizar" checked>
         <label class="form-check-label" for="checkActualizar">
@@ -23,7 +39,7 @@
                 @foreach ($listaClasificacions as $listaClasificacion)
                 <tr>
                     <input hidden name="id[]" value="<?php echo $listaClasificacion->id ?>">
-                    <td><input class="form-control listaClasificacionstextolista tamano-texto-cuerpo-lista" name="nombre[<?php echo $listaClasificacion->id ?>]" value="<?php echo $listaClasificacion->nombre ?>"></td>
+                    <td><input type="text" class="form-control listaClasificacionstextolista tamano-texto-cuerpo-lista" name="nombre[<?php echo $listaClasificacion->id ?>]" value="<?php echo $listaClasificacion->nombre ?>"></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -39,7 +55,7 @@
             @csrf
             <table class="listaClasificacions-tabla table table-bordered" id="tablaListaClasificacions">
                 <tr class="fila-fija-listaClasificacions">
-                    <td><input required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    <td><input required type="text" name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
                 </tr>
             </table>
             <div class="btn-der">

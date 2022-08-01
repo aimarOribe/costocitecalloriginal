@@ -19,7 +19,10 @@ return new class extends Migration
             $table->foreign('familia_id')
                 ->references('id')
                 ->on('familias');
-            $table->string('insumo');
+            $table->unsignedBigInteger('listafamiliamateriales_id');
+            $table->foreign('listafamiliamateriales_id')
+                ->references('id')
+                ->on('listafamiliademateriales');
             $table->unsignedBigInteger('listaunidadmedida_id');
             $table->foreign('listaunidadmedida_id')
                 ->references('id')

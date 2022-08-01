@@ -1,4 +1,20 @@
 <div class="col-sm-12 col-md-12 offset-md-12 col-lg-12 offset-lg-0">
+
+    @if (session('errorUserModelos'))
+        <div class="alert alert-warning" role="alert">
+            {{session('errorUserModelos')}}
+        </div>
+    @endif
+
+    @if (session('mensajemodelos'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{session('mensajemodelos')}}!</strong>
+            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                x
+            </button>
+        </div>
+    @endif
+
     <div class="margenes-botones">
         <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormModelosInsumosModelos(this)" id="checkAactualizar" checked>
         <label class="form-check-label" for="checkActualizar">
@@ -26,7 +42,7 @@
                     <input hidden name="id[]" value="<?php echo $modelofamilia->id ?>">
                     <td>
                         <select class="form-control" id="familia_id" name="familia_id[<?php echo $modelofamilia->id ?>]">
-                            <option class="tamano-texto-cuerpo-lista" value="">--</option>
+                            <option class="tamano-texto-cuerpo-lista" value="--">--</option>
                             @foreach ($familias as $familia)
                                 <option class="tamano-texto-cuerpo-lista" value="{{$familia->id}}" @if($familia->id===$modelofamilia->familia_id) selected='selected' @endif>
                                     {{$familia->nombre}}
@@ -34,7 +50,7 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input class="form-control tamano-texto-cuerpo-lista" name="modelo[<?php echo $modelofamilia->id ?>]" value="<?php echo $modelofamilia->modelo ?>"></td>
+                    <td><input class="form-control tamano-texto-cuerpo-lista" type="text" name="modelo[<?php echo $modelofamilia->id ?>]" value="<?php echo $modelofamilia->modelo ?>"></td>
                 </tr>
                 @endforeach
             </tbody>

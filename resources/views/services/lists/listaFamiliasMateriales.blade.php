@@ -1,4 +1,20 @@
 <div class="col-sm-6 col-md-3 offset-md-2 col-lg-3 offset-lg-0">
+    
+    @if (session('errorServidorfamiliamateriales'))
+        <div class="alert alert-danger" role="alert">
+            {{session('errorServidorfamiliamateriales')}}
+        </div>
+    @endif
+
+    @if (session('mensajefamiliamateriales'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{session('mensajefamiliamateriales')}}!</strong>
+            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                x
+            </button>
+        </div>
+    @endif
+    
     <div class="margenes-botones">
         <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormListaFamiliasMateriales(this)" id="checkAactualizar" checked>
         <label class="form-check-label" for="checkActualizar">
@@ -23,7 +39,7 @@
                 @foreach ($listaFamiliasMateriales as $listaFamiliasMaterial)
                 <tr>
                     <input hidden name="id[]" value="<?php echo $listaFamiliasMaterial->id ?>">
-                    <td><input class="form-control listaFamiliasMaterialestextolista tamano-texto-cuerpo-lista" name="nombre[<?php echo $listaFamiliasMaterial->id ?>]" value="<?php echo $listaFamiliasMaterial->nombre ?>"></td>
+                    <td><input type="text" class="form-control listaFamiliasMaterialestextolista tamano-texto-cuerpo-lista" name="nombre[<?php echo $listaFamiliasMaterial->id ?>]" value="<?php echo $listaFamiliasMaterial->nombre ?>"></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -40,7 +56,7 @@
             @csrf
             <table class="listaFamiliasMateriales-tabla table table-bordered" id="tablaListaFamiliasMateriales">
                 <tr class="fila-fija-listaFamiliasMateriales">
-                    <td><input required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    <td><input required type="text" name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
                 </tr>
             </table>
             <div class="btn-der">

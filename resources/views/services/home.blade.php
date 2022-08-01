@@ -8,7 +8,7 @@
 
 @section('content')
     @auth
-        @if (auth()->user()->can('familias.inicio') || auth()->user()->can('flujodecajas.inicio') || auth()->user()->can('listas.inicio'))
+        @if (auth()->user()->can('familias.inicio') || auth()->user()->can('flujodecajas.inicio') || auth()->user()->can('listas.inicio') || auth()->user()->can('modeloseinsumos.inicio') || auth()->user()->can('manoobra.inicio'))
             @if (auth()->user()->can('familias.inicio'))
                 <form action="{{route('familias.inicio')}}" method="GET">
                     <div class="centrar-texto">
@@ -31,6 +31,24 @@
                 </form>
             @elseif (auth()->user()->can('listas.inicio'))
                 <form action="{{route('listas.inicio')}}" method="GET">
+                    <div class="centrar-texto">
+                        <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
+                        <button type="submit" class="btn btn-success">
+                            Ir a la hoja u hojas
+                        </button>
+                    </div>
+                </form>
+            @elseif (auth()->user()->can('modeloseinsumos.inicio'))
+                <form action="{{route('modeloseinsumos.inicio')}}" method="GET">
+                    <div class="centrar-texto">
+                        <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
+                        <button type="submit" class="btn btn-success">
+                            Ir a la hoja u hojas
+                        </button>
+                    </div>
+                </form>
+            @elseif (auth()->user()->can('manoobra.inicio'))
+                <form action="{{route('manoobra.inicio')}}" method="GET">
                     <div class="centrar-texto">
                         <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
                         <button type="submit" class="btn btn-success">

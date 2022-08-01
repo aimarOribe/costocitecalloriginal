@@ -12,6 +12,22 @@
 @section('content')
     @if (auth()->user()->can('familias.inicio'))
         <div class="margen-principal">
+
+            @if (session('errorUser'))
+                <div class="alert alert-warning" role="alert">
+                    {{session('errorUser')}}
+                </div>
+            @endif
+
+            @if (session('mensajefamilia'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{session('mensajefamilia')}}!</strong>
+                    <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                        x
+                    </button>
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-body">
                     <div class="margenes-botones">
@@ -40,9 +56,9 @@
                                 @foreach ($familias as $familia)
                                     <tr>
                                         <input hidden name="id[]" value="<?php echo $familia->id ?>">
-                                        <td><input class="form-control tamano-texto-cuerpo-lista" name="nombre[<?php echo $familia->id ?>]" value="<?php echo $familia->nombre ?>"></td>
-                                        <td><input class="form-control familianumeroslista tamano-texto-cuerpo-lista" name="capprosemdocenas[<?php echo $familia->id ?>]" value="<?php echo $familia->capprosemdocenas ?>"></td>
-                                        <td><input class="form-control familianumeroslista tamano-texto-cuerpo-lista" name="capprodmensual[<?php echo $familia->id ?>]" value="<?php echo $familia->capprodmensual ?>"></td>
+                                        <td><input type="text" class="form-control tamano-texto-cuerpo-lista" name="nombre[<?php echo $familia->id ?>]" value="<?php echo $familia->nombre ?>"></td>
+                                        <td><input type="number" class="form-control familianumeroslista tamano-texto-cuerpo-lista" name="capprosemdocenas[<?php echo $familia->id ?>]" value="<?php echo $familia->capprosemdocenas ?>"></td>
+                                        <td><input type="number" class="form-control familianumeroslista tamano-texto-cuerpo-lista" name="capprodmensual[<?php echo $familia->id ?>]" value="<?php echo $familia->capprodmensual ?>"></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -58,9 +74,9 @@
                             @csrf
                             <table class="familia-tabla table table-bordered" id="tabla">
                                 <tr class="fila-fija">
-                                    <td><input required name="nombre[]" placeholder="Name" class="form-control tamano-texto-cuerpo-lista"/></td>
-                                    <td><input required name="capprosemdocenas[]" placeholder="CAP. PROD SEM (DOCENAS)" class="form-control tamano-texto-cuerpo-lista"/></td>
-                                    <td><input required name="capprodmensual[]" placeholder="CAP PROD MENSUAL" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                    <td><input type="text" required name="nombre[]" placeholder="Name" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                    <td><input type="number" name="capprosemdocenas[]" placeholder="CAP. PROD SEM (DOCENAS)" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                    <td><input type="number" name="capprodmensual[]" placeholder="CAP PROD MENSUAL" class="form-control tamano-texto-cuerpo-lista"/></td>
                                 </tr>
                             </table>
                             <div class="btn-der">
@@ -96,15 +112,4 @@
 
 @section('js')
     <script type="text/javascript" src="{{asset('js/familia.js')}}"></script>
-    {{-- <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
-    <script>
-        $('#familias').DataTable({
-            searching: false,
-            responsive: true,
-            autoWidth: false
-        });
-    </script> --}}
 @endsection

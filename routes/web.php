@@ -77,6 +77,8 @@ Route::post('/modeloseinsumosinsumos/actualizar',[ModeloInsumoController::class,
 
 // Mano de Obra
 Route::get('/manoobra',[ManoObraController::class,'inicio'])->middleware('auth')->name('manoobra.inicio');
+Route::post('/modelos',[ManoObraController::class,'obtenerModelos'])->name('modelos');
+Route::post('/modeloslista',[ManoObraController::class,'obtenerModeloslista'])->name('modeloslista');
 Route::post('/manoobra',[ManoObraController::class,'registrarmanoobra'])->name('manoobra.registrarmanoobra');
 Route::post('/manoobra/actualizar',[ManoObraController::class,'actualizarmanoobra'])->name('manoobra.actualizarmanoobra');
 

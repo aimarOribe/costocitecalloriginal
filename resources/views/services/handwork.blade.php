@@ -3,6 +3,7 @@
 @section('title','Mano de Obra')
 
 @section('css')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{asset('css/manoobra.css')}}">
 @endsection
 
@@ -11,6 +12,22 @@
         <div class="margen-principal">
             <div class="card">
                 <div class="card-body">
+
+                    @if (session('errorUserHandWork'))
+                        <div class="alert alert-warning" role="alert">
+                            {{session('errorUserHandWork')}}
+                        </div>
+                    @endif
+
+                    @if (session('mensajemanoobra'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{session('mensajemanoobra')}}!</strong>
+                            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                                x
+                            </button>
+                        </div>
+                    @endif
+
                     <div class="margenes-botones">
                         <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormManoObra(this)" id="checkAactualizar" checked>
                         <label class="form-check-label" for="checkActualizar">
@@ -40,7 +57,7 @@
                                     <tr>
                                         <input hidden name="id[]" value="<?php echo $manoobra->id ?>">
                                         <td>
-                                            <select class="form-control" id="familia_id" name="familia_id[<?php echo $manoobra->id ?>]">
+                                            <select class="form-control" id="familiaSeleccionadaLista" name="familia_id[<?php echo $manoobra->id ?>]">
                                                 <option class="tamano-texto-cuerpo-lista" value="">--</option>
                                                 @foreach ($familias as $familia)
                                                     <option class="tamano-texto-cuerpo-lista" value="{{$familia->id}}" @if($familia->id===$manoobra->familia_id) selected='selected' @endif>
@@ -49,9 +66,28 @@
                                                 @endforeach
                                             </select>
                                         </td>
-                                        <td><input class="form-control tamano-texto-cuerpo-lista" name="familia_id[<?php echo $familia->id ?>]" value="<?php echo $familia->nombre ?>"></td>
-                                        <td><input class="form-control tamano-texto-cuerpo-lista" name="capprosemdocenas[<?php echo $familia->id ?>]" value="<?php echo $familia->capprosemdocenas ?>"></td>
-                                        <td><input class="form-control tamano-texto-cuerpo-lista" name="capprodmensual[<?php echo $familia->id ?>]" value="<?php echo $familia->capprodmensual ?>"></td>
+                                        <td>
+                                            <select class="form-control" id="modeloSeleccionadaLista" name="modelo_id[<?php echo $manoobra->id ?>]">
+                                                <option class="tamano-texto-cuerpo-lista" value="">--</option>
+                                                @foreach ($modelos as $modelo)
+                                                    <option class="tamano-texto-cuerpo-lista" value="{{$modelo->id}}" @if($modelo->id===$manoobra->modelo_id) selected='selected' @endif>
+                                                        {{$modelo->modelo}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control" id="familia_id" name="proceso_id[<?php echo $manoobra->id ?>]">
+                                                <option class="tamano-texto-cuerpo-lista" value="">--</option>
+                                                @foreach ($procesos as $proceso)
+                                                    <option class="tamano-texto-cuerpo-lista" value="{{$proceso->id}}" @if($proceso->id===$manoobra->proceso_id) selected='selected' @endif>
+                                                        {{$proceso->nombre}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td><input type="number" class="form-control tamano-texto-cuerpo-lista" name="tiempohoras[<?php echo $manoobra->id ?>]" value="<?php echo $manoobra->tiempohoras ?>"></td>
+                                        <td><input class="form-control tamano-texto-cuerpo-lista" name="costo[<?php echo $manoobra->id ?>]" value="<?php echo $manoobra->costo ?>"></td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -68,8 +104,8 @@
                             <table class="manoobra-tabla table table-bordered" id="tablaManoObra">
                                 <tr class="fila-fija-manoObra">
                                     <td>
-                                        <select name="familia_id[]" id="familiaSeleccionado" class="form-select" aria-label="Default select example">
-                                            <option>--</option>
+                                        <select name="familia_id" id="familiaSeleccionado" class="form-select" aria-label="Default select example">
+                                            <option value="">--</option>
                                             @foreach ($familias as $familia)
                                                 <option value="{{$familia->id}}">
                                                     {{$familia->nombre}}
@@ -78,18 +114,12 @@
                                         </select>
                                     </td>  
                                     <td>
-                                        <select name="modelo_id[]" id="modeloSeleccionado" class="form-select" aria-label="Default select example">
-                                            <option>--</option>
-                                            @foreach ($modelos as $modelo)
-                                                <option value="{{$modelo->id}}">
-                                                    {{$modelo->modelo}}
-                                                </option>
-                                            @endforeach
+                                        <select name="modelo_id" id="modeloSeleccionado" class="form-select" aria-label="Default select example">
                                         </select>
                                     </td>                                    
                                     <td>
-                                        <select name="proceso_id[]" class="form-select" aria-label="Default select example">
-                                            <option>--</option>
+                                        <select name="proceso_id" class="form-select" aria-label="Default select example">
+                                            <option value="">--</option>
                                             @foreach ($procesos as $proceso)
                                                 <option value="{{$proceso->id}}">
                                                     {{$proceso->nombre}}
@@ -97,16 +127,14 @@
                                             @endforeach
                                         </select>
                                     </td>   
-                                    <td><input required name="tiempohoras[]" placeholder="Tiempo en horas" class="form-control tamano-texto-cuerpo-lista"/></td>
-                                    <td><input required name="costo[]" placeholder="Costo" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                    <td><input type="number" name="tiempohora" placeholder="Tiempo en horas" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                    <td><input name="costo" placeholder="Costo" class="form-control tamano-texto-cuerpo-lista"/></td>
                                 </tr>
                             </table>
                             <div class="btn-der">
                                 @can('manoobra.registrarmanoobra')
                                     <input type="submit" name="insertarManoObra" value="Insert HandWork" class="btn btn-info"/>
                                 @endcan
-                                <button id="adicionalManoObra" name="adicionalManoObra" type="button" class="btn btn-warning"> More + </button>
-                                <button id="eliminarManoObra" name="eliminarManoObra" type="button" class="btn btn-danger"> Less - </button>
                             </div>
                         </form>
                     </div>

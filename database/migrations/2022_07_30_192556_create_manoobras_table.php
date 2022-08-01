@@ -27,8 +27,8 @@ return new class extends Migration
             $table->foreign('proceso_id')
                 ->references('id')
                 ->on('listaprocesos');
-            $table->integer('tiempohoras');
-            $table->double('costo',8,2);
+            $table->integer('tiempohoras')->nullable();
+            $table->double('costo',8,2)->nullable();
             $table->timestamps();
         });
     }

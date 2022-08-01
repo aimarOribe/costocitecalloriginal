@@ -1,4 +1,20 @@
 <div class="col-sm-6 col-md-3 offset-md-2 col-lg-3 offset-lg-0">
+    
+    @if (session('errorServidorUnidadesMedidas'))
+        <div class="alert alert-danger" role="alert">
+            {{session('errorServidorUnidadesMedidas')}}
+        </div>
+    @endif
+
+    @if (session('mensajeunidadmedida'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{session('mensajeunidadmedida')}}!</strong>
+            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                x
+            </button>
+        </div>
+    @endif
+
     <div class="margenes-botones">
         <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormListaUnidadMedida(this)" id="checkAactualizar" checked>
         <label class="form-check-label" for="checkActualizar">
@@ -23,7 +39,7 @@
                 @foreach ($listaUnidadDeMedidas as $listaUnidadDeMedida)
                 <tr>
                     <input hidden name="id[]" value="<?php echo $listaUnidadDeMedida->id ?>">
-                    <td><input class="form-control unidadDeMedidatextolista tamano-texto-cuerpo-lista" name="nombre[<?php echo $listaUnidadDeMedida->id ?>]" value="<?php echo $listaUnidadDeMedida->nombre ?>"></td>
+                    <td><input type="text" class="form-control unidadDeMedidatextolista tamano-texto-cuerpo-lista" name="nombre[<?php echo $listaUnidadDeMedida->id ?>]" value="<?php echo $listaUnidadDeMedida->nombre ?>"></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -39,7 +55,7 @@
             @csrf
             <table class="listaUnidadDeMedidas-tabla table table-bordered" id="tablaListaUnidadMedida">
                 <tr class="fila-fija-listaUnidadDeMedidas">
-                    <td><input required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    <td><input type="text" required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
                 </tr>
             </table>
             <div class="btn-der">

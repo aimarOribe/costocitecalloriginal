@@ -1,4 +1,20 @@
 <div class="col-sm-12 col-md-12 offset-md-12 col-lg-12 offset-lg-0">
+
+    @if (session('errorUserInsumos'))
+        <div class="alert alert-warning" role="alert">
+            {{session('errorUserInsumos')}}
+        </div>
+    @endif
+
+    @if (session('mensajeinsumos'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{session('mensajeinsumos')}}!</strong>
+            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                x
+            </button>
+        </div>
+    @endif
+
     <div class="margenes-botones">
         <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormModelosInsumosInsumos(this)" id="checkAactualizar" checked>
         <label class="form-check-label" for="checkActualizar">
@@ -35,7 +51,16 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input class="form-control tamano-texto-cuerpo-lista" name="insumo[<?php echo $insumofamilia->id ?>]" value="<?php echo $insumofamilia->insumo ?>"></td>
+                    <td>
+                        <select class="form-control" id="listafamiliamateriales_id" name="listafamiliamateriales_id[<?php echo $insumofamilia->id ?>]">
+                            <option class="tamano-texto-cuerpo-lista" value="">--</option>
+                            @foreach ($familiasMateriales as $familiasMateriale)
+                                <option class="tamano-texto-cuerpo-lista" value="{{$familiasMateriale->id}}" @if($familiasMateriale->id===$insumofamilia->listafamiliamateriales_id) selected='selected' @endif>
+                                    {{$familiasMateriale->nombre}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </td>
                     <td>
                         <select class="form-control" id="listaunidadmedida_id" name="listaunidadmedida_id[<?php echo $insumofamilia->id ?>]">
                             <option class="tamano-texto-cuerpo-lista" value="">--</option>
@@ -71,7 +96,16 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input required name="insumo[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    <td>
+                        <select name="listafamiliamateriales_id[]" class="form-select" aria-label="Default select example">
+                            <option>--</option>
+                            @foreach ($familiasMateriales as $familiasMateriale)
+                                <option value="{{$familiasMateriale->id}}">
+                                    {{$familiasMateriale->nombre}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </td>
                     <td>
                         <select name="listaunidadmedida_id[]" class="form-select" aria-label="Default select example">
                             <option>--</option>
