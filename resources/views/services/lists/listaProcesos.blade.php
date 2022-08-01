@@ -54,9 +54,16 @@
         <form action="{{route('listas.registrarlistaProcesos')}}" method="POST">
             @csrf
             <table class="listaProcesos-tabla table table-bordered" id="tablaListaProcesos">
-                <tr class="fila-fija-listaProcesos">
-                    <td><input type="text" required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th scope="col">PROCESO</th>
+                    </tr>
+                </thead>
+                <tbody style="border-color: #5b9bd5">
+                    <tr class="fila-fija-listaProcesos">
+                        <td><input type="text" required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="btn-der">
                 @can('listas.registrarlistaProcesos')

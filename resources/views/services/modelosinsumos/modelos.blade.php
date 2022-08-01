@@ -65,19 +65,27 @@
         <form action="{{route('modeloseinsumos.registrarmodeloseinsumosmodelos')}}" method="POST">
             @csrf
             <table class="modelosInsumosModelos-tabla table table-bordered" id="tablamodeloseinsumosmodelos">
-                <tr class="fila-fija-modeloseinsumosmodelos">
-                    <td>
-                        <select name="familia_id[]" class="form-select" aria-label="Default select example">
-                            <option>--</option>
-                            @foreach ($familias as $familia)
-                                <option value="{{$familia->id}}">
-                                    {{$familia->nombre}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td><input required name="modelo[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th scope="col">Familia</th>
+                        <th scope="col">Modelo</th>
+                    </tr>
+                </thead>
+                <tbody style="border-color: #ed7d31">
+                    <tr class="fila-fija-modeloseinsumosmodelos">
+                        <td>
+                            <select name="familia_id[]" class="form-select" aria-label="Default select example">
+                                <option>--</option>
+                                @foreach ($familias as $familia)
+                                    <option value="{{$familia->id}}">
+                                        {{$familia->nombre}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td><input required name="modelo[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="btn-der">
                 @can('modeloseinsumos.registrarmodeloseinsumosmodelos')

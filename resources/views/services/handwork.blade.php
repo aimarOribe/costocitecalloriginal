@@ -102,34 +102,45 @@
                         <form action="{{route('manoobra.registrarmanoobra')}}" method="POST">
                             @csrf
                             <table class="manoobra-tabla table table-bordered" id="tablaManoObra">
-                                <tr class="fila-fija-manoObra">
-                                    <td>
-                                        <select name="familia_id" id="familiaSeleccionado" class="form-select" aria-label="Default select example">
-                                            <option value="">--</option>
-                                            @foreach ($familias as $familia)
-                                                <option value="{{$familia->id}}">
-                                                    {{$familia->nombre}}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </td>  
-                                    <td>
-                                        <select name="modelo_id" id="modeloSeleccionado" class="form-select" aria-label="Default select example">
-                                        </select>
-                                    </td>                                    
-                                    <td>
-                                        <select name="proceso_id" class="form-select" aria-label="Default select example">
-                                            <option value="">--</option>
-                                            @foreach ($procesos as $proceso)
-                                                <option value="{{$proceso->id}}">
-                                                    {{$proceso->nombre}}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </td>   
-                                    <td><input type="number" name="tiempohora" placeholder="Tiempo en horas" class="form-control tamano-texto-cuerpo-lista"/></td>
-                                    <td><input name="costo" placeholder="Costo" class="form-control tamano-texto-cuerpo-lista"/></td>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">FAMILIA</th>
+                                        <th scope="col">MODELO</th>
+                                        <th scope="col">PROCESO</th>
+                                        <th scope="col">TIEMPO (HORAS)</th>
+                                        <th scope="col">COSTO</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="border-color: #ed7d31">
+                                    <tr class="fila-fija-manoObra">
+                                        <td>
+                                            <select name="familia_id" id="familiaSeleccionado" class="form-select" aria-label="Default select example">
+                                                <option value="">--</option>
+                                                @foreach ($familias as $familia)
+                                                    <option value="{{$familia->id}}">
+                                                        {{$familia->nombre}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>  
+                                        <td>
+                                            <select name="modelo_id" id="modeloSeleccionado" class="form-select" aria-label="Default select example">
+                                            </select>
+                                        </td>                                    
+                                        <td>
+                                            <select name="proceso_id" class="form-select" aria-label="Default select example">
+                                                <option value="">--</option>
+                                                @foreach ($procesos as $proceso)
+                                                    <option value="{{$proceso->id}}">
+                                                        {{$proceso->nombre}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>   
+                                        <td><input type="number" name="tiempohora" placeholder="Tiempo en horas" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                        <td><input name="costo" placeholder="Costo" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                    </tr>
+                                </tbody>
                             </table>
                             <div class="btn-der">
                                 @can('manoobra.registrarmanoobra')

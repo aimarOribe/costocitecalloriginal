@@ -68,6 +68,10 @@ class ManoObraController extends Controller
                 throw new Exception("Debes seleccionar un proceso");
             }
 
+            if($tiempohora == ""){
+                throw new Exception("Debes ingresar un tiempo en horas");
+            }
+
             $costoDecimal = floatval($costo);
 
             if($costoDecimal == 0){

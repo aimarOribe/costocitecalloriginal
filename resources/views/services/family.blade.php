@@ -73,18 +73,27 @@
                         <form action="{{route('familias.registrar')}}" method="POST">
                             @csrf
                             <table class="familia-tabla table table-bordered" id="tabla">
-                                <tr class="fila-fija">
-                                    <td><input type="text" required name="nombre[]" placeholder="Name" class="form-control tamano-texto-cuerpo-lista"/></td>
-                                    <td><input type="number" name="capprosemdocenas[]" placeholder="CAP. PROD SEM (DOCENAS)" class="form-control tamano-texto-cuerpo-lista"/></td>
-                                    <td><input type="number" name="capprodmensual[]" placeholder="CAP PROD MENSUAL" class="form-control tamano-texto-cuerpo-lista"/></td>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th>FAMILIA</th>
+                                        <th>CAP. PROD SEM (DOCENAS)</th>
+                                        <th>CAP PROD MENSUAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="border-color: #ed7d31">
+                                    <tr class="fila-fija">
+                                        <td><input type="text" required name="nombre[]" placeholder="FAMILIA" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                        <td><input type="number" name="capprosemdocenas[]" placeholder="CAP. PROD SEM (DOCENAS)" class="semanal form-control tamano-texto-cuerpo-lista"/></td>
+                                        <td><input type="number" name="capprodmensual[]" placeholder="CAP PROD MENSUAL" class="mensual form-control tamano-texto-cuerpo-lista"/></td>
+                                    </tr>
+                                </tbody>
                             </table>
                             <div class="btn-der">
                                 @can('familias.registrar')
                                     <input type="submit" name="insertar" value="Insert Families" class="btn btn-info"/>
                                 @endcan
-                                <button id="adicional" name="adicional" type="button" class="btn btn-warning"> More + </button>
-                                <button id="eliminar" name="eliminar" type="button" class="btn btn-danger"> Less - </button>
+                                {{-- <button id="adicional" name="adicional" type="button" class="btn btn-warning"> More + </button>
+                                <button id="eliminar" name="eliminar" type="button" class="btn btn-danger"> Less - </button> --}}
                             </div>
                         </form>
                     </div>

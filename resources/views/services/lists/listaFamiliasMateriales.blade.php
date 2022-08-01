@@ -55,9 +55,16 @@
         <form action="{{route('listas.registrarlistaFamiliasMateriales')}}" method="POST">
             @csrf
             <table class="listaFamiliasMateriales-tabla table table-bordered" id="tablaListaFamiliasMateriales">
-                <tr class="fila-fija-listaFamiliasMateriales">
-                    <td><input required type="text" name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th scope="col">FAMILIAS DE MATERIALES</th>
+                    </tr>
+                </thead>
+                <tbody style="border-color: #5b9bd5">
+                    <tr class="fila-fija-listaFamiliasMateriales">
+                        <td><input required type="text" name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="btn-der">
                 @can('listas.registrarlistaFamiliasMateriales')

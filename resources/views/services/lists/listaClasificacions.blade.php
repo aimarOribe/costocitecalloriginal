@@ -54,9 +54,16 @@
         <form action="{{route('listas.registrarclasificacions')}}" method="POST">
             @csrf
             <table class="listaClasificacions-tabla table table-bordered" id="tablaListaClasificacions">
-                <tr class="fila-fija-listaClasificacions">
-                    <td><input required type="text" name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th scope="col">CLASIFICACION</th>
+                    </tr>
+                </thead>
+                <tbody style="border-color: #5b9bd5">
+                    <tr class="fila-fija-listaClasificacions">
+                        <td><input required type="text" name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="btn-der">
                 @can('listas.registrarclasificacions')

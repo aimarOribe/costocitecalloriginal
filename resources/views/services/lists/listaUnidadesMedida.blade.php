@@ -54,9 +54,16 @@
         <form action="{{route('listas.registrarlistaUnidadMedidas')}}" method="POST">
             @csrf
             <table class="listaUnidadDeMedidas-tabla table table-bordered" id="tablaListaUnidadMedida">
-                <tr class="fila-fija-listaUnidadDeMedidas">
-                    <td><input type="text" required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th scope="col">UNIDAD MEDIDA</th>
+                    </tr>
+                </thead>
+                <tbody style="border-color: #5b9bd5">
+                    <tr class="fila-fija-listaUnidadDeMedidas">
+                        <td><input type="text" required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="btn-der">
                 @can('listas.registrarlistaUnidadMedidas')

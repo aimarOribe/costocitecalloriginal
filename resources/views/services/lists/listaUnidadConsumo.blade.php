@@ -54,9 +54,16 @@
         <form action="{{route('listas.registrarlistaUnidadConsumo')}}" method="POST">
             @csrf
             <table class="listaUnidadConsumos-tabla table table-bordered" id="tablaListaUnidadConsumos">
-                <tr class="fila-fija-listaUnidadConsumos">
-                    <td><input type="text" required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th scope="col">UNIDAD DE CONSUMO</th>
+                    </tr>
+                </thead>
+                <tbody style="border-color: #5b9bd5">
+                    <tr class="fila-fija-listaUnidadConsumos">
+                        <td><input type="text" required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
+                    </tr>
+                </tbody>
             </table>
             <div class="btn-der">
                 @can('listas.registrarlistaUnidadConsumo')

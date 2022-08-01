@@ -85,38 +85,47 @@
         <form action="{{route('modeloseinsumos.registrarmodeloseinsumosinsumos')}}" method="POST">
             @csrf
             <table class="modelosInsumosInsumos-tabla table table-bordered" id="tablamodeloseinsumosinsumos">
-                <tr class="fila-fija-modeloseinsumosinsumos">
-                    <td>
-                        <select name="familia_id[]" class="form-select" aria-label="Default select example">
-                            <option>--</option>
-                            @foreach ($familias as $familia)
-                                <option value="{{$familia->id}}">
-                                    {{$familia->nombre}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select name="listafamiliamateriales_id[]" class="form-select" aria-label="Default select example">
-                            <option>--</option>
-                            @foreach ($familiasMateriales as $familiasMateriale)
-                                <option value="{{$familiasMateriale->id}}">
-                                    {{$familiasMateriale->nombre}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td>
-                        <select name="listaunidadmedida_id[]" class="form-select" aria-label="Default select example">
-                            <option>--</option>
-                            @foreach ($unidaddemendidas as $unidaddemendida)
-                                <option value="{{$unidaddemendida->id}}">
-                                    {{$unidaddemendida->nombre}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th scope="col">Familia</th>
+                        <th scope="col">Insumo</th>
+                        <th scope="col">Unidad de Medida</th>
+                    </tr>
+                </thead>
+                <tbody style="border-color: #ed7d31">
+                    <tr class="fila-fija-modeloseinsumosinsumos">
+                        <td>
+                            <select name="familia_id[]" class="form-select" aria-label="Default select example">
+                                <option>--</option>
+                                @foreach ($familias as $familia)
+                                    <option value="{{$familia->id}}">
+                                        {{$familia->nombre}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <select name="listafamiliamateriales_id[]" class="form-select" aria-label="Default select example">
+                                <option>--</option>
+                                @foreach ($familiasMateriales as $familiasMateriale)
+                                    <option value="{{$familiasMateriale->id}}">
+                                        {{$familiasMateriale->nombre}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td>
+                            <select name="listaunidadmedida_id[]" class="form-select" aria-label="Default select example">
+                                <option>--</option>
+                                @foreach ($unidaddemendidas as $unidaddemendida)
+                                    <option value="{{$unidaddemendida->id}}">
+                                        {{$unidaddemendida->nombre}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
             <div class="btn-der">
                 @can('modeloseinsumos.registrarmodeloseinsumosinsumos')
