@@ -33,8 +33,7 @@
             <thead>
                 <tr>
                     <th scope="col">Familia</th>
-                    <th scope="col">Insumo</th>
-                    <th scope="col">Unidad de Medida</th>
+                    <th scope="col">Familia de Materiales</th>
                 </tr>
             </thead>
             <tbody style="border-color: #ed7d31">
@@ -61,16 +60,6 @@
                             @endforeach
                         </select>
                     </td>
-                    <td>
-                        <select class="form-control" id="listaunidadmedida_id" name="listaunidadmedida_id[<?php echo $insumofamilia->id ?>]">
-                            <option class="tamano-texto-cuerpo-lista" value="">--</option>
-                            @foreach ($unidaddemendidas as $unidaddemendida)
-                                <option class="tamano-texto-cuerpo-lista" value="{{$unidaddemendida->id}}" @if($unidaddemendida->id===$insumofamilia->listaunidadmedida_id) selected='selected' @endif>
-                                    {{$unidaddemendida->nombre}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -88,8 +77,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Familia</th>
-                        <th scope="col">Insumo</th>
-                        <th scope="col">Unidad de Medida</th>
+                        <th scope="col">Familia de Materiales</th>
                     </tr>
                 </thead>
                 <tbody style="border-color: #ed7d31">
@@ -110,16 +98,6 @@
                                 @foreach ($familiasMateriales as $familiasMateriale)
                                     <option value="{{$familiasMateriale->id}}">
                                         {{$familiasMateriale->nombre}}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td>
-                            <select name="listaunidadmedida_id[]" class="form-select" aria-label="Default select example">
-                                <option>--</option>
-                                @foreach ($unidaddemendidas as $unidaddemendida)
-                                    <option value="{{$unidaddemendida->id}}">
-                                        {{$unidaddemendida->nombre}}
                                     </option>
                                 @endforeach
                             </select>

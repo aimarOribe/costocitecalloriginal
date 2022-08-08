@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('insumofamilias', function (Blueprint $table) {
+        Schema::create('gifempleadossinbeneficios', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('familia_id');
-            $table->foreign('familia_id')
+            $table->string('nombre');
+            $table->float('sueldo');
+            $table->integer('ntrabajadores');
+            $table->unsignedBigInteger('regimenlaboral_id');
+            $table->foreign('regimenlaboral_id')
                 ->references('id')
-                ->on('familias');
-            $table->unsignedBigInteger('listafamiliamateriales_id');
-            $table->foreign('listafamiliamateriales_id')
-                ->references('id')
-                ->on('listafamiliademateriales');
+                ->on('regimenlaborals');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('insumofamilias');
+        Schema::dropIfExists('gifempleadossinbeneficios');
     }
 };

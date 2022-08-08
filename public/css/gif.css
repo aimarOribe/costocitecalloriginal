@@ -1,0 +1,397 @@
+.tamano-texto-cuerpo-lista{
+    font-size: 16px;
+    font-weight: 500;
+}
+.tamano-texto-cuerpo-boton{
+    font-size: 15px;
+    font-weight: 500;
+}
+/* No tiene Permisos de hoja */
+.centrar-texto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-size: 40px;
+    font-weight: bold;
+}
+.tamano-texto{
+    font-size: 30px;
+}
+/* No tiene Permisos de hoja */
+/*Tabla Mano obra sin beneficios*/
+.empleadosconsinbeneficios-tabla {
+    border-color: white;
+    text-align: center;
+}
+.empleadosconsinbeneficios-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.empleadosconsinbeneficios-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.empleadosconsinbeneficios-tabla > tbody {
+    border-color: white;
+}
+.empleadosconsinbeneficios-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Mano obra sin beneficios*/
+
+/*Tabla Mano obra con beneficios*/
+.empleadosconbeneficios-tabla {
+    border-color: white;
+    text-align: center;
+}
+.empleadosconbeneficios-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.empleadosconbeneficios-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.empleadosconbeneficios-tabla > tbody {
+    border-color: white;
+}
+.empleadosconbeneficios-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Mano obra con beneficios*/
+
+/*Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > modelaje y seriado con beneficios*/
+.hmsidfmodelajeseriado-tabla {
+    border-color: white;
+    text-align: center;
+}
+.hmsidfmodelajeseriado-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.hmsidfmodelajeseriado-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.hmsidfmodelajeseriado-tabla > tbody {
+    border-color: white;
+}
+.hmsidfmodelajeseriado-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.hmsidfmodelajeseriado-tabla > thead > .tipos > .tipohmsief {
+    font-size: 12px;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > modelaje y seriado con beneficios*/
+
+/*Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > corte*/
+.hmsidfcorte-tabla {
+    border-color: white;
+    text-align: center;
+}
+.hmsidfcorte-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.hmsidfcorte-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.hmsidfcorte-tabla > tbody {
+    border-color: white;
+}
+.hmsidfcorte-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.hmsidfcorte-tabla > thead > .tipos > .tipohmsief {
+    font-size: 12px;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > corte*/
+
+/*Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Aparado*/
+.hmsidfaparado-tabla {
+    border-color: white;
+    text-align: center;
+}
+.hmsidfaparado-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.hmsidfaparado-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.hmsidfaparado-tabla > tbody {
+    border-color: white;
+}
+.hmsidfaparado-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.hmsidfaparado-tabla > thead > .tipos > .tipohmsief {
+    font-size: 12px;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Aparado*/
+
+/*Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Armado*/
+.hmsidfarmado-tabla {
+    border-color: white;
+    text-align: center;
+}
+.hmsidfarmado-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.hmsidfarmado-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.hmsidfarmado-tabla > tbody {
+    border-color: white;
+}
+.hmsidfarmado-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.hmsidfarmado-tabla > thead > .tipos > .tipohmsief {
+    font-size: 12px;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Armado*/
+
+/*Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Alistado*/
+.hmsidfalistado-tabla {
+    border-color: white;
+    text-align: center;
+}
+.hmsidfalistado-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.hmsidfalistado-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.hmsidfalistado-tabla > tbody {
+    border-color: white;
+}
+.hmsidfalistado-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.hmsidfalistado-tabla > thead > .tipos > .tipohmsief {
+    font-size: 12px;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Alistado*/
+
+/*Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Limpieza*/
+.hmsidflimpieza-tabla {
+    border-color: white;
+    text-align: center;
+}
+.hmsidflimpieza-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.hmsidflimpieza-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.hmsidflimpieza-tabla > tbody {
+    border-color: white;
+}
+.hmsidflimpieza-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.hmsidflimpieza-tabla > thead > .tipos > .tipohmsief {
+    font-size: 12px;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Limpieza*/
+
+/*Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Equipo de proteccion personal*/
+.hmsidfeppersonal-tabla {
+    border-color: white;
+    text-align: center;
+}
+.hmsidfeppersonal-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.hmsidfeppersonal-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.hmsidfeppersonal-tabla > tbody {
+    border-color: white;
+}
+.hmsidfeppersonal-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.hmsidfeppersonal-tabla > thead > .tipos > .tipohmsief {
+    font-size: 12px;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Equipo de proteccion personal*/
+
+/*Tabla REPUESTOS Y MANTENIMIENTO > Corte*/
+.rmcorte-tabla {
+    border-color: white;
+    text-align: center;
+}
+.rmcorte-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.rmcorte-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.rmcorte-tabla > tbody {
+    border-color: white;
+}
+.rmcorte-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.rmcorte-tabla > thead > .tipos > .tipohmsief {
+    font-size: 12px;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla REPUESTOS Y MANTENIMIENTO > Corte*/
+
+/*Tabla REPUESTOS Y MANTENIMIENTO > Aparado*/
+.rmaparado-tabla {
+    border-color: white;
+    text-align: center;
+}
+.rmaparado-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.rmaparado-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.rmaparado-tabla > tbody {
+    border-color: white;
+}
+.rmaparado-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.rmaparado-tabla > thead > .tipos > .tipohmsief {
+    font-size: 12px;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla REPUESTOS Y MANTENIMIENTO > Aparado*/
+
+/*Tabla REPUESTOS Y MANTENIMIENTO > Armado*/
+.rmarmado-tabla {
+    border-color: white;
+    text-align: center;
+}
+.rmarmado-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.rmarmado-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.rmarmado-tabla > tbody {
+    border-color: white;
+}
+.rmarmado-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.rmarmado-tabla > thead > .tipos > .tipohmsief {
+    font-size: 12px;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla REPUESTOS Y MANTENIMIENTO > Armado*/
+
+/* DETALLES DE LA PAGINA */
+.gif-titulo{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: right;
+    background-color: #b7b7b7;
+    padding: 5px;
+    font-weight: 600;
+}
+.gif-subtituloempleados{
+    display: grid;
+    grid-template-columns: .5fr 3fr .5fr;
+    justify-content: space-evenly;
+    background-color: #fef2cb;
+    border: 1px black solid;
+    padding: 5px;
+    font-weight: 600;
+}
+.gif-subtituloempleados > div > input{
+    color: white;
+}
+/* DETALLES DE LA PAGINA FIN */

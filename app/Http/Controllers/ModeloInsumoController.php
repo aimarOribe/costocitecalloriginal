@@ -87,11 +87,9 @@ class ModeloInsumoController extends Controller
             $mensaje = "";
             $familia_ids = $request->familia_id;
             $listafamiliamateriales_ids = $request->listafamiliamateriales_id;
-            $listaunidadmedida_ids = $request->listaunidadmedida_id;
             while(true){
                 $familia_id = current($familia_ids);
                 $listafamiliamateriales_id = current($listafamiliamateriales_ids);
-                $listaunidadmedida_id = current($listaunidadmedida_ids);
 
                 if($familia_id == "--"){
                     throw new Exception("Debes ingresar una familia");
@@ -101,22 +99,16 @@ class ModeloInsumoController extends Controller
                     throw new Exception("Debes ingresar una familia de materiales");
                 }
 
-                if($listaunidadmedida_id == "--"){
-                    throw new Exception("Debes ingresar una unidad de medida");
-                }
-
                 $insumofamilia = new Insumofamilia();
                 $insumofamilia->familia_id = $familia_id;
                 $insumofamilia->listafamiliamateriales_id = $listafamiliamateriales_id;
-                $insumofamilia->listaunidadmedida_id = $listaunidadmedida_id;
                 $insumofamilia->save();
                 $mensaje = "Insumo(s) Registrados Correctamente";
 
                 $familia_id = next($familia_ids);
                 $listafamiliamateriales_id = next($listafamiliamateriales_ids);
-                $listaunidadmedida_id = next($listaunidadmedida_ids);
 
-                if($familia_id === false && $listafamiliamateriales_id === false && $listaunidadmedida_id === false) break;
+                if($familia_id === false && $listafamiliamateriales_id === false) break;
             }
             return redirect()->route('modeloseinsumos.inicio')->with('mensajeinsumos',$mensaje);
         } catch (\Exception $e) {
@@ -129,17 +121,16 @@ class ModeloInsumoController extends Controller
         try {
             $mensaje = "";
             foreach ($request->id as $ids) {
-                if ($request->familia_id[$ids] == "" & $request->listafamiliamateriales_id[$ids] == "" & $request->listaunidadmedida_id[$ids] == ""){
+                if ($request->familia_id[$ids] == "" & $request->listafamiliamateriales_id[$ids] == ""){
                     $insumoFamilia = Insumofamilia::find($ids);
                     $insumoFamilia->delete();
                     $mensaje = "Insumo Eliminado Correctamente";
                 } else{
                     $familia_id = $request->familia_id[$ids];
                     $listafamiliamateriales_id = $request->listafamiliamateriales_id[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
 
-                    if($familia_id == "" && $listafamiliamateriales_id == "" && $listaunidadmedida_id == ""){
-                        throw new Exception("No puedes vaciar el campo de familia, familia de materiales y unidad de medida");
+                    if($familia_id == "" && $listafamiliamateriales_id == ""){
+                        throw new Exception("No puedes vaciar el campo de familia Y familia de materiales");
                     }
 
                     if($familia_id == ""){
@@ -150,13 +141,9 @@ class ModeloInsumoController extends Controller
                         throw new Exception("No puedes vaciar el campo de familia de materiales");
                     }
 
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes vaciar el campo de unidad de medida");
-                    }
-
                     DB::table('insumofamilias')
                         ->where('id',$ids)
-                        ->update(['familia_id'=>$familia_id,'listafamiliamateriales_id'=>$listafamiliamateriales_id,'listaunidadmedida_id'=>$listaunidadmedida_id]);
+                        ->update(['familia_id'=>$familia_id,'listafamiliamateriales_id'=>$listafamiliamateriales_id]);
                     $mensaje = "Insumo Actualizado Correctamente";
                 }
             }

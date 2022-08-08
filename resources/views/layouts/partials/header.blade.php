@@ -7,38 +7,72 @@
             </a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    @can('familias.inicio')
-                        <li>
-                            <a class="nav-link {{request()->routeIs('familias.*') ? 'active servicio-ctivo':''}}" href="{{route('familias.inicio')}}">Familia</a>
-                        </li>
-                    @endcan
-                    @can('flujodecajas.inicio')
+                    {{-- @can('flujodecajas.inicio')
                         <li>
                             <a class="nav-link {{request()->routeIs('flujodecajas.*') ? 'active servicio-ctivo':''}}" href="{{route('flujodecajas.inicio')}}">Flujo de Caja</a>
                         </li>
-                    @endcan
-                    @can('listas.inicio')
-                        <li>
-                            <a class="nav-link {{request()->routeIs('listas.*') ? 'active servicio-ctivo':''}}" href="{{route('listas.inicio')}}">Listas</a>
-                        </li>
-                    @endcan     
-                    @can('modeloseinsumos.inicio')
-                        <li>
-                            <a class="nav-link {{request()->routeIs('modeloseinsumos.*') ? 'active servicio-ctivo':''}}" href="{{route('modeloseinsumos.inicio')}}">Modelos e Insumos</a>
-                        </li>
-                    @endcan
-                    @can('manoobra.inicio')
-                        <li>
-                            <a class="nav-link {{request()->routeIs('manoobra.*') ? 'active servicio-ctivo':''}}" href="{{route('manoobra.inicio')}}">Mano de Obra</a>
-                        </li>
-                    @endcan                
+                    @endcan --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Más
+                            Tablas Maestras
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">asdasdas</a></li>
-                            <li><a class="dropdown-item" href="#">qweqweqweqw</a></li>
+                            @can('familias.inicio')
+                                <li>
+                                    <a class="nav-link {{request()->routeIs('familias.*') ? 'active servicio-ctivo':''}}" href="{{route('familias.inicio')}}">Familia</a>
+                                </li>
+                            @endcan
+                            @can('listas.inicio')
+                                <li>
+                                    <a class="nav-link {{request()->routeIs('listas.*') ? 'active servicio-ctivo':''}}" href="{{route('listas.inicio')}}">Listas</a>
+                                </li>
+                            @endcan  
+                            @can('modeloseinsumos.inicio')
+                                <li>
+                                    <a class="nav-link {{request()->routeIs('modeloseinsumos.*') ? 'active servicio-ctivo':''}}" href="{{route('modeloseinsumos.inicio')}}">Modelos y Familia de Materiales</a>
+                                </li>
+                            @endcan 
+                            @can('familiamaterialesmateriales.inicio')   
+                                <li>
+                                    <a class="nav-link {{request()->routeIs('familiamaterialesmateriales.*') ? 'active servicio-ctivo':''}}" href="{{route('familiamaterialesmateriales.inicio')}}">Materiales</a>
+                                </li>    
+                            @endcan 
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Procesos
+                        </a>
+                        <ul class="dropdown-menu">
+                            @can('manoobra.inicio')
+                                <li>
+                                    <a class="nav-link {{request()->routeIs('manoobra.*') ? 'active servicio-ctivo':''}}" href="{{route('manoobra.inicio')}}">Mano de Obra</a>
+                                </li>
+                            @endcan  
+                            <li>
+                                <a href="{{route('insumos.inicio')}}">Insumos</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Gastos
+                        </a>
+                        <ul class="dropdown-menu">
+                            @can('gif.inicio')
+                                <li>
+                                    <a class="nav-link {{request()->routeIs('gif.*') ? 'active servicio-ctivo':''}}" href="{{route('gif.inicio')}}">GIF</a>
+                                </li>
+                            @endcan  
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Reportes
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Reporte Uno</a></li>
+                            <li><a class="dropdown-item" href="#">Reporte Dos</a></li>
                         </ul>
                     </li>
                 </ul>

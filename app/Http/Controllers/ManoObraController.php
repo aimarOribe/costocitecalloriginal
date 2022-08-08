@@ -28,12 +28,16 @@ class ManoObraController extends Controller
     public function obtenerModelos(Request $request){
         if(isset($request->texto)){
             $modelos = Modelofamilia::where('familia_id',$request->texto)->get();
+            //$manoobra = Manoobra::where('familia_id',$request->texto)->get();
+            $manoobra = DB::table('manoobras')->where('familia_id',$request->texto)->get();
+
             return response()->json(
                 [
                     'lista' => $modelos,
+                    'manoobras' => $manoobra,
                     'success' => true
                 ]
-                );
+            );
         }else{
             return response()->json(
                 [

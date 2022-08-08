@@ -1,0 +1,59 @@
+.margen-listas{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.margenes-botones{
+    padding: 15px 0px 15px 0px;
+}
+.boton-actualizar{
+    max-width: 150px;
+}
+.tamano-texto-cuerpo-lista{
+    font-size: 13px;
+    font-weight: 500;
+}
+.tamano-texto-cuerpo-boton{
+    font-size: 15px;
+    font-weight: 500;
+    margin: 5px;
+}
+
+/* No tiene Permisos de hoja */
+.centrar-texto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-size: 40px;
+    font-weight: bold;
+}
+.tamano-texto{
+    font-size: 30px;
+}
+/* No tiene Permisos de hoja */
+
+/*Tabla Modelos*/
+.fmmateriales-tabla {
+    border-color: #ed7d31;
+    text-align: center;
+}
+.fmmateriales-tabla > thead {
+    background-color: #ed7d31;
+    border-color: #ed7d31
+}
+.fmmateriales-tabla > thead > tr > th {
+    color: white;
+}
+.fmmateriales-tabla > tbody {
+    border-color: #ed7d31;
+}
+.fmmateriales-tabla > tbody > tr:nth-child(odd) {
+    background-color: #fce4d6;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Modelos*/

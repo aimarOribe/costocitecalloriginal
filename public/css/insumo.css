@@ -1,0 +1,148 @@
+.tablaInsumos > thead{
+    border-color: #5b9bd5;
+}
+
+.tablaInsumos > thead > tr > .pprincipalfondocolor{
+    background-color: #5b9bd5;
+}
+
+.tablaInsumos > thead > tr > .pprincipalfondocoloritems{
+    background-color: #5b9bd5;
+}
+
+.tablaInsumos > thead > tr > .color-blanco-texto{
+    color: white;
+}
+
+.tablaInsumos > thead > tr > .alinear-texto-centro{
+    text-align: center;
+}
+
+.tablaInsumos > thead > .alinear-texto-centro{
+    text-align: center;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(1) {
+    background-color: #ddebf7;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(2) {
+    background-color: #ddebf7;
+}
+
+.tamano-texto-cabeza-lista > th{
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.tamano-texto-cuerpo-lista > td{
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* ESTILOS DE PRIMER NIVEL */
+
+.tablaInsumos > thead > tr > .pnivelunofondocolor{
+    background-color: #c65911;
+}
+
+.tablaInsumos > thead > tr > .pnivelunofondocoloritems{
+    background-color: #f4b084;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(3) {
+    background-color: #f4b084;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(4) {
+    background-color: #f4b084;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(5) {
+    background-color: #f4b084;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(6) {
+    background-color: #f4b084;
+}
+
+
+/* ESTILOS DE PRIMER NIVEL FIN */
+
+
+/* ESTILOS DE SEGUNDO NIVEL */
+
+.tablaInsumos > thead > tr > .pniveldosfondocolor{
+    background-color: #806000;
+}
+
+.tablaInsumos > thead > tr > .pniveldosfondocolordos{
+    background-color: #bf8f00;
+}
+
+.tablaInsumos > thead > tr > .pniveldosfondocoloritems{
+    background-color: #ffe699;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(7) {
+    background-color: #ffe699;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(8) {
+    background-color: #ffe699;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(9) {
+    background-color: #ffe699;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(10) {
+    background-color: #ffe699;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(11) {
+    background-color: #ffe699;
+}
+
+/* ESTILOS DE SEGUNDO NIVEL FIN */
+
+
+/* ESTILOS DE TERCER NIVEL  */
+
+.tablaInsumos > thead > tr > .mensajefondocolor{
+    background-color: #ffff00;
+}
+
+.tablaInsumos > thead > tr > .pniveltresfondocolor{
+    background-color: #548235;
+}
+
+.tablaInsumos > thead > tr > .pniveltresfondocoloritems{
+    background-color: #c6e0b4;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(12) {
+    background-color: #c6e0b4;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(13) {
+    background-color: #c6e0b4;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(14) {
+    background-color: #c6e0b4;
+}
+
+.tablaInsumos > tbody > tr > td:nth-child(15) {
+    background-color: #c6e0b4;
+}
+
+/* ESTILOS DE TERCER NIVEL FIN */
+
+/* RESULTADO DE TABLA INSUMOS */
+
+.tablaInsumos > tbody > tr > td:nth-child(16) {
+    background-color: #ddebf7;
+}
+
+/* RESULTADO DE TABLA INSUMOS FIN */

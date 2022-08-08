@@ -52,12 +52,15 @@
                                     <th scope="col">COSTO</th>
                                 </tr>
                             </thead>
-                            <tbody style="border-color: #ed7d31">
+                            <tbody style="border-color: #ed7d31" class="cuerpopadremanoobra">
+                                <?php $i = 0; ?>
                                 @foreach ($manoobras as $manoobra)
+                                    <?php $i++; ?>
                                     <tr>
+                                        <input hidden class="vamos-<?php echo $i ?>" value="<?php echo $manoobra->modelo_id ?>">
                                         <input hidden name="id[]" value="<?php echo $manoobra->id ?>">
                                         <td>
-                                            <select class="form-control" id="familiaSeleccionadaLista" name="familia_id[<?php echo $manoobra->id ?>]">
+                                            <select class="opcionfamilia-<?php echo $i ?> form-control" name="familia_id[<?php echo $manoobra->id ?>]">
                                                 <option class="tamano-texto-cuerpo-lista" value="">--</option>
                                                 @foreach ($familias as $familia)
                                                     <option class="tamano-texto-cuerpo-lista" value="{{$familia->id}}" @if($familia->id===$manoobra->familia_id) selected='selected' @endif>
@@ -67,13 +70,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select class="form-control" id="modeloSeleccionadaLista" name="modelo_id[<?php echo $manoobra->id ?>]">
-                                                <option class="tamano-texto-cuerpo-lista" value="">--</option>
-                                                @foreach ($modelos as $modelo)
-                                                    <option class="tamano-texto-cuerpo-lista" value="{{$modelo->id}}" @if($modelo->id===$manoobra->modelo_id) selected='selected' @endif>
-                                                        {{$modelo->modelo}}
-                                                    </option>
-                                                @endforeach
+                                            <select class="opcionmodelo-<?php echo $i ?> form-control" name="modelo_id[<?php echo $manoobra->id ?>]">
                                             </select>
                                         </td>
                                         <td>

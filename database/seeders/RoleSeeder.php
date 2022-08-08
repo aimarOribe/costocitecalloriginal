@@ -113,5 +113,23 @@ class RoleSeeder extends Seeder
                             'description' => 'Registrar un nuevo item en Mano de Obra'])->syncRoles([$roleAdmin,$rolaPersona]);
         Permission::create(['name' => 'manoobra.actualizarmanoobra',
                             'description' => 'Actualizar un item en Mano de Obra'])->syncRoles([$roleAdmin]);
+
+        //Familia Materiales Materiales
+        Permission::create(['name' => 'familiamaterialesmateriales.inicio',
+                            'description' => 'Acceder a la navegacion de Materiales'])->syncRoles([$roleAdmin,$rolaPersona]);
+        Permission::create(['name' => 'familiamaterialesmateriales.registrarfamiliamaterialesmateriales',
+                            'description' => 'Registrar un nuevo item en Materiales'])->syncRoles([$roleAdmin,$rolaPersona]);
+        Permission::create(['name' => 'familiamaterialesmateriales.actualizarfamiliamaterialesmateriales',
+                            'description' => 'Actualizar un item en Materiales'])->syncRoles([$roleAdmin]);
+
+        //GIF
+        Permission::create(['name' => 'gif.inicio',
+                            'description' => 'Acceder a la navegacion de GIF'])->syncRoles([$roleAdmin,$rolaPersona]);
+        
+        //GIF -> Empleados con y sin beneficios
+        Permission::create(['name' => 'gi.registrar',
+                            'description' => 'Registrar un nuevo item en Gif'])->syncRoles([$roleAdmin,$rolaPersona]);
+        Permission::create(['name' => 'gif.actualizar',
+                            'description' => 'Actualizar un item en Gif'])->syncRoles([$roleAdmin]);
     }
 }
