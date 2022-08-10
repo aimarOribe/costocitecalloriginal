@@ -373,6 +373,21 @@
 }
 /*Fin Tabla REPUESTOS Y MANTENIMIENTO > Armado*/
 
+/* Modal */
+.empleadosconsinbeneficiosmodal-tabla{
+    border-color: white;
+    text-align: center;
+}
+.empleadosconsinbeneficiosmodal-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.empleadosconsinbeneficiosmodal-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+/* Modal Fin */
+
 /* DETALLES DE LA PAGINA */
 .gif-titulo{
     display: grid;

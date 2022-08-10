@@ -13,15 +13,8 @@
 <br>
 
 <div class="margenes-botones">
-    <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormhmsidfmodelajeseriado(this)" id="checkAactualizar" checked>
-    <label class="form-check-label" for="checkActualizar">
-        Update
-    </label>  
-    
-    <input class="form-check-input" value="2" type="radio" name="formselector" onClick="displayFormhmsidfmodelajeseriado(this)" id="checkRegistrar">
-    <label class="form-check-label" for="checkRegistrar">
-        Register
-    </label>
+    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormhmsidfmodelajeseriado(this)">See Modeling and Series</button>
+    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormhmsidfmodelajeseriado(this)">Register Modeling and Series</button>
 </div>
 
 <div id="requestFormhmsidfmodelajeseriado">

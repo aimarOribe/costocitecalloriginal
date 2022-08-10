@@ -63,6 +63,120 @@ class GifController extends Controller
         return view('services.gif',compact('gifs','regimenlaborales','regimenlaboralesconbeneficios','gifempleadosconbeneficios','gifempleadossinbeneficios','unidaddemedidas','hmsiefmodelajeseriados','hmsiefcortes','hmsiefaparados','hmsiefarmados','hmsiefalistados','hmsieflimpiezas','hmsiefeppersonales','rmcortes','rmaparados','rmarmados'));
     }
 
+    // Modal de Mano de Obra sin beneficios
+    public function registrargifmanoobrasinbeneficiosmodal(Request $request){
+        try {
+            $mensaje = "";
+            $nombre = $request->nombre;
+            $numero = $request->numero;
+
+            $numeroDecimal = floatval($numero);
+            
+
+            $regimenlaboral = new Regimenlaboral();
+            $regimenlaboral->nombre = $nombre;
+            $regimenlaboral->numero = $numeroDecimal;
+            $regimenlaboral->save();
+
+            $mensaje = "Regimen Laboral Guardado Correctamente";
+            return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
+            return redirect()->route('gif.inicio')->with('errorUser',$error);
+        }
+    }
+
+    public function actualizargifmanoobrasinbeneficiosmodal(Request $request){
+        try {
+            $mensaje = "";
+            foreach ($request->id as $ids) {
+                if ($request->nombre[$ids] == "" && $request->numero[$ids] == ""){
+                    $regimenlaboral = Regimenlaboral::find($ids);
+                    $regimenlaboral->delete();
+                    $mensaje = "Regimen Laboral Eliminado Correctamente";
+                } else {
+                    $nombre = $request->nombre[$ids];
+                    $numero = $request->numero[$ids];
+
+                    if($nombre == ""){
+                        throw new Exception("No puedes borrar el nombre");
+                    }
+
+                    if($numero == ""){
+                        throw new Exception("No puedes borrar el numero");
+                    }
+
+                    $numeroDecimal = floatval($numero);
+
+                    DB::table('regimenlaborals')
+                        ->where('id',$ids)
+                        ->update(['nombre'=>$nombre,'numero'=>$numeroDecimal]);
+                    $mensaje = "Regimen Laboral Actualizado Correctamente";
+                }
+            }
+            return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
+            return redirect()->route('gif.inicio')->with('errorUser',$error);
+        }
+    }
+
+    public function registrargifmanoobraconbeneficiosmodal(Request $request){
+        try {
+            $mensaje = "";
+            $nombre = $request->nombre;
+            $numero = $request->numero;
+
+            $numeroDecimal = floatval($numero);
+
+            $regimenlaboral = new Regimenlaboralconbeneficio();
+            $regimenlaboral->nombre = $nombre;
+            $regimenlaboral->numero = $numeroDecimal;
+            $regimenlaboral->save();
+
+            $mensaje = "Regimen Laboral Guardado Correctamente";
+            return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
+            return redirect()->route('gif.inicio')->with('errorUser',$error);
+        }
+    }
+
+    public function actualizargifmanoobraconbeneficiosmodal(Request $request){
+        try {
+            $mensaje = "";
+            foreach ($request->id as $ids) {
+                if ($request->nombre[$ids] == "" && $request->numero[$ids] == ""){
+                    $regimenlaboral = Regimenlaboralconbeneficio::find($ids);
+                    $regimenlaboral->delete();
+                    $mensaje = "Regimen Laboral Eliminado Correctamente";
+                } else {
+                    $nombre = $request->nombre[$ids];
+                    $numero = $request->numero[$ids];
+
+                    if($nombre == ""){
+                        throw new Exception("No puedes borrar el nombre");
+                    }
+
+                    if($numero == ""){
+                        throw new Exception("No puedes borrar el numero");
+                    }
+
+                    $numeroDecimal = floatval($numero);
+
+                    DB::table('regimenlaboralconbeneficios')
+                        ->where('id',$ids)
+                        ->update(['nombre'=>$nombre,'numero'=>$numeroDecimal]);
+                    $mensaje = "Regimen Laboral Actualizado Correctamente";
+                }
+            }
+            return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
+            return redirect()->route('gif.inicio')->with('errorUser',$error);
+        }
+    }
+
     public function obtenervalorgif(Request $request){
         if(isset($request->texto)){
             DB::table('gifs')

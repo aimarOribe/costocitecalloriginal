@@ -1,13 +1,8 @@
+<br>
+
 <div class="margenes-botones">
-    <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormhmsidflimpieza(this)" id="checkAactualizar" checked>
-    <label class="form-check-label" for="checkActualizar">
-        Update
-    </label>  
-    
-    <input class="form-check-input" value="2" type="radio" name="formselector" onClick="displayFormhmsidflimpieza(this)" id="checkRegistrar">
-    <label class="form-check-label" for="checkRegistrar">
-        Register
-    </label>
+    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormhmsidflimpieza(this)">See cleaning</button>
+    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormhmsidflimpieza(this)">Register cleaning</button>
 </div>
 
 <div id="requestFormhmsidflimpieza">
@@ -60,7 +55,7 @@
         </tbody>
     </table>
     @can('gif.actualizar')
-        <input type="submit" name="actualizarhmsidflimpieza" value="Update armed" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarhmsidflimpieza" value="Update cleaning" class="btn btn-warning tamano-texto-cuerpo-boton"/>
     @endcan
     {!! Form::close() !!}
 </div>
@@ -109,7 +104,7 @@
         </table>
         <div class="btn-der">
             @can('gi.registrar')
-                <input type="submit" name="insertarhmsidflimpieza" value="Insert armed" class="btn btn-info"/>
+                <input type="submit" name="insertarhmsidflimpieza" value="Insert cleaning" class="btn btn-info"/>
             @endcan
         </div>
     </form>

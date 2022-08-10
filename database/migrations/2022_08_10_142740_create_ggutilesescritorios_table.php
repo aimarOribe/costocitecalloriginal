@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gifempleadosconbeneficios', function (Blueprint $table) {
+        Schema::create('ggutilesescritorios', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->float('sueldo');
-            $table->integer('ntrabajadores');
-            $table->unsignedBigInteger('regimenlaboral_id');
-            $table->foreign('regimenlaboral_id')
-                ->references('id')
-                ->on('regimenlaborals');
+            $table->string('descripcion');
+            $table->float('gasto',8,2);
+            $table->integer('cantidad');
+            $table->integer('periodoanual');
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gifempleadosconbeneficios');
+        Schema::dropIfExists('ggutilesescritorios');
     }
 };

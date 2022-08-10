@@ -13,15 +13,8 @@
 <br>
 
 <div class="margenes-botones">
-    <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormrmcorte(this)" id="checkAactualizar" checked>
-    <label class="form-check-label" for="checkActualizar">
-        Update
-    </label>  
-    
-    <input class="form-check-input" value="2" type="radio" name="formselector" onClick="displayFormrmcorte(this)" id="checkRegistrar">
-    <label class="form-check-label" for="checkRegistrar">
-        Register
-    </label>
+    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormrmcorte(this)">Ver Cortes</button>
+    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormrmcorte(this)">Registrar Cortes</button>
 </div>
 
 <div id="requestFormrmcorte">
@@ -74,7 +67,7 @@
         </tbody>
     </table>
     @can('gif.actualizar')
-        <input type="submit" name="actualizarrmcorte" value="Update Cut" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarrmcorte" value="Actualizar Cortes" class="btn btn-warning tamano-texto-cuerpo-boton"/>
     @endcan
     {!! Form::close() !!}
 </div>
@@ -123,7 +116,7 @@
         </table>
         <div class="btn-der">
             @can('gi.registrar')
-                <input type="submit" name="insertarrmcorte" value="Insert Cut" class="btn btn-info"/>
+                <input type="submit" name="insertarrmcorte" value="Insertar Cortes" class="btn btn-info"/>
             @endcan
         </div>
     </form>

@@ -13,15 +13,12 @@
 <br>
 
 <div class="margenes-botones">
-    <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormgifempleadosconsinbeneficios(this)" id="checkAactualizar" checked>
-    <label class="form-check-label" for="checkActualizar">
-        Update
-    </label>  
-    
-    <input class="form-check-input" value="2" type="radio" name="formselector" onClick="displayFormgifempleadosconsinbeneficios(this)" id="checkRegistrar">
-    <label class="form-check-label" for="checkRegistrar">
-        Register
-    </label>
+    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormgifempleadosconsinbeneficios(this)">See Workforce</button>
+    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormgifempleadosconsinbeneficios(this)">Register Workforce</button>
+    {{-- <button type="button" class="btn btn-info btn-sm tamano-texto-cuerpo-boton" data-toggle="modal" data-target="#EjemploModal">Regimen Laboral</button> --}}
+    <button type="button" class="btn btn-info btn-sm tamano-texto-cuerpo-boton" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Regimen Laboral
+    </button>
 </div>
 
 <div id="requestFormempleadosconsinbeneficios">
@@ -61,7 +58,7 @@
         </tbody>
     </table>
     @can('gif.actualizar')
-        <input type="submit" name="actualizarempleadosconsinbeneficios" value="Update Indirect labor" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarempleadosconsinbeneficios" value="Update Workforce" class="btn btn-warning tamano-texto-cuerpo-boton"/>
     @endcan
     
     {!! Form::close() !!}
@@ -99,8 +96,75 @@
         </table>
         <div class="btn-der">
             @can('gi.registrar')
-                <input type="submit" name="insertarempleadosconsinbeneficios" value="Insert Indirect labor" class="btn btn-info"/>
+                <input type="submit" name="insertarempleadosconsinbeneficios" value="Insert Workforce" class="btn btn-info"/>
             @endcan
         </div>
     </form>
 </div>
+
+{{-- MODAL DE REGIMEN LABORAL SIN BENEFICIO --}}
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="EjemploModalLabel">Regimen Laboral</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="margenes-botones">
+                <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormgifempleadosconsinbeneficiosmodal(this)">Ver Regimenes Laborales</button>
+                <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormgifempleadosconsinbeneficiosmodal(this)">Registrar Regimen Laboral</button>
+            </div>
+
+            <div id="requestFormempleadosconsinbeneficiosmodal">
+                {!! Form::open(['url' => 'gifmanoobrasinbeneficiosmodal/actualizar', 'method' => 'post']) !!}
+                    <table id="empleadosconsinbeneficiosmodal" class="empleadosconsinbeneficiosmodal-tabla table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Numero</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($regimenlaborales as $regimenlaboral)
+                                <tr>
+                                    <input hidden name="id[]" value="<?php echo $regimenlaboral->id ?>">
+                                    <td><input type="text" class="form-control tamano-texto-cuerpo-lista" name="nombre[<?php echo $regimenlaboral->id ?>]" value="<?php echo $regimenlaboral->nombre ?>"></td>
+                                    <td><input class="form-control familianumeroslista tamano-texto-cuerpo-lista" name="numero[<?php echo $regimenlaboral->id ?>]" value="<?php echo $regimenlaboral->numero ?>"></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <input type="submit" name="actualizarempleadosconsinbeneficiosmodal" value="Actualizar Regimenes Laborales" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+                {!! Form::close() !!}
+            </div>
+
+            <div style="display:none" id="memberFormempleadosconsinbeneficiosmodal">
+                {!! Form::open(['url' => 'gifmanoobrasinbeneficiosmodal', 'method' => 'post']) !!}
+                <table class="empleadosconsinbeneficiosmodal-tabla table table-bordered" id="tabla">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Numero</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input required type="text" class="form-control tamano-texto-cuerpo-lista" name="nombre"></td>
+                            <td><input required class="form-control tamano-texto-cuerpo-lista" name="numero"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-der">
+                    <input type="submit" name="insertarempleadosconsinbeneficios" value="Insertar Regimen Laboral" class="btn btn-info"/>
+                </div>
+                {!! Form::close() !!}
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+{{-- MODAL DE REGIMEN LABORAL SIN BENEFICIO --}}
+

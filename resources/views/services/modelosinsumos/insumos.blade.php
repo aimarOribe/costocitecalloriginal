@@ -16,15 +16,8 @@
     @endif
 
     <div class="margenes-botones">
-        <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormModelosInsumosInsumos(this)" id="checkAactualizar" checked>
-        <label class="form-check-label" for="checkActualizar">
-            Update
-        </label>  
-        
-        <input class="form-check-input" value="2" type="radio" name="formselector" onClick="displayFormModelosInsumosInsumos(this)" id="checkRegistrar">
-        <label class="form-check-label" for="checkRegistrar">
-            Register
-        </label>
+        <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormModelosInsumosInsumos(this)">See Material Families</button>
+        <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormModelosInsumosInsumos(this)">Register Material Family</button>
     </div>
 
     <div id="requestFormModelosInsumosInsumos">
@@ -41,7 +34,7 @@
                 <tr>
                     <input hidden name="id[]" value="<?php echo $insumofamilia->id ?>">
                     <td>
-                        <select class="form-control" id="familia_id" name="familia_id[<?php echo $insumofamilia->id ?>]">
+                        <select class="form-control tamano-texto-cuerpo-lista" id="familia_id" name="familia_id[<?php echo $insumofamilia->id ?>]">
                             <option class="tamano-texto-cuerpo-lista" value="">--</option>
                             @foreach ($familias as $familia)
                                 <option class="tamano-texto-cuerpo-lista" value="{{$familia->id}}" @if($familia->id===$insumofamilia->familia_id) selected='selected' @endif>

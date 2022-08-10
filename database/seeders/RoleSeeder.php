@@ -122,14 +122,28 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'familiamaterialesmateriales.actualizarfamiliamaterialesmateriales',
                             'description' => 'Actualizar un item en Materiales'])->syncRoles([$roleAdmin]);
 
+        //DEP
+        Permission::create(['name' => 'dep.inicio',
+                            'description' => 'Acceder a la navegacion de DEP'])->syncRoles([$roleAdmin,$rolaPersona]);
+        Permission::create(['name' => 'dep.registrardeps',
+                            'description' => 'Registrar un nuevo item en DEP'])->syncRoles([$roleAdmin,$rolaPersona]);
+        Permission::create(['name' => 'dep.actualizardeps',
+                            'description' => 'Actualizar un item en DEP'])->syncRoles([$roleAdmin]);
+
         //GIF
         Permission::create(['name' => 'gif.inicio',
                             'description' => 'Acceder a la navegacion de GIF'])->syncRoles([$roleAdmin,$rolaPersona]);
-        
-        //GIF -> Empleados con y sin beneficios
         Permission::create(['name' => 'gi.registrar',
                             'description' => 'Registrar un nuevo item en Gif'])->syncRoles([$roleAdmin,$rolaPersona]);
         Permission::create(['name' => 'gif.actualizar',
                             'description' => 'Actualizar un item en Gif'])->syncRoles([$roleAdmin]);
+
+        //GG
+        Permission::create(['name' => 'gg.inicio',
+                            'description' => 'Acceder a la navegacion de GG'])->syncRoles([$roleAdmin,$rolaPersona]);
+        Permission::create(['name' => 'gg.registrar',
+                            'description' => 'Registrar un nuevo item en GG'])->syncRoles([$roleAdmin,$rolaPersona]);
+        Permission::create(['name' => 'gg.actualizar',
+                            'description' => 'Actualizar un item en GG'])->syncRoles([$roleAdmin]);
     }
 }

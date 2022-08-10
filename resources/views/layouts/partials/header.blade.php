@@ -59,9 +59,19 @@
                             Gastos
                         </a>
                         <ul class="dropdown-menu">
+                            @can('dep.inicio')
+                                <li>
+                                    <a class="nav-link {{request()->routeIs('dep.*') ? 'active servicio-ctivo':''}}" href="{{route('dep.inicio')}}">DEP</a>
+                                </li>
+                            @endcan  
                             @can('gif.inicio')
                                 <li>
                                     <a class="nav-link {{request()->routeIs('gif.*') ? 'active servicio-ctivo':''}}" href="{{route('gif.inicio')}}">GIF</a>
+                                </li>
+                            @endcan  
+                            @can('gg.inicio')
+                                <li>
+                                    <a class="nav-link {{request()->routeIs('gg.*') ? 'active servicio-ctivo':''}}" href="{{route('gg.inicio')}}">GG</a>
                                 </li>
                             @endcan  
                         </ul>

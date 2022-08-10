@@ -428,6 +428,29 @@ $(function(){
     });
 });
 
+function displayFormgifempleadosconsinbeneficiosmodal(c) {
+    if (c.value == "2") {    
+        jQuery('#memberFormempleadosconsinbeneficiosmodal').toggle('show');
+        jQuery('#requestFormempleadosconsinbeneficiosmodal').hide();
+    }
+        if (c.value == "1") {
+        jQuery('#requestFormempleadosconsinbeneficiosmodal').toggle('show');
+        jQuery('#memberFormempleadosconsinbeneficiosmodal').hide();
+    }
+};
+
+function displayFormgifempleadosconbeneficiosmodal(c) {
+    if (c.value == "2") {    
+        jQuery('#memberFormempleadosconbeneficiosmodal').toggle('show');
+        jQuery('#requestFormempleadosconbeneficiosmodal').hide();
+    }
+        if (c.value == "1") {
+        jQuery('#requestFormempleadosconbeneficiosmodal').toggle('show');
+        jQuery('#memberFormempleadosconbeneficiosmodal').hide();
+    }
+};
+
+
 function displayFormgifempleadosconsinbeneficios(c) {
     if (c.value == "2") {    
         jQuery('#memberFormempleadosconsinbeneficios').toggle('show');

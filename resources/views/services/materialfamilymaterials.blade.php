@@ -27,18 +27,11 @@
                                         x
                                     </button>
                                 </div>
-                            @endif
-                        
+                            @endif  
+
                             <div class="margenes-botones">
-                                <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormfmmateriales(this)" id="checkAactualizar" checked>
-                                <label class="form-check-label" for="checkActualizar">
-                                    Update
-                                </label>  
-                                
-                                <input class="form-check-input" value="2" type="radio" name="formselector" onClick="displayFormfmmateriales(this)" id="checkRegistrar">
-                                <label class="form-check-label" for="checkRegistrar">
-                                    Register
-                                </label>
+                                <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormfmmateriales(this)">See Materials</button>
+                                <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormfmmateriales(this)">Register Material</button>
                             </div>
                         
                             <div id="requestFormfmmateriales">

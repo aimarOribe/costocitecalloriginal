@@ -16,15 +16,8 @@
     @endif
 
     <div class="margenes-botones">
-        <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormModelosInsumosModelos(this)" id="checkAactualizar" checked>
-        <label class="form-check-label" for="checkActualizar">
-            Update
-        </label>  
-        
-        <input class="form-check-input" value="2" type="radio" name="formselector" onClick="displayFormModelosInsumosModelos(this)" id="checkRegistrar">
-        <label class="form-check-label" for="checkRegistrar">
-            Register
-        </label>
+        <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormModelosInsumosModelos(this)">See Model Families</button>
+        <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormModelosInsumosModelos(this)">Register Model Family</button>
     </div>
 
     <div id="requestFormModelosInsumosModelos">
@@ -74,10 +67,10 @@
                 <tbody style="border-color: #ed7d31">
                     <tr class="fila-fija-modeloseinsumosmodelos">
                         <td>
-                            <select name="familia_id[]" class="form-select" aria-label="Default select example">
-                                <option>--</option>
+                            <select name="familia_id[]" class="form-select tamano-texto-cuerpo-lista" aria-label="Default select example">
+                                <option class="tamano-texto-cuerpo-lista">--</option>
                                 @foreach ($familias as $familia)
-                                    <option value="{{$familia->id}}">
+                                    <option class="tamano-texto-cuerpo-lista" value="{{$familia->id}}">
                                         {{$familia->nombre}}
                                     </option>
                                 @endforeach

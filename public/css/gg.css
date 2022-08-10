@@ -1,0 +1,316 @@
+.tamano-texto-cuerpo-lista{
+    font-size: 16px;
+    font-weight: 500;
+}
+.tamano-texto-cuerpo-boton{
+    font-size: 15px;
+    font-weight: 500;
+}
+/* No tiene Permisos de hoja */
+.centrar-texto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-size: 40px;
+    font-weight: bold;
+}
+.tamano-texto{
+    font-size: 30px;
+}
+/* No tiene Permisos de hoja */
+/*Tabla Sueldos Administrativos*/
+.gggasueldosadministrativos-tabla {
+    border-color: white;
+    text-align: center;
+}
+.gggasueldosadministrativos-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.gggasueldosadministrativos-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.gggasueldosadministrativos-tabla > tbody {
+    border-color: white;
+}
+.gggasueldosadministrativos-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Sueldos Administrativos*/
+
+/*Tabla Utiles de Escritorio*/
+.gggautilesescritorio-tabla {
+    border-color: white;
+    text-align: center;
+}
+.gggautilesescritorio-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.gggautilesescritorio-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.gggautilesescritorio-tabla > tbody {
+    border-color: white;
+}
+.gggautilesescritorio-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Utiles de Escritorio*/
+
+/*Tabla Eventos Anuales para el Personal*/
+.gggaeventosanuales-tabla {
+    border-color: white;
+    text-align: center;
+}
+.gggaeventosanuales-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.gggaeventosanuales-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.gggaeventosanuales-tabla > tbody {
+    border-color: white;
+}
+.gggaeventosanuales-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Eventos Anuales para el Personal*/
+
+/*Tabla Sueldos Administrativos de Ventas*/
+.ggvsueldosadministrativos-tabla {
+    border-color: white;
+    text-align: center;
+}
+.ggvsueldosadministrativos-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.ggvsueldosadministrativos-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.ggvsueldosadministrativos-tabla > tbody {
+    border-color: white;
+}
+.ggvsueldosadministrativos-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Sueldos Administrativos de Ventas*/
+
+/*Tabla Almuerzos Ejecutivos de Ventas*/
+.ggvalmuerzoejecutivo-tabla {
+    border-color: white;
+    text-align: center;
+}
+.ggvalmuerzoejecutivo-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.ggvalmuerzoejecutivo-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.ggvalmuerzoejecutivo-tabla > tbody {
+    border-color: white;
+}
+.ggvalmuerzoejecutivo-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Almuerzos Ejecutivos de Ventas*/
+
+/*Tabla Otro Gasto Ventas de Ventas*/
+.ggvotrogastoventa-tabla {
+    border-color: white;
+    text-align: center;
+}
+.ggvotrogastoventa-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.ggvotrogastoventa-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.ggvotrogastoventa-tabla > tbody {
+    border-color: white;
+}
+.ggvotrogastoventa-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Otro Gasto Ventas de Ventas*/
+
+/*Tabla Pasajes y Combustible de Transporte*/
+.ggtpasajecombustible-tabla {
+    border-color: white;
+    text-align: center;
+}
+.ggtpasajecombustible-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.ggtpasajecombustible-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.ggtpasajecombustible-tabla > tbody {
+    border-color: white;
+}
+.ggtpasajecombustible-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Pasajes y Combustible de Transporte*/
+
+/*Tabla Mantenimiento de Auto de Transporte*/
+.ggtmantenimientoauto-tabla {
+    border-color: white;
+    text-align: center;
+}
+.ggtmantenimientoauto-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.ggtmantenimientoauto-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.ggtmantenimientoauto-tabla > tbody {
+    border-color: white;
+}
+.ggtmantenimientoauto-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Mantenimiento de Auto de Transporte*/
+
+/*Tabla Servicios Basicos*/
+.ggserviciobasico-tabla {
+    border-color: white;
+    text-align: center;
+}
+.ggserviciobasico-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.ggserviciobasico-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+.ggserviciobasico-tabla > tbody {
+    border-color: white;
+}
+.ggserviciobasico-tabla > tbody > tr:nth-child(odd) {
+    background-color: white;
+}
+.margenes-botones{
+    padding: 0px 0px 15px 0px;
+}
+.familianumeroslista{
+    text-align: right;
+}
+/*Fin Tabla Servicios Basicos*/
+
+/* DETALLES DE LA PAGINA */
+.gif-titulo{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: right;
+    background-color: #b7b7b7;
+    padding: 5px;
+    font-weight: 600;
+}
+.gif-subtituloempleados{
+    display: grid;
+    grid-template-columns: .5fr 3fr .5fr;
+    justify-content: space-evenly;
+    background-color: #fef2cb;
+    border: 1px black solid;
+    padding: 5px;
+    font-weight: 600;
+}
+.gif-subtituloempleados > div > input{
+    color: white;
+}
+/* DETALLES DE LA PAGINA FIN */
+
+/* Modal */
+.gggasueldosadministrativosmodal-tabla{
+    border-color: white;
+    text-align: center;
+}
+.gggasueldosadministrativosmodal-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.gggasueldosadministrativosmodal-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+/* Modal Fin */
+
+/* Modal Ventas */
+.ggvsueldosadministrativosmodal-tabla{
+    border-color: white;
+    text-align: center;
+}
+.ggvsueldosadministrativosmodal-tabla > thead {
+    background-color: white;
+    border-color: white
+}
+.ggvsueldosadministrativosmodal-tabla > thead > tr > th {
+    color: black;
+    font-weight: 600;
+}
+/* Modal Ventas Fin */

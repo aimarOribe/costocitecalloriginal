@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\DepController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FamiliaController;
 use App\Http\Controllers\FamiliaMateMaterialesController;
 use App\Http\Controllers\FlujoCajaController;
+use App\Http\Controllers\GgController;
 use App\Http\Controllers\GifController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InsumoController;
@@ -91,12 +93,25 @@ Route::post('/familiamaterialesmateriales/actualizar',[FamiliaMateMaterialesCont
 // test Insumos
 Route::get('/insumos',[InsumoController::class,'inicio'])->name('insumos.inicio');
 
+//DEP
+Route::get('/dep',[DepController::class,'inicio'])->middleware('auth')->name('dep.inicio');
+Route::post('/dep',[DepController::class,'registrardeps'])->name('dep.registrardeps');
+Route::post('/dep/actualizar',[DepController::class,'actualizardeps'])->name('dep.actualizardeps');
+//Obtener el valor de Depreciaicion mensual
+Route::post('/obtenervalordep',[DepController::class,'obtenervalordep'])->name('obtenervalordep');
+
 //GIF
 Route::get('/gif',[GifController::class,'inicio'])->middleware('auth')->name('gif.inicio');
 Route::post('/obtenervalorgif',[GifController::class,'obtenervalorgif'])->name('obtenervalorgif');
+// GIF Costos Mano Obra Sin Beneficios -> Modal
+Route::post('/gifmanoobrasinbeneficiosmodal',[GifController::class,'registrargifmanoobrasinbeneficiosmodal'])->name('gifmanoobrasinbeneficiosmodal.registrargifmanoobrasinbeneficiosmodal');
+Route::post('/gifmanoobrasinbeneficiosmodal/actualizar',[GifController::class,'actualizargifmanoobrasinbeneficiosmodal'])->name('gifmanoobrasinbeneficiosmodal.actualizargifmanoobrasinbeneficiosmodal');
 // GIF Costos Mano Obra Sin Beneficios
 Route::post('/gifmanoobrasinbeneficios',[GifController::class,'registrargifmanoobrasinbeneficios'])->name('gifmanoobrasinbeneficios.registrargifmanoobrasinbeneficios');
 Route::post('/gifmanoobrasinbeneficios/actualizar',[GifController::class,'actualizargifmanoobrasinbeneficios'])->name('gifmanoobrasinbeneficios.actualizargifmanoobrasinbeneficios');
+// GIF Costos Mano Obra Con Beneficios -> Modal
+Route::post('/gifmanoobraconbeneficiosmodal',[GifController::class,'registrargifmanoobraconbeneficiosmodal'])->name('gifmanoobraconbeneficiosmodal.registrargifmanoobraconbeneficiosmodal');
+Route::post('/gifmanoobraconbeneficiosmodal/actualizar',[GifController::class,'actualizargifmanoobraconbeneficiosmodal'])->name('gifmanoobraconbeneficiosmodal.actualizargifmanoobraconbeneficiosmodal');
 // GIF Costos Mano Obra Con Beneficios
 Route::post('/gifmanoobraconbeneficios',[GifController::class,'registrargifmanoobraconbeneficios'])->name('gifmanoobraconbeneficios.registrargifmanoobraconbeneficios');
 Route::post('/gifmanoobraconbeneficios/actualizar',[GifController::class,'actualizargifmanoobraconbeneficios'])->name('gifmanoobraconbeneficios.actualizargifmanoobraconbeneficios');
@@ -133,5 +148,42 @@ Route::post('/gifrmaparado/actualizar',[GifController::class,'actualizargifrmapa
 // GIF REPUESTOS Y MANTENIMIENTO Armado
 Route::post('/gifrmarmado',[GifController::class,'registrargifrmarmado'])->name('gifrmarmado.registrargifrmarmado');
 Route::post('/gifrmarmado/actualizar',[GifController::class,'actualizargifrmarmado'])->name('gifrmarmado.actualizargifrmarmado');
+
+//GG
+Route::get('/gg',[GgController::class,'inicio'])->middleware('auth')->name('gg.inicio');
+Route::post('/obtenervalorgg',[GgController::class,'obtenervalorgg'])->name('obtenervalorgg');
+//GG -> Sueldo Administrativo
+Route::post('/ggsueldoadministrativo',[GgController::class,'registrarggsueldoadministrativo'])->name('ggsueldoadministrativo.registrarggsueldoadministrativo');
+Route::post('/ggsueldoadministrativo/actualizar',[GgController::class,'actualizarggsueldoadministrativo'])->name('ggsueldoadministrativo.actualizarggsueldoadministrativo');
+//GG -> Sueldo Administrativo Modal
+Route::post('/ggsueldoadministrativosmodal',[GgController::class,'registrarggsueldoadministrativosmodal'])->name('ggsueldoadministrativosmodal.registrarggsueldoadministrativosmodal');
+Route::post('/ggsueldoadministrativosmodal/actualizar',[GgController::class,'actualizarggsueldoadministrativosmodal'])->name('ggsueldoadministrativosmodal.actualizarggsueldoadministrativosmodal');
+//GG -> Utiles de Escritorio
+Route::post('/gggautilesescritorio',[GgController::class,'registrargggautilesescritorio'])->name('gggautilesescritorio.registrargggautilesescritorio');
+Route::post('/gggautilesescritorio/actualizar',[GgController::class,'actualizargggautilesescritorio'])->name('gggautilesescritorio.actualizargggautilesescritorio');
+//GG -> Utiles de Escritorio
+Route::post('/gggaeventosanuales',[GgController::class,'registrargggaeventosanuales'])->name('gggaeventosanuales.registrargggaeventosanuales');
+Route::post('/gggaeventosanuales/actualizar',[GgController::class,'actualizargggaeventosanuales'])->name('gggaeventosanuales.actualizargggaeventosanuales');
+//GG Venta-> Sueldo Administrativo
+Route::post('/ggvsueldoadministrativo',[GgController::class,'registrarggvsueldoadministrativo'])->name('ggvsueldoadministrativo.registrarggvsueldoadministrativo');
+Route::post('/ggvsueldoadministrativo/actualizar',[GgController::class,'actualizarggvsueldoadministrativo'])->name('ggvsueldoadministrativo.actualizarggvsueldoadministrativo');
+//GG Venta-> Sueldo Administrativo Modal
+Route::post('/ggvsueldoadministrativomodal',[GgController::class,'registrarggvsueldoadministrativomodal'])->name('ggvsueldoadministrativomodal.registrarggvsueldoadministrativomodal');
+Route::post('/ggvsueldoadministrativomodal/actualizar',[GgController::class,'actualizarggvsueldoadministrativomodal'])->name('ggvsueldoadministrativomodal.actualizarggvsueldoadministrativomodal');
+//GG Venta-> Almuerzo Ejecutivo
+Route::post('/ggvalmuerzoejecutivo',[GgController::class,'registrarggvalmuerzoejecutivo'])->name('ggvalmuerzoejecutivo.registrarggvalmuerzoejecutivo');
+Route::post('/ggvalmuerzoejecutivo/actualizar',[GgController::class,'actualizarggvalmuerzoejecutivo'])->name('ggvalmuerzoejecutivo.actualizarggvalmuerzoejecutivo');
+//GG Venta-> Otro Gasto Venta
+Route::post('/ggvotrogastoventa',[GgController::class,'registrarggvotrogastoventa'])->name('ggvotrogastoventa.registrarggvotrogastoventa');
+Route::post('/ggvotrogastoventa/actualizar',[GgController::class,'actualizarggvotrogastoventa'])->name('ggvotrogastoventa.actualizarggvotrogastoventa');
+//GG Transporte -> Pasajes y Combustible
+Route::post('/ggtpasajecombustible',[GgController::class,'registrarggtpasajecombustible'])->name('ggtpasajecombustible.registrarggtpasajecombustible');
+Route::post('/ggtpasajecombustible/actualizar',[GgController::class,'actualizarggtpasajecombustible'])->name('ggtpasajecombustible.actualizarggtpasajecombustible');
+//GG Transporte -> Pasajes y Combustible
+Route::post('/ggtmantenimientoauto',[GgController::class,'registrarggtmantenimientoauto'])->name('ggtmantenimientoauto.registrarggtmantenimientoauto');
+Route::post('/ggtmantenimientoauto/actualizar',[GgController::class,'actualizarggtmantenimientoauto'])->name('ggtmantenimientoauto.actualizarggtmantenimientoauto');
+//GG Transporte -> Pasajes y Combustible
+Route::post('/ggserviciosbasicos',[GgController::class,'registrarggserviciosbasicos'])->name('ggserviciosbasicos.registrarggserviciosbasicos');
+Route::post('/ggserviciosbasicos/actualizar',[GgController::class,'actualizarggserviciosbasicos'])->name('ggserviciosbasicos.actualizarggserviciosbasicos');
 
 require __DIR__.'/auth.php';
