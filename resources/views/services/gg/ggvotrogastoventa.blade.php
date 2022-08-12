@@ -1,6 +1,6 @@
-<div class="margenes-botones">
-    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormggvotrogastoventa(this)">Ver Otros Gastos Ventas</button>
-    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormggvotrogastoventa(this)">Registrar Otro Gasto Venta</button>
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="displayFormggvotrogastoventa">
+    <label class="form-check-label" for="displayFormggvotrogastoventa">Ver/Registrar Otros Gastos Ventas</label>
 </div>
 
 <div id="requestFormggvotrogastoventa">
@@ -23,15 +23,15 @@
                     <input hidden name="id[]" value="<?php echo $ggvotrogastoventa->id ?>">
                     <td><input hidden type="text"></td>
                     <td><input type="text" class="ggvogvdescripcion-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="descripcion[<?php echo $ggvotrogastoventa->id ?>]" value="<?php echo $ggvotrogastoventa->descripcion ?>"></td>
-                    <td><input class="ggvogvgasto-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="gasto[<?php echo $ggvotrogastoventa->id ?>]" value="<?php echo $ggvotrogastoventa->gasto ?>"></td>
-                    <td><input class="ggvogvperiodoanual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="periodoanual[<?php echo $ggvotrogastoventa->id ?>]" value="<?php echo $ggvotrogastoventa->periodoanual ?>"></td>
-                    <td><input disabled class="ggvogvtotalgastomensual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" value=""></td>
+                    <td><input class="ggvogvgasto-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="gasto[<?php echo $ggvotrogastoventa->id ?>]" value="<?php echo $ggvotrogastoventa->gasto ?>"></td>
+                    <td><input type="number" class="ggvogvperiodoanual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="periodoanual[<?php echo $ggvotrogastoventa->id ?>]" value="<?php echo $ggvotrogastoventa->periodoanual ?>"></td>
+                    <td><input readonly class="ggvogvtotalgastomensual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" value=""></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @can('gg.actualizar')
-        <input type="submit" name="actualizarggvotrogastoventa" value="Actualizar Otro Gasto Venta" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarggvotrogastoventa" value="Guardar Otro Gasto Venta" class="btn btn-success tamano-texto-cuerpo-boton"/>
     @endcan
     
     {!! Form::close() !!}
@@ -54,13 +54,13 @@
                     <td><input hidden type="text"></td>
                     <td><input required type="text" class="form-control tamano-texto-cuerpo-lista" name="descripcion"></td>
                     <td><input required class="form-control tamano-texto-cuerpo-lista" name="gasto"></td>
-                    <td><input required class="form-control tamano-texto-cuerpo-lista" name="periodoanual"></td>
+                    <td><input required type="number" required class="form-control tamano-texto-cuerpo-lista" name="periodoanual"></td>
                 </tr>
             </tbody>
         </table>
         <div class="btn-der">
             @can('gg.registrar')
-                <input type="submit" name="insertarggvotrogastoventa" value="Insertar Otro Gasto Venta" class="btn btn-info"/>
+                <input type="submit" name="insertarggvotrogastoventa" value="Insertar Otro Gasto Venta" class="btn btn-primary"/>
             @endcan
         </div>
     </form>

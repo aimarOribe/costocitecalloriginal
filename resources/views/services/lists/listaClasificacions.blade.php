@@ -1,23 +1,8 @@
 <div class="col-sm-6 col-md-3 offset-md-2 col-lg-2 offset-lg-0">
 
-    @if (session('errorServidorclasificacion'))
-        <div class="alert alert-danger" role="alert">
-            {{session('errorServidorclasificacion')}}
-        </div>
-    @endif
-    
-    @if (session('mensajeclasificacion'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{session('mensajeclasificacion')}}!</strong>
-            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
-                x
-            </button>
-        </div>
-    @endif
-
-    <div class="margenes-botones">
-        <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormListaClasificacion(this)">See Classifications</button>
-        <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormListaClasificacion(this)">Register Classification</button>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="displayFormListaClasificacion">
+        <label class="form-check-label" for="displayFormListaClasificacion">Ver/Registrar Clasificaciones</label>
     </div>
 
     <div id="requestFormListaClasificacions">
@@ -38,7 +23,7 @@
             </tbody>
         </table>
         @can('listas.actualizarclasificacions')
-            <button type="submit" name="actualizarListaClasificacion" class="btn btn-warning boton-actualizar tamano-texto-cuerpo-boton">Update<?php echo "<br/>" ?>Clasificaciones</button>
+            <button type="submit" name="actualizarListaClasificacion" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton">Guardar<?php echo "<br/>" ?>Clasificaciones</button>
         @endcan
         {!! Form::close() !!}
     </div>
@@ -60,7 +45,7 @@
             </table>
             <div class="btn-der">
                 @can('listas.registrarclasificacions')
-                    <button type="submit" name="insertarListaClasificacions" class="btn btn-info tamano-texto-cuerpo-boton">Insert<?php echo "<br/>" ?>Classifications</button>
+                    <button type="submit" name="insertarListaClasificacions" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar<?php echo "<br/>" ?>Clasificaciones</button>
                 @endcan
                 <button id="adicionalListaClasificacions" name="adicionalListaClasificacions" type="button" class="btn btn-warning"> More + </button>
                 <button id="eliminarListaClasificacions" name="eliminarListaClasificacions" type="button" class="btn btn-danger"> Less - </button>

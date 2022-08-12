@@ -16,15 +16,17 @@ $(function(){
             $(".mensual-"+index+"").val(Math.round(nuevoValor));
         })  
     }
-});
 
-function displayForm(c) {
-    if (c.value == "2") {    
-        jQuery('#memberForm').toggle('show');
-        jQuery('#requestForm').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestForm').toggle('show');
-        jQuery('#memberForm').hide();
-    }
-};
+    $("#displayForm").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberForm').toggle('show');
+            jQuery('#requestForm').hide();
+        }
+        else {
+            jQuery('#requestForm').toggle('show');
+            jQuery('#memberForm').hide();
+        }
+    })
+
+});

@@ -13,11 +13,17 @@
 <br>
 
 <div class="margenes-botones">
-    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormggvsueldosadministrativos(this)">Ver Sueldos Administrativos</button>
-    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormggvsueldosadministrativos(this)">Registrar Sueldo Administrativo</button>
-    <button type="button" class="btn btn-info btn-sm tamano-texto-cuerpo-boton" data-bs-toggle="modal" data-bs-target="#ggvstaticBackdrop">
-        Regimen Laboral
-    </button>
+    <div class="container row">
+        <div class="form-check form-switch col-4">
+            <input class="form-check-input" type="checkbox" role="switch" id="displayFormggvsueldosadministrativos">
+            <label class="form-check-label" for="displayFormggvsueldosadministrativos">Ver/Registrar Sueldos Administrativos</label>
+        </div>
+        <div class="col-8">
+            <button type="button" class="btn btn-secondary btn-sm tamano-texto-cuerpo-boton" data-bs-toggle="modal" data-bs-target="#ggvstaticBackdrop">
+                Regimen Laboral
+            </button>
+        </div>
+    </div>
 </div>
 
 <div id="requestFormggvsueldosadministrativos">
@@ -41,10 +47,10 @@
                     <input hidden name="id[]" value="<?php echo $ggvsueldosadministrativo->id ?>">
                     <td><input hidden type="text"></td>
                     <td><input type="text" class="ggvsadescripcion-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="descripcion[<?php echo $ggvsueldosadministrativo->id ?>]" value="<?php echo $ggvsueldosadministrativo->descripcion ?>"></td>
-                    <td><input class="ggvsasueldomensualplanilla-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="sueldomensualplanilla[<?php echo $ggvsueldosadministrativo->id ?>]" value="<?php echo $ggvsueldosadministrativo->sueldomensualplanilla ?>"></td>
-                    <td><input class="ggvsahonoratiosmensuales-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="honoratiosmensuales[<?php echo $ggvsueldosadministrativo->id ?>]" value="<?php echo $ggvsueldosadministrativo->honoratiosmensuales ?>"></td>
+                    <td><input class="ggvsasueldomensualplanilla-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="sueldomensualplanilla[<?php echo $ggvsueldosadministrativo->id ?>]" value="<?php echo $ggvsueldosadministrativo->sueldomensualplanilla ?>"></td>
+                    <td><input class="ggvsahonoratiosmensuales-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="honoratiosmensuales[<?php echo $ggvsueldosadministrativo->id ?>]" value="<?php echo $ggvsueldosadministrativo->honoratiosmensuales ?>"></td>
                     <td>
-                        <select class="ggvsaregimenlaboral-<?php echo $i ?> form-control" name="regimenlaboral_id[<?php echo $ggvsueldosadministrativo->id ?>]">
+                        <select class="ggvsaregimenlaboral-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="regimenlaboral_id[<?php echo $ggvsueldosadministrativo->id ?>]">
                             <option class="tamano-texto-cuerpo-lista" value="">--</option>
                             @foreach ($regimenlaboralventas as $regimenlaboralventa)
                                 <option class="tamano-texto-cuerpo-lista" value="{{$regimenlaboralventa->numero}}" @if($regimenlaboralventa->id===$ggvsueldosadministrativo->regimenlaboral_id) selected='selected' @endif>
@@ -53,13 +59,13 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input disabled class="ggvsatotalgastomensual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" value=""></td>
+                    <td><input readonly class="ggvsatotalgastomensual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" value=""></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @can('gg.actualizar')
-        <input type="submit" name="actualizarggvsueldosadministrativos" value="Actualizar Sueldos Administrativos" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarggvsueldosadministrativos" value="Guardar Sueldos Administrativos" class="btn btn-success tamano-texto-cuerpo-boton"/>
     @endcan
     
     {!! Form::close() !!}
@@ -85,7 +91,7 @@
                     <td><input required class="form-control tamano-texto-cuerpo-lista" name="sueldomensualplanilla"></td>
                     <td><input required class="form-control tamano-texto-cuerpo-lista" name="honoratiosmensuales"></td>
                     <td>
-                        <select required class="form-control" name="regimenlaboral_id">
+                        <select required class="form-control tamano-texto-cuerpo-lista" name="regimenlaboral_id">
                             <option class="tamano-texto-cuerpo-lista" value="">--</option>
                             @foreach ($regimenlaboralventas as $regimenlaboralventa)
                                 <option class="tamano-texto-cuerpo-lista" value="{{$regimenlaboralventa->id}}">
@@ -99,7 +105,7 @@
         </table>
         <div class="btn-der">
             @can('gg.registrar')
-                <input type="submit" name="insertarggvsueldosadministrativos" value="Insertar Sueldo Administrativo" class="btn btn-info"/>
+                <input type="submit" name="insertarggvsueldosadministrativos" value="Insertar Sueldo Administrativo" class="btn btn-primary"/>
             @endcan
         </div>
     </form>
@@ -115,9 +121,9 @@
         </div>
         <div class="modal-body">
 
-            <div class="margenes-botones">
-                <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormgggasueldosadministrativosmodal(this)">Ver Regimenes Laborales</button>
-                <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormgggasueldosadministrativosmodal(this)">Registrar Regimen Laboral</button>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="displayFormggvsueldosadministrativosmodal">
+                <label class="form-check-label" for="displayFormggvsueldosadministrativosmodal">Ver/Registrar Regimenes Laborales</label>
             </div>
 
             <div id="requestFormggvsueldosadministrativosmodal">
@@ -134,12 +140,12 @@
                                 <tr>
                                     <input hidden name="id[]" value="<?php echo $regimenlaboralventa->id ?>">
                                     <td><input type="text" class="form-control tamano-texto-cuerpo-lista" name="nombre[<?php echo $regimenlaboralventa->id ?>]" value="<?php echo $regimenlaboralventa->nombre ?>"></td>
-                                    <td><input class="form-control familianumeroslista tamano-texto-cuerpo-lista" name="numero[<?php echo $regimenlaboralventa->id ?>]" value="<?php echo $regimenlaboralventa->numero ?>"></td>
+                                    <td><input class="form-control tamano-texto-cuerpo-lista" name="numero[<?php echo $regimenlaboralventa->id ?>]" value="<?php echo $regimenlaboralventa->numero ?>"></td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <input type="submit" name="actualizarggvsueldosadministrativosmodal" value="Actualizar Regimenes Laborales" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+                    <input type="submit" name="actualizarggvsueldosadministrativosmodal" value="Guardar Regimenes Laborales" class="btn btn-success tamano-texto-cuerpo-boton"/>
                 {!! Form::close() !!}
             </div>
 
@@ -160,7 +166,7 @@
                     </tbody>
                 </table>
                 <div class="btn-der">
-                    <input type="submit" name="insertarggvsueldosadministrativosmodal" value="Insertar Regimen Laboral" class="btn btn-info"/>
+                    <input type="submit" name="insertarggvsueldosadministrativosmodal" value="Insertar Regimen Laboral" class="btn btn-primary"/>
                 </div>
                 {!! Form::close() !!}
             </div>

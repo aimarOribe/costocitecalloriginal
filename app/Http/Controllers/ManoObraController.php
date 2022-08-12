@@ -28,7 +28,6 @@ class ManoObraController extends Controller
     public function obtenerModelos(Request $request){
         if(isset($request->texto)){
             $modelos = Modelofamilia::where('familia_id',$request->texto)->get();
-            //$manoobra = Manoobra::where('familia_id',$request->texto)->get();
             $manoobra = DB::table('manoobras')->where('familia_id',$request->texto)->get();
 
             return response()->json(
@@ -56,31 +55,7 @@ class ManoObraController extends Controller
             $tiempohora = $request->tiempohora;
             $costo = $request->costo;
 
-            if($familia_id == "" && $modelo_id == "" && $proceso_id == ""){
-                throw new Exception("Debes seleccionar una familia, modelo y proceso");
-            }
-
-            if($familia_id == ""){
-                throw new Exception("Debes seleccionar una familia");
-            }
-
-            if($modelo_id == ""){
-                throw new Exception("Debes seleccionar un modelo");
-            }
-
-            if($proceso_id == ""){
-                throw new Exception("Debes seleccionar un proceso");
-            }
-
-            if($tiempohora == ""){
-                throw new Exception("Debes ingresar un tiempo en horas");
-            }
-
             $costoDecimal = floatval($costo);
-
-            if($costoDecimal == 0){
-                throw new Exception("No puedes poner texto en el costo");
-            }
 
             $manoobra = new Manoobra();
             $manoobra->familia_id = $familia_id;
@@ -101,44 +76,48 @@ class ManoObraController extends Controller
 
     public function actualizarmanoobra(Request $request){
         try {
-            foreach ($request->id as $ids) {
-                if($request->familia_id[$ids] == "" & $request->modelo_id[$ids] == "" & $request->proceso_id[$ids] == "" & $request->tiempohoras[$ids] == "" & $request->costo[$ids] == ""){
-                    $manoobra = Manoobra::find($ids);
-                    $manoobra->delete();
-                    $mensaje = "Mano de Obra Eliminada Correctamente";
-                }else{
-                    $familia_id = $request->familia_id[$ids];
-                    $modelo_id = $request->modelo_id[$ids];
-                    $proceso_id = $request->proceso_id[$ids];
-                    $tiempohoras = $request->tiempohoras[$ids];
-                    $costo = $request->costo[$ids];
+            $mensaje = "";
+            if(!$request->hasAny(['familia_id','modelo_id','proceso_id','tiempohoras','costo'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if($request->familia_id[$ids] == "" & $request->modelo_id[$ids] == "" & $request->proceso_id[$ids] == "" & $request->tiempohoras[$ids] == "" & $request->costo[$ids] == ""){
+                        $manoobra = Manoobra::find($ids);
+                        $manoobra->delete();
+                        $mensaje = "Mano de Obra Eliminado(s) Correctamente";
+                    }else{
+                        $familia_id = $request->familia_id[$ids];
+                        $modelo_id = $request->modelo_id[$ids];
+                        $proceso_id = $request->proceso_id[$ids];
+                        $tiempohoras = $request->tiempohoras[$ids];
+                        $costo = $request->costo[$ids];
 
-                    if($familia_id == "" && $modelo_id == "" && $proceso_id == ""){
-                        throw new Exception("No puedes vaciar el campo de familia, modelo y proceso");
-                    }
+                        if($familia_id == ""){
+                            throw new Exception("No puedes vaciar el campo de familia");
+                        }
 
-                    if($familia_id == ""){
-                        throw new Exception("No puedes vaciar el campo de familia");
-                    }
+                        if($modelo_id == ""){
+                            throw new Exception("No puedes vaciar el campo de modelo");
+                        }
+                        if($proceso_id == ""){
+                            throw new Exception("No puedes vaciar el campo de proceso");
+                        }
 
-                    if($modelo_id == ""){
-                        throw new Exception("No puedes vaciar el campo de modelo");
-                    }
-                    if($proceso_id == ""){
-                        throw new Exception("No puedes vaciar el campo de proceso");
-                    }
+                        if($tiempohoras == ""){
+                            throw new Exception("No puedes vaciar la hora");
+                        }
+                        if($costo == ""){
+                            throw new Exception("No puedes vaciar el costo");
+                        }
 
-                    $costoDecimal = floatval($costo);
+                        $costoDecimal = floatval($costo);
 
-                    if($costoDecimal == 0){
-                        throw new Exception("No puedes poner texto en el costo");
-                    }
-
-                    DB::table('manoobras')
-                        ->where('id',$ids)
-                        ->update(['familia_id'=>$familia_id,'modelo_id'=>$modelo_id,'proceso_id'=>$proceso_id,'tiempohoras'=>$tiempohoras,'costo'=>$costoDecimal]);
-                    $mensaje = "Mano de Obra Actualizada Correctamente";
-                } 
+                        DB::table('manoobras')
+                            ->where('id',$ids)
+                            ->update(['familia_id'=>$familia_id,'modelo_id'=>$modelo_id,'proceso_id'=>$proceso_id,'tiempohoras'=>$tiempohoras,'costo'=>$costoDecimal]);
+                        $mensaje = "Mano de Obra Actualizado(s) Correctamente";
+                    } 
+                }
             }
             return redirect()->route('manoobra.inicio')->with('mensajemanoobra',$mensaje);
         } catch (\Exception $e) {

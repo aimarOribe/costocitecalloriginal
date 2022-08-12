@@ -1,4 +1,174 @@
 $(function(){
+
+    //Ver o Registrar Gif
+    $("#displayFormgifempleadosconsinbeneficios").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormempleadosconsinbeneficios').toggle('show');
+            jQuery('#requestFormempleadosconsinbeneficios').hide();
+        }
+        else {
+            jQuery('#requestFormempleadosconsinbeneficios').toggle('show');
+            jQuery('#memberFormempleadosconsinbeneficios').hide();
+        }
+    })
+
+    $("#displayFormgifempleadosconsinbeneficiosmodal").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormempleadosconsinbeneficiosmodal').toggle('show');
+            jQuery('#requestFormempleadosconsinbeneficiosmodal').hide();
+        }
+        else {
+            jQuery('#requestFormempleadosconsinbeneficiosmodal').toggle('show');
+            jQuery('#memberFormempleadosconsinbeneficiosmodal').hide();
+        }
+    })
+
+    $("#displayFormgifempleadosconbeneficios").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormempleadosconbeneficios').toggle('show');
+            jQuery('#requestFormempleadosconbeneficios').hide();
+        }
+        else {
+            jQuery('#requestFormempleadosconbeneficios').toggle('show');
+            jQuery('#memberFormempleadosconbeneficios').hide();
+        }
+    })
+
+    $("#displayFormgifempleadosconbeneficiosmodal").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormempleadosconbeneficiosmodal').toggle('show');
+            jQuery('#requestFormempleadosconbeneficiosmodal').hide();
+        }
+        else {
+            jQuery('#requestFormempleadosconbeneficiosmodal').toggle('show');
+            jQuery('#memberFormempleadosconbeneficiosmodal').hide();
+        }
+    })
+
+    $("#displayFormhmsidfmodelajeseriado").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormhmsidfmodelajeseriado').toggle('show');
+            jQuery('#requestFormhmsidfmodelajeseriado').hide();
+        }
+        else {
+            jQuery('#requestFormhmsidfmodelajeseriado').toggle('show');
+            jQuery('#memberFormhmsidfmodelajeseriado').hide();
+        }
+    })
+
+    $("#displayFormhmsidfcorte").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormhmsidfcorte').toggle('show');
+            jQuery('#requestFormhmsidfcorte').hide();
+        }
+        else {
+            jQuery('#requestFormhmsidfcorte').toggle('show');
+            jQuery('#memberFormhmsidfcorte').hide();
+        }
+    })
+
+    $("#displayFormhmsidfaparado").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormhmsidfaparado').toggle('show');
+            jQuery('#requestFormhmsidfaparado').hide();
+        }
+        else {
+            jQuery('#requestFormhmsidfaparado').toggle('show');
+            jQuery('#memberFormhmsidfaparado').hide();
+        }
+    })
+
+    $("#displayFormhmsidfarmado").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormhmsidfarmado').toggle('show');
+            jQuery('#requestFormhmsidfarmado').hide();
+        }
+        else {
+            jQuery('#requestFormhmsidfarmado').toggle('show');
+            jQuery('#memberFormhmsidfarmado').hide();
+        }
+    })
+
+    $("#displayFormhmsidfalistado").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormhmsidfalistado').toggle('show');
+            jQuery('#requestFormhmsidfalistado').hide();
+        }
+        else {
+            jQuery('#requestFormhmsidfalistado').toggle('show');
+            jQuery('#memberFormhmsidfalistado').hide();
+        }
+    })
+
+    $("#displayFormhmsidflimpieza").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormhmsidflimpieza').toggle('show');
+            jQuery('#requestFormhmsidflimpieza').hide();
+        }
+        else {
+            jQuery('#requestFormhmsidflimpieza').toggle('show');
+            jQuery('#memberFormhmsidflimpieza').hide();
+        }
+    })
+
+    $("#displayFormhmsidfeppersonal").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormhmsidfeppersonal').toggle('show');
+            jQuery('#requestFormhmsidfeppersonal').hide();
+        }
+        else {
+            jQuery('#requestFormhmsidfeppersonal').toggle('show');
+            jQuery('#memberFormhmsidfeppersonal').hide();
+        }
+    })
+
+    $("#displayFormrmcorte").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormrmcorte').toggle('show');
+            jQuery('#requestFormrmcorte').hide();
+        }
+        else {
+            jQuery('#requestFormrmcorte').toggle('show');
+            jQuery('#memberFormrmcorte').hide();
+        }
+    })
+
+    $("#displayFormrmaparado").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormrmaparado').toggle('show');
+            jQuery('#requestFormrmaparado').hide();
+        }
+        else {
+            jQuery('#requestFormrmaparado').toggle('show');
+            jQuery('#memberFormrmaparado').hide();
+        }
+    })
+
+    $("#displayFormrmarmado").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormrmarmado').toggle('show');
+            jQuery('#requestFormrmarmado').hide();
+        }
+        else {
+            jQuery('#requestFormrmarmado').toggle('show');
+            jQuery('#memberFormrmarmado').hide();
+        }
+    })
+
     //Obtener el token de la pagina para poder realizar ajax.
     const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 
@@ -427,158 +597,3 @@ $(function(){
         }).catch(error =>console.error(error));
     });
 });
-
-function displayFormgifempleadosconsinbeneficiosmodal(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormempleadosconsinbeneficiosmodal').toggle('show');
-        jQuery('#requestFormempleadosconsinbeneficiosmodal').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormempleadosconsinbeneficiosmodal').toggle('show');
-        jQuery('#memberFormempleadosconsinbeneficiosmodal').hide();
-    }
-};
-
-function displayFormgifempleadosconbeneficiosmodal(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormempleadosconbeneficiosmodal').toggle('show');
-        jQuery('#requestFormempleadosconbeneficiosmodal').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormempleadosconbeneficiosmodal').toggle('show');
-        jQuery('#memberFormempleadosconbeneficiosmodal').hide();
-    }
-};
-
-
-function displayFormgifempleadosconsinbeneficios(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormempleadosconsinbeneficios').toggle('show');
-        jQuery('#requestFormempleadosconsinbeneficios').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormempleadosconsinbeneficios').toggle('show');
-        jQuery('#memberFormempleadosconsinbeneficios').hide();
-    }
-};
-
-function displayFormgifempleadosconbeneficios(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormempleadosconbeneficios').toggle('show');
-        jQuery('#requestFormempleadosconbeneficios').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormempleadosconbeneficios').toggle('show');
-        jQuery('#memberFormempleadosconbeneficios').hide();
-    }
-};
-
-function displayFormhmsidfmodelajeseriado(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormhmsidfmodelajeseriado').toggle('show');
-        jQuery('#requestFormhmsidfmodelajeseriado').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormhmsidfmodelajeseriado').toggle('show');
-        jQuery('#memberFormhmsidfmodelajeseriado').hide();
-    }
-};
-
-function displayFormhmsidfcorte(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormhmsidfcorte').toggle('show');
-        jQuery('#requestFormhmsidfcorte').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormhmsidfcorte').toggle('show');
-        jQuery('#memberFormhmsidfcorte').hide();
-    }
-};
-
-function displayFormhmsidfaparado(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormhmsidfaparado').toggle('show');
-        jQuery('#requestFormhmsidfaparado').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormhmsidfaparado').toggle('show');
-        jQuery('#memberFormhmsidfaparado').hide();
-    }
-};
-
-function displayFormhmsidfarmado(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormhmsidfarmado').toggle('show');
-        jQuery('#requestFormhmsidfarmado').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormhmsidfarmado').toggle('show');
-        jQuery('#memberFormhmsidfarmado').hide();
-    }
-};
-
-function displayFormhmsidfalistado(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormhmsidfalistado').toggle('show');
-        jQuery('#requestFormhmsidfalistado').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormhmsidfalistado').toggle('show');
-        jQuery('#memberFormhmsidfalistado').hide();
-    }
-};
-
-function displayFormhmsidflimpieza(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormhmsidflimpieza').toggle('show');
-        jQuery('#requestFormhmsidflimpieza').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormhmsidflimpieza').toggle('show');
-        jQuery('#memberFormhmsidflimpieza').hide();
-    }
-};
-
-function displayFormhmsidfeppersonal(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormhmsidfeppersonal').toggle('show');
-        jQuery('#requestFormhmsidfeppersonal').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormhmsidfeppersonal').toggle('show');
-        jQuery('#memberFormhmsidfeppersonal').hide();
-    }
-};
-
-function displayFormrmcorte(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormrmcorte').toggle('show');
-        jQuery('#requestFormrmcorte').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormrmcorte').toggle('show');
-        jQuery('#memberFormrmcorte').hide();
-    }
-};
-
-function displayFormrmaparado(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormrmaparado').toggle('show');
-        jQuery('#requestFormrmaparado').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormrmaparado').toggle('show');
-        jQuery('#memberFormrmaparado').hide();
-    }
-};
-
-function displayFormrmarmado(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormrmarmado').toggle('show');
-        jQuery('#requestFormrmarmado').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormrmarmado').toggle('show');
-        jQuery('#memberFormrmarmado').hide();
-    }
-};

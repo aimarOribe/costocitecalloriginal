@@ -38,12 +38,6 @@
 .empleadosconsinbeneficios-tabla > tbody > tr:nth-child(odd) {
     background-color: white;
 }
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
-}
 /*Fin Tabla Mano obra sin beneficios*/
 
 /*Tabla Mano obra con beneficios*/
@@ -64,12 +58,6 @@
 }
 .empleadosconbeneficios-tabla > tbody > tr:nth-child(odd) {
     background-color: white;
-}
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
 }
 /*Fin Tabla Mano obra con beneficios*/
 
@@ -95,12 +83,6 @@
 .hmsidfmodelajeseriado-tabla > thead > .tipos > .tipohmsief {
     font-size: 12px;
 }
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
-}
 /*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > modelaje y seriado con beneficios*/
 
 /*Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > corte*/
@@ -124,12 +106,6 @@
 }
 .hmsidfcorte-tabla > thead > .tipos > .tipohmsief {
     font-size: 12px;
-}
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
 }
 /*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > corte*/
 
@@ -155,12 +131,6 @@
 .hmsidfaparado-tabla > thead > .tipos > .tipohmsief {
     font-size: 12px;
 }
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
-}
 /*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Aparado*/
 
 /*Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Armado*/
@@ -184,12 +154,6 @@
 }
 .hmsidfarmado-tabla > thead > .tipos > .tipohmsief {
     font-size: 12px;
-}
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
 }
 /*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Armado*/
 
@@ -215,12 +179,6 @@
 .hmsidfalistado-tabla > thead > .tipos > .tipohmsief {
     font-size: 12px;
 }
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
-}
 /*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Alistado*/
 
 /*Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Limpieza*/
@@ -244,12 +202,6 @@
 }
 .hmsidflimpieza-tabla > thead > .tipos > .tipohmsief {
     font-size: 12px;
-}
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
 }
 /*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Limpieza*/
 
@@ -275,12 +227,6 @@
 .hmsidfeppersonal-tabla > thead > .tipos > .tipohmsief {
     font-size: 12px;
 }
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
-}
 /*Fin Tabla HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL > Equipo de proteccion personal*/
 
 /*Tabla REPUESTOS Y MANTENIMIENTO > Corte*/
@@ -304,12 +250,6 @@
 }
 .rmcorte-tabla > thead > .tipos > .tipohmsief {
     font-size: 12px;
-}
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
 }
 /*Fin Tabla REPUESTOS Y MANTENIMIENTO > Corte*/
 
@@ -335,12 +275,6 @@
 .rmaparado-tabla > thead > .tipos > .tipohmsief {
     font-size: 12px;
 }
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
-}
 /*Fin Tabla REPUESTOS Y MANTENIMIENTO > Aparado*/
 
 /*Tabla REPUESTOS Y MANTENIMIENTO > Armado*/
@@ -364,12 +298,6 @@
 }
 .rmarmado-tabla > thead > .tipos > .tipohmsief {
     font-size: 12px;
-}
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
 }
 /*Fin Tabla REPUESTOS Y MANTENIMIENTO > Armado*/
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Familia;
 use App\Models\Fmatematerial;
 use App\Models\Listafamiliademateriales;
 use App\Models\Listaunidaddemedida;
@@ -30,35 +29,30 @@ class FamiliaMateMaterialesController extends Controller
             $familiamateriales_ids = $request->familiamateriales_id;
             $nombres = $request->nombre;
             $unidadesmedidas_ids = $request->unidadesmedidas_id;
+            $presentaciones = $request->presentacion;
             while(true){
                 $familiamateriales_id = current($familiamateriales_ids);
                 $nombre = current($nombres);
                 $unidadesmedidas_id = current($unidadesmedidas_ids);
-
-                if($familiamateriales_id == "--"){
-                    throw new Exception("Debes ingresar una familia de materiales");
-                }
-
-                if($nombre == "--"){
-                    throw new Exception("Debes ingresar un nombre");
-                }
-
-                if($unidadesmedidas_id == "--"){
-                    throw new Exception("Debes ingresar una unidad de medida");
-                }
+                $presentacion = current($presentaciones);
 
                 $fmmateriales = new Fmatematerial();
                 $fmmateriales->familiamateriales_id = $familiamateriales_id;
                 $fmmateriales->nombre = $nombre;
                 $fmmateriales->listaunidadmedida_id = $unidadesmedidas_id;
+                $fmmateriales->presentacion = $presentacion;
+                $fmmateriales->stock = 0;
+                $fmmateriales->costopromedio = 0.00;
+                $fmmateriales->costoreal = 0.00;
                 $fmmateriales->save();
-                $mensaje = "Material(es) Registrados Correctamente";
+                $mensaje = "Material(es) Registrado(s) Correctamente";
 
                 $familiamateriales_id = next($familiamateriales_ids);
                 $nombre = next($nombres);
                 $unidadesmedidas_id = next($unidadesmedidas_ids);
+                $presentacion = next($presentaciones);
 
-                if($familiamateriales_id === false && $nombre === false && $unidadesmedidas_id === false) break;
+                if($familiamateriales_id === false && $nombre === false && $unidadesmedidas_id === false && $presentacion === false) break;
             }
             return redirect()->route('familiamaterialesmateriales.inicio')->with('mensajemateriales',$mensaje);
         } catch (\Exception $e) {
@@ -70,31 +64,43 @@ class FamiliaMateMaterialesController extends Controller
     public function actualizarfamiliamaterialesmateriales(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if($request->familiamateriales_id[$ids] == "--"){
-                    throw new Exception("Debes ingresar un familia de materiales");
-                }
-                if($request->nombre[$ids] == ""){
-                    throw new Exception("Debes ingresar un nombre al material");
-                }
-                if($request->unidadesmedidas_id[$ids] == "--"){
-                    throw new Exception("Debes ingresar una unidad de medida");
-                }
-                if ($request->familiamateriales_id[$ids] == "--" & $request->nombre[$ids] == "" & $request->unidadesmedidas_id[$ids] == "--"){
-                    $fmmateriales = Fmatematerial::find($ids);
-                    $fmmateriales->delete();
-                    $mensaje = "Material Eliminado Correctamente";
-                } else {
-                    $familiamateriales_id = $request->familiamateriales_id[$ids];
-                    $nombre = $request->nombre[$ids];
-                    $unidadesmedidas_id = $request->unidadesmedidas_id[$ids];
-                    DB::table('fmatematerials')
-                        ->where('id',$ids)
-                        ->update(['familiamateriales_id'=>$familiamateriales_id,'nombre'=>$nombre,'listaunidadmedida_id'=>$unidadesmedidas_id]);
-                    $mensaje = "Material Actualizado Correctamente";
+            if(!$request->hasAny(['familiamateriales_id','nombre','unidadesmedidas_id','presentacion'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->familiamateriales_id[$ids] == "" & $request->nombre[$ids] == "" & $request->unidadesmedidas_id[$ids] == "" & $request->presentacion[$ids] == ""){
+                        $fmmateriales = Fmatematerial::find($ids);
+                        $fmmateriales->delete();
+                        $mensaje = "Material Eliminado Correctamente";
+                    } else {
+                        $familiamateriales_id = $request->familiamateriales_id[$ids];
+                        $nombre = $request->nombre[$ids];
+                        $unidadesmedidas_id = $request->unidadesmedidas_id[$ids];
+                        $presentacion = $request->presentacion[$ids];
+
+                        if($familiamateriales_id == ""){
+                            throw new Exception("No puedes borrar la familia de materiales");
+                        }
+                        if($nombre == ""){
+                            throw new Exception("No puedes borrar el nombre al material");
+                        }
+                        if($unidadesmedidas_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
+                        if($presentacion == ""){
+                            throw new Exception("No puedes borrar la presentacion");
+                        }
+                        DB::table('fmatematerials')
+                            ->where('id',$ids)
+                            ->update(['familiamateriales_id'=>$familiamateriales_id,'nombre'=>$nombre,'listaunidadmedida_id'=>$unidadesmedidas_id,'presentacion'=>$presentacion]);
+                        $mensaje = "Material Actualizado Correctamente";
+                    }
                 }
             }
             return redirect()->route('familiamaterialesmateriales.inicio')->with('mensajemateriales',$mensaje);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $error = "No se puede eliminar este registro debido a que lo estas utilizando en tus demas procesos";
+            return redirect()->route('familiamaterialesmateriales.inicio')->with('errorUserMateriales',$error);
         } catch (\Exception $e) {
             $error = $e->getMessage();
             return redirect()->route('familiamaterialesmateriales.inicio')->with('errorUserMateriales',$error);

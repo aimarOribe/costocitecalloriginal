@@ -37,6 +37,11 @@
                                     <a class="nav-link {{request()->routeIs('familiamaterialesmateriales.*') ? 'active servicio-ctivo':''}}" href="{{route('familiamaterialesmateriales.inicio')}}">Materiales</a>
                                 </li>    
                             @endcan 
+                            @can('unidadesmedidaconversion.inicio')   
+                                <li>
+                                    <a class="nav-link {{request()->routeIs('unidadesmedidaconversion.*') ? 'active servicio-ctivo':''}}" href="{{route('unidadesmedidaconversion.inicio')}}">Unidades de Conversion</a>
+                                </li>    
+                            @endcan 
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

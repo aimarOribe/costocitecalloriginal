@@ -8,7 +8,7 @@
 
 @section('content')
     @auth
-        @if (auth()->user()->can('familias.inicio') || auth()->user()->can('flujodecajas.inicio') || auth()->user()->can('listas.inicio') || auth()->user()->can('modeloseinsumos.inicio') || auth()->user()->can('manoobra.inicio') || auth()->user()->can('gif.inicio') || auth()->user()->can('dep.inicio') || auth()->user()->can('gg.inicio'))
+        @if (auth()->user()->can('familias.inicio') || auth()->user()->can('flujodecajas.inicio') || auth()->user()->can('listas.inicio') || auth()->user()->can('modeloseinsumos.inicio') || auth()->user()->can('familiamaterialesmateriales.inicio') || auth()->user()->can('unidadesmedidaconversion.inicio') || auth()->user()->can('manoobra.inicio') || auth()->user()->can('gif.inicio') || auth()->user()->can('dep.inicio') || auth()->user()->can('gg.inicio'))
             @if (auth()->user()->can('familias.inicio'))
                 <form action="{{route('familias.inicio')}}" method="GET">
                     <div class="centrar-texto">
@@ -33,7 +33,7 @@
                 <form action="{{route('listas.inicio')}}" method="GET">
                     <div class="centrar-texto">
                         <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success tamano-texto">
                             Ir a la hoja u hojas
                         </button>
                     </div>
@@ -42,7 +42,25 @@
                 <form action="{{route('modeloseinsumos.inicio')}}" method="GET">
                     <div class="centrar-texto">
                         <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success tamano-texto">
+                            Ir a la hoja u hojas
+                        </button>
+                    </div>
+                </form>
+            @elseif (auth()->user()->can('familiamaterialesmateriales.inicio'))
+                <form action="{{route('familiamaterialesmateriales.inicio')}}" method="GET">
+                    <div class="centrar-texto">
+                        <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
+                        <button type="submit" class="btn btn-success tamano-texto">
+                            Ir a la hoja u hojas
+                        </button>
+                    </div>
+                </form>
+            @elseif (auth()->user()->can('unidadesmedidaconversion.inicio'))
+                <form action="{{route('unidadesmedidaconversion.inicio')}}" method="GET">
+                    <div class="centrar-texto">
+                        <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
+                        <button type="submit" class="btn btn-success tamano-texto">
                             Ir a la hoja u hojas
                         </button>
                     </div>
@@ -51,7 +69,7 @@
                 <form action="{{route('manoobra.inicio')}}" method="GET">
                     <div class="centrar-texto">
                         <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success tamano-texto">
                             Ir a la hoja u hojas
                         </button>
                     </div>
@@ -60,7 +78,7 @@
                 <form action="{{route('dep.inicio')}}" method="GET">
                     <div class="centrar-texto">
                         <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success tamano-texto">
                             Ir a la hoja u hojas
                         </button>
                     </div>
@@ -69,7 +87,7 @@
                 <form action="{{route('gif.inicio')}}" method="GET">
                     <div class="centrar-texto">
                         <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success tamano-texto">
                             Ir a la hoja u hojas
                         </button>
                     </div>
@@ -78,7 +96,7 @@
                 <form action="{{route('gg.inicio')}}" method="GET">
                     <div class="centrar-texto">
                         <img src="https://cdn-icons-png.flaticon.com/512/994/994588.png" height="400px" width="400px" alt="Persona Triste">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success tamano-texto">
                             Ir a la hoja u hojas
                         </button>
                     </div>
@@ -94,5 +112,4 @@
 @endsection
 
 @section('js')
-    <script type="text/javascript" src="{{asset('js/familia.js')}}"></script>
 @endsection

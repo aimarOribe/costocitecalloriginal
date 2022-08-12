@@ -1,23 +1,8 @@
 <div class="col-sm-6 col-md-3 offset-md-2 col-lg-3 offset-lg-0">
     
-    @if (session('errorServidorfamiliamateriales'))
-        <div class="alert alert-danger" role="alert">
-            {{session('errorServidorfamiliamateriales')}}
-        </div>
-    @endif
-
-    @if (session('mensajefamiliamateriales'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{session('mensajefamiliamateriales')}}!</strong>
-            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
-                x
-            </button>
-        </div>
-    @endif
-    
-    <div class="margenes-botones">
-        <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormListaFamiliasMateriales(this)">See Families of Materials</button>
-        <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormListaFamiliasMateriales(this)">Register Family of Material</button>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="displayFormListaFamiliasMateriales">
+        <label class="form-check-label" for="displayFormListaFamiliasMateriales">Ver/Registrar Familia de Materiales</label>
     </div>
 
     <div id="requestFormListaFamiliasMateriales">
@@ -38,7 +23,7 @@
             </tbody>
         </table>
         @can('listas.actualizarlistaFamiliasMateriales')
-            <button type="submit" name="actualizarListaFamiliasMateriale" class="btn btn-warning boton-actualizar tamano-texto-cuerpo-boton">Update Families<?php echo "<br/>" ?>Materials</button>
+            <button type="submit" name="actualizarListaFamiliasMateriale" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton">Guardar Familia<?php echo "<br/>" ?>de Materiales</button>
         @endcan
         
         {!! Form::close() !!}
@@ -61,7 +46,7 @@
             </table>
             <div class="btn-der">
                 @can('listas.registrarlistaFamiliasMateriales')
-                    <button type="submit" name="insertarListaFamiliasMateriales" class="btn btn-info tamano-texto-cuerpo-boton">Insert Material<?php echo "<br/>" ?>Families</button>
+                    <button type="submit" name="insertarListaFamiliasMateriales" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Familia<?php echo "<br/>" ?>de Material</button>
                 @endcan
                 <button id="adicionalListaFamiliasMateriales" name="adicionalListaFamiliasMateriales" type="button" class="btn btn-warning"> More + </button>
                 <button id="eliminarListaFamiliasMateriales" name="eliminarListaFamiliasMateriales" type="button" class="btn btn-danger"> Less - </button>

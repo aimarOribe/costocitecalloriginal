@@ -25,6 +25,19 @@ $(function(){
 
 $(function(){
 
+    //Ver o Registrar en la tabla
+    $("#displayFormdep").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormdep').toggle('show');
+            jQuery('#requestFormdep').hide();
+        }
+        else {
+            jQuery('#requestFormdep').toggle('show');
+            jQuery('#memberFormdep').hide();
+        }
+    })
+
     //Refrescar datos para la tabla DEP
     var padreped = $(".cuerpopadredep tr").length;
     var totalped = 0;
@@ -128,14 +141,3 @@ $(function(){
         }
     });
 });
-
-function displayFormdep(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormdep').toggle('show');
-        jQuery('#requestFormdep').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormdep').toggle('show');
-        jQuery('#memberFormdep').hide();
-    }
-};

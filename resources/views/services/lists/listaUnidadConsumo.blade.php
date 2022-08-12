@@ -1,23 +1,8 @@
 <div class="col-sm-6 col-md-3 offset-md-2 col-lg-2 offset-lg-0">
-    
-    @if (session('errorServidorunidadconsumo'))
-        <div class="alert alert-danger" role="alert">
-            {{session('errorServidorunidadconsumo')}}
-        </div>
-    @endif
 
-    @if (session('mensajeunidadconsumo'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{session('mensajeunidadconsumo')}}!</strong>
-            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
-                x
-            </button>
-        </div>
-    @endif
-   
-    <div class="margenes-botones">
-        <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormListaUnidadConsumo(this)">See Consumption Units</button>
-        <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormListaUnidadConsumo(this)">Register Consumption Unit</button>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="displayFormListaUnidadConsumo">
+        <label class="form-check-label" for="displayFormListaUnidadConsumo">Ver/Registrar Unidades de Consumo</label>
     </div>
 
     <div id="requestFormListaUnidadConsumo">
@@ -38,7 +23,7 @@
             </tbody>
         </table>
         @can('listas.actualizarlistaUnidadConsumo')
-            <button type="submit" name="actualizarListaUnidadConsumo" class="btn btn-warning tamano-texto-cuerpo-boton boton-actualizar">Update Unidad<?php echo "<br/>" ?>de Consumo</button>
+            <button type="submit" name="actualizarListaUnidadConsumo" class="btn btn-success tamano-texto-cuerpo-boton boton-actualizar">Guardar Unidades<?php echo "<br/>" ?>de Consumo</button>
         @endcan
         {!! Form::close() !!}
     </div>
@@ -60,7 +45,7 @@
             </table>
             <div class="btn-der">
                 @can('listas.registrarlistaUnidadConsumo')
-                    <button type="submit" name="insertarListaUnidadConsumos" class="btn btn-info tamano-texto-cuerpo-boton">Insert Consumption<?php echo "<br/>" ?>Units</button>
+                    <button type="submit" name="insertarListaUnidadConsumos" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Unidades<?php echo "<br/>" ?>de Consumo</button>
                 @endcan
                 <button id="adicionalListaUnidadConsumos" name="adicionalListaUnidadConsumos" type="button" class="btn btn-warning"> More + </button>
                 <button id="eliminarListaUnidadConsumos" name="eliminarListaUnidadConsumos" type="button" class="btn btn-danger"> Less - </button>

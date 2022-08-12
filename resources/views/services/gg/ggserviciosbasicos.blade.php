@@ -12,9 +12,9 @@
 
 <br>
 
-<div class="margenes-botones">
-    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormggserviciobasico(this)">Ver Servicios Basicos</button>
-    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormggserviciobasico(this)">Registrar Servicio Basico</button>
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="displayFormggserviciobasico">
+    <label class="form-check-label" for="displayFormggserviciobasico">Ver/Registrar Servicios Basicos</label>
 </div>
 
 <div id="requestFormggserviciobasico">
@@ -35,15 +35,15 @@
                 <tr>
                     <input hidden name="id[]" value="<?php echo $ggserviciosbasico->id ?>">
                     <td><input type="text" class="ggsvdescripcion-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="descripcion[<?php echo $ggserviciosbasico->id ?>]" value="<?php echo $ggserviciosbasico->descripcion ?>"></td>
-                    <td><input class="ggsbcostoservicio-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="costoservicio[<?php echo $ggserviciosbasico->id ?>]" value="<?php echo $ggserviciosbasico->costoservicio ?>"></td>
-                    <td><input class="ggsbporcentajeuso-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="porcentajeuso[<?php echo $ggserviciosbasico->id ?>]" value="<?php echo $ggserviciosbasico->porcentajeuso ?>"></td>
-                    <td><input disabled class="ggsbtotalgastomensual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" value=""></td>
+                    <td><input class="ggsbcostoservicio-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="costoservicio[<?php echo $ggserviciosbasico->id ?>]" value="<?php echo $ggserviciosbasico->costoservicio ?>"></td>
+                    <td><input class="ggsbporcentajeuso-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="porcentajeuso[<?php echo $ggserviciosbasico->id ?>]" value="<?php echo $ggserviciosbasico->porcentajeuso ?>"></td>
+                    <td><input readonly class="ggsbtotalgastomensual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" value=""></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @can('gg.actualizar')
-        <input type="submit" name="actualizarggserviciobasico" value="Actualizar Servicios Basicos" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarggserviciobasico" value="Guardar Servicios Basicos" class="btn btn-success tamano-texto-cuerpo-boton"/>
     @endcan
     
     {!! Form::close() !!}
@@ -70,7 +70,7 @@
         </table>
         <div class="btn-der">
             @can('gg.registrar')
-                <input type="submit" name="insertarggserviciobasico" value="Insertar Mantenimiento de Auto" class="btn btn-info"/>
+                <input type="submit" name="insertarggserviciobasico" value="Insertar Mantenimiento de Auto" class="btn btn-primary"/>
             @endcan
         </div>
     </form>

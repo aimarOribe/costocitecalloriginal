@@ -37,10 +37,4 @@
 .manoobra-tabla > tbody > tr:nth-child(odd) {
     background-color: #fce4d6;
 }
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
-}
 /*Fin Tabla Familia*/

@@ -87,43 +87,47 @@ class GgController extends Controller
     public function actualizarggsueldoadministrativo(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->sueldomensualplanilla[$ids] == "" && $request->sueldosinplanilla[$ids] == "" && $request->regimenlaboral_id[$ids] == ""){
-                    $ggsueldoadministrativo = Ggsueldoadministrativo::find($ids);
-                    $ggsueldoadministrativo->delete();
-                    $mensaje = "Sueldo Administrativo Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $sueldomensualplanilla = $request->sueldomensualplanilla[$ids];
-                    $sueldosinplanilla = $request->sueldosinplanilla[$ids];
-                    $regimenlaboral_id = $request->regimenlaboral_id[$ids];
+            if(!$request->hasAny(['descripcion','sueldomensualplanilla','sueldosinplanilla','regimenlaboral_id'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->sueldomensualplanilla[$ids] == "" && $request->sueldosinplanilla[$ids] == "" && $request->regimenlaboral_id[$ids] == ""){
+                        $ggsueldoadministrativo = Ggsueldoadministrativo::find($ids);
+                        $ggsueldoadministrativo->delete();
+                        $mensaje = "Sueldo Administrativo Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $sueldomensualplanilla = $request->sueldomensualplanilla[$ids];
+                        $sueldosinplanilla = $request->sueldosinplanilla[$ids];
+                        $regimenlaboral_id = $request->regimenlaboral_id[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar el nombre");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar el nombre");
+                        }
+
+                        if($sueldomensualplanilla == ""){
+                            throw new Exception("No puedes borrar el sueldo mensual en planilla");
+                        }
+
+                        if($sueldosinplanilla == ""){
+                            throw new Exception("No puedes borrar el sueldo sin planilla");
+                        }
+
+                        $sueldoconplanillaDecimal = floatval($sueldomensualplanilla);
+                        $sueldosinplanillaDecimal = floatval($sueldosinplanilla);
+
+                        if($regimenlaboral_id == ""){
+                            throw new Exception("No puedes borrar el regimen laboral");
+                        }
+
+                        $regimenlaboralID = DB::table('regimenlaboralgastoadministrativos')->where('numero', $regimenlaboral_id)->first();
+                        $id = $regimenlaboralID->id;
+
+                        DB::table('ggsueldoadministrativos')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'sueldomensualplanilla'=>$sueldoconplanillaDecimal,'sueldosinplanilla'=>$sueldosinplanillaDecimal,'regimenlaboral_id'=>$id]);
+                        $mensaje = "Sueldo Administrativo Actualizado Correctamente";
                     }
-
-                    if($sueldomensualplanilla == ""){
-                        throw new Exception("No puedes borrar el sueldo mensual en planilla");
-                    }
-
-                    if($sueldosinplanilla == ""){
-                        throw new Exception("No puedes borrar el sueldo sin planilla");
-                    }
-
-                    $sueldoconplanillaDecimal = floatval($sueldomensualplanilla);
-                    $sueldosinplanillaDecimal = floatval($sueldosinplanilla);
-
-                    if($regimenlaboral_id == ""){
-                        throw new Exception("No puedes borrar el regimen laboral");
-                    }
-
-                    $regimenlaboralID = DB::table('regimenlaboralgastoadministrativos')->where('numero', $regimenlaboral_id)->first();
-                    $id = $regimenlaboralID->id;
-
-                    DB::table('ggsueldoadministrativos')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'sueldomensualplanilla'=>$sueldoconplanillaDecimal,'sueldosinplanilla'=>$sueldosinplanillaDecimal,'regimenlaboral_id'=>$id]);
-                    $mensaje = "Sueldo Administrativo Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);
@@ -158,29 +162,33 @@ class GgController extends Controller
     public function actualizarggsueldoadministrativosmodal(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->nombre[$ids] == "" && $request->numero[$ids] == ""){
-                    $regimenlaboral = Regimenlaboralgastoadministrativo::find($ids);
-                    $regimenlaboral->delete();
-                    $mensaje = "Regimen Laboral Eliminado Correctamente";
-                } else {
-                    $nombre = $request->nombre[$ids];
-                    $numero = $request->numero[$ids];
+            if(!$request->hasAny(['nombre','numero'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->nombre[$ids] == "" && $request->numero[$ids] == ""){
+                        $regimenlaboral = Regimenlaboralgastoadministrativo::find($ids);
+                        $regimenlaboral->delete();
+                        $mensaje = "Regimen Laboral Eliminado(s) Correctamente";
+                    } else {
+                        $nombre = $request->nombre[$ids];
+                        $numero = $request->numero[$ids];
 
-                    if($nombre == ""){
-                        throw new Exception("No puedes borrar el nombre");
+                        if($nombre == ""){
+                            throw new Exception("No puedes borrar el nombre");
+                        }
+
+                        if($numero == ""){
+                            throw new Exception("No puedes borrar el numero");
+                        }
+
+                        $numeroDecimal = floatval($numero);
+
+                        DB::table('regimenlaboralgastoadministrativos')
+                            ->where('id',$ids)
+                            ->update(['nombre'=>$nombre,'numero'=>$numeroDecimal]);
+                        $mensaje = "Regimen Laboral Actualizado(s) Correctamente";
                     }
-
-                    if($numero == ""){
-                        throw new Exception("No puedes borrar el numero");
-                    }
-
-                    $numeroDecimal = floatval($numero);
-
-                    DB::table('regimenlaboralgastoadministrativos')
-                        ->where('id',$ids)
-                        ->update(['nombre'=>$nombre,'numero'=>$numeroDecimal]);
-                    $mensaje = "Regimen Laboral Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);
@@ -218,39 +226,43 @@ class GgController extends Controller
     public function actualizargggautilesescritorio(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->cantidad[$ids] == "" && $request->periodoanual[$ids] == ""){
-                    $ggutilesescritorio = Ggutilesescritorio::find($ids);
-                    $ggutilesescritorio->delete();
-                    $mensaje = "Utiles de Escritorio Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $gasto = $request->gasto[$ids];
-                    $cantidad = $request->cantidad[$ids];
-                    $periodoanual = $request->periodoanual[$ids];
+            if(!$request->hasAny(['descripcion','gasto','cantidad','periodoanual'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->cantidad[$ids] == "" && $request->periodoanual[$ids] == ""){
+                        $ggutilesescritorio = Ggutilesescritorio::find($ids);
+                        $ggutilesescritorio->delete();
+                        $mensaje = "Utiles de Escritorio Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $gasto = $request->gasto[$ids];
+                        $cantidad = $request->cantidad[$ids];
+                        $periodoanual = $request->periodoanual[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($gasto == ""){
+                            throw new Exception("No puedes borrar el gasto");
+                        }
+
+                        if($cantidad == ""){
+                            throw new Exception("No puedes borrar la cantidad");
+                        }
+
+                        $gastoDecimal = floatval($gasto);
+
+                        if($periodoanual == ""){
+                            throw new Exception("No puedes borrar el periodo anual");
+                        }
+
+                        DB::table('ggutilesescritorios')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'cantidad'=>$cantidad,'periodoanual'=>$periodoanual]);
+                        $mensaje = "Utiles de Escritorio Actualizado(s) Correctamente";
                     }
-
-                    if($gasto == ""){
-                        throw new Exception("No puedes borrar el gasto");
-                    }
-
-                    if($cantidad == ""){
-                        throw new Exception("No puedes borrar la cantidad");
-                    }
-
-                    $gastoDecimal = floatval($gasto);
-
-                    if($periodoanual == ""){
-                        throw new Exception("No puedes borrar el periodo anual");
-                    }
-
-                    DB::table('ggutilesescritorios')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'cantidad'=>$cantidad,'periodoanual'=>$periodoanual]);
-                    $mensaje = "Utiles de Escritorio Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);
@@ -286,34 +298,38 @@ class GgController extends Controller
     public function actualizargggaeventosanuales(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->periodoanual[$ids] == ""){
-                    $ggeventoanualpersonal = Ggeventoanualpersonal::find($ids);
-                    $ggeventoanualpersonal->delete();
-                    $mensaje = "Evento Anual para el Personal Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $gasto = $request->gasto[$ids];
-                    $periodoanual = $request->periodoanual[$ids];
+            if(!$request->hasAny(['descripcion','gasto','periodoanual'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->periodoanual[$ids] == ""){
+                        $ggeventoanualpersonal = Ggeventoanualpersonal::find($ids);
+                        $ggeventoanualpersonal->delete();
+                        $mensaje = "Evento Anual para el Personal Eliminado(s) Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $gasto = $request->gasto[$ids];
+                        $periodoanual = $request->periodoanual[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($gasto == ""){
+                            throw new Exception("No puedes borrar el gasto");
+                        }
+
+                        $gastoDecimal = floatval($gasto);
+
+                        if($periodoanual == ""){
+                            throw new Exception("No puedes borrar el periodo anual");
+                        }
+
+                        DB::table('ggeventoanualpersonals')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'periodoanual'=>$periodoanual]);
+                        $mensaje = "Evento Anual para el Personal Actualizado(s) Correctamente";
                     }
-
-                    if($gasto == ""){
-                        throw new Exception("No puedes borrar el gasto");
-                    }
-
-                    $gastoDecimal = floatval($gasto);
-
-                    if($periodoanual == ""){
-                        throw new Exception("No puedes borrar el periodo anual");
-                    }
-
-                    DB::table('ggeventoanualpersonals')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'periodoanual'=>$periodoanual]);
-                    $mensaje = "Evento Anual para el Personal Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);
@@ -352,43 +368,47 @@ class GgController extends Controller
     public function actualizarggvsueldoadministrativo(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->sueldomensualplanilla[$ids] == "" && $request->honoratiosmensuales[$ids] == "" && $request->regimenlaboral_id[$ids] == ""){
-                    $ggvsueldoadministrativo = Ggvsueldoadministrativo::find($ids);
-                    $ggvsueldoadministrativo->delete();
-                    $mensaje = "Sueldo Administrativo Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $sueldomensualplanilla = $request->sueldomensualplanilla[$ids];
-                    $honoratiosmensuales = $request->honoratiosmensuales[$ids];
-                    $regimenlaboral_id = $request->regimenlaboral_id[$ids];
+            if(!$request->hasAny(['descripcion','sueldomensualplanilla','honoratiosmensuales','regimenlaboral_id'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->sueldomensualplanilla[$ids] == "" && $request->honoratiosmensuales[$ids] == "" && $request->regimenlaboral_id[$ids] == ""){
+                        $ggvsueldoadministrativo = Ggvsueldoadministrativo::find($ids);
+                        $ggvsueldoadministrativo->delete();
+                        $mensaje = "Sueldo Administrativo Eliminado(s) Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $sueldomensualplanilla = $request->sueldomensualplanilla[$ids];
+                        $honoratiosmensuales = $request->honoratiosmensuales[$ids];
+                        $regimenlaboral_id = $request->regimenlaboral_id[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar el nombre");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar el nombre");
+                        }
+
+                        if($sueldomensualplanilla == ""){
+                            throw new Exception("No puedes borrar el sueldo mensual en planilla");
+                        }
+
+                        if($honoratiosmensuales == ""){
+                            throw new Exception("No puedes borrar el sueldo sin planilla");
+                        }
+
+                        $sueldoconplanillaDecimal = floatval($sueldomensualplanilla);
+                        $honoratiosmensualesDecimal = floatval($honoratiosmensuales);
+
+                        if($regimenlaboral_id == ""){
+                            throw new Exception("No puedes borrar el regimen laboral");
+                        }
+
+                        $regimenlaboralID = DB::table('regimenlaboralventas')->where('numero', $regimenlaboral_id)->first();
+                        $id = $regimenlaboralID->id;
+
+                        DB::table('ggvsueldoadministrativos')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'sueldomensualplanilla'=>$sueldoconplanillaDecimal,'honoratiosmensuales'=>$honoratiosmensualesDecimal,'regimenlaboral_id'=>$id]);
+                        $mensaje = "Sueldo Administrativo Actualizado(s) Correctamente";
                     }
-
-                    if($sueldomensualplanilla == ""){
-                        throw new Exception("No puedes borrar el sueldo mensual en planilla");
-                    }
-
-                    if($honoratiosmensuales == ""){
-                        throw new Exception("No puedes borrar el sueldo sin planilla");
-                    }
-
-                    $sueldoconplanillaDecimal = floatval($sueldomensualplanilla);
-                    $honoratiosmensualesDecimal = floatval($honoratiosmensuales);
-
-                    if($regimenlaboral_id == ""){
-                        throw new Exception("No puedes borrar el regimen laboral");
-                    }
-
-                    $regimenlaboralID = DB::table('regimenlaboralventas')->where('numero', $regimenlaboral_id)->first();
-                    $id = $regimenlaboralID->id;
-
-                    DB::table('ggvsueldoadministrativos')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'sueldomensualplanilla'=>$sueldoconplanillaDecimal,'honoratiosmensuales'=>$honoratiosmensualesDecimal,'regimenlaboral_id'=>$id]);
-                    $mensaje = "Sueldo Administrativo Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);
@@ -423,29 +443,33 @@ class GgController extends Controller
     public function actualizarggvsueldoadministrativomodal(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->nombre[$ids] == "" && $request->numero[$ids] == ""){
-                    $regimenlaboral = Regimenlaboralventa::find($ids);
-                    $regimenlaboral->delete();
-                    $mensaje = "Regimen Laboral Eliminado Correctamente";
-                } else {
-                    $nombre = $request->nombre[$ids];
-                    $numero = $request->numero[$ids];
+            if(!$request->hasAny(['nombre','numero'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->nombre[$ids] == "" && $request->numero[$ids] == ""){
+                        $regimenlaboral = Regimenlaboralventa::find($ids);
+                        $regimenlaboral->delete();
+                        $mensaje = "Regimen Laboral Eliminado Correctamente";
+                    } else {
+                        $nombre = $request->nombre[$ids];
+                        $numero = $request->numero[$ids];
 
-                    if($nombre == ""){
-                        throw new Exception("No puedes borrar el nombre");
+                        if($nombre == ""){
+                            throw new Exception("No puedes borrar el nombre");
+                        }
+
+                        if($numero == ""){
+                            throw new Exception("No puedes borrar el numero");
+                        }
+
+                        $numeroDecimal = floatval($numero);
+
+                        DB::table('regimenlaboralventas')
+                            ->where('id',$ids)
+                            ->update(['nombre'=>$nombre,'numero'=>$numeroDecimal]);
+                        $mensaje = "Regimen Laboral Actualizado Correctamente";
                     }
-
-                    if($numero == ""){
-                        throw new Exception("No puedes borrar el numero");
-                    }
-
-                    $numeroDecimal = floatval($numero);
-
-                    DB::table('regimenlaboralventas')
-                        ->where('id',$ids)
-                        ->update(['nombre'=>$nombre,'numero'=>$numeroDecimal]);
-                    $mensaje = "Regimen Laboral Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);
@@ -481,34 +505,38 @@ class GgController extends Controller
     public function actualizarggvalmuerzoejecutivo(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->periodoanual[$ids] == ""){
-                    $ggvalmuerzoejecutivo = Ggvalmuerzoejecutivo::find($ids);
-                    $ggvalmuerzoejecutivo->delete();
-                    $mensaje = "Almuerzo Ejecutivo Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $gasto = $request->gasto[$ids];
-                    $periodoanual = $request->periodoanual[$ids];
+            if(!$request->hasAny(['descripcion','gasto','periodoanual'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->periodoanual[$ids] == ""){
+                        $ggvalmuerzoejecutivo = Ggvalmuerzoejecutivo::find($ids);
+                        $ggvalmuerzoejecutivo->delete();
+                        $mensaje = "Almuerzo Ejecutivo Eliminado(s) Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $gasto = $request->gasto[$ids];
+                        $periodoanual = $request->periodoanual[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($gasto == ""){
+                            throw new Exception("No puedes borrar el gasto");
+                        }
+
+                        $gastoDecimal = floatval($gasto);
+
+                        if($periodoanual == ""){
+                            throw new Exception("No puedes borrar el periodo anual");
+                        }
+
+                        DB::table('ggvalmuerzoejecutivos')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'periodoanual'=>$periodoanual]);
+                        $mensaje = "Almuerzo Ejecutivo Actualizado(s) Correctamente";
                     }
-
-                    if($gasto == ""){
-                        throw new Exception("No puedes borrar el gasto");
-                    }
-
-                    $gastoDecimal = floatval($gasto);
-
-                    if($periodoanual == ""){
-                        throw new Exception("No puedes borrar el periodo anual");
-                    }
-
-                    DB::table('ggvalmuerzoejecutivos')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'periodoanual'=>$periodoanual]);
-                    $mensaje = "Almuerzo Ejecutivo Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);
@@ -544,34 +572,38 @@ class GgController extends Controller
     public function actualizarggvotrogastoventa(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->periodoanual[$ids] == ""){
-                    $ggvotrogastoventa = Ggvotrogastoventa::find($ids);
-                    $ggvotrogastoventa->delete();
-                    $mensaje = "Otro Gasto Venta Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $gasto = $request->gasto[$ids];
-                    $periodoanual = $request->periodoanual[$ids];
+            if(!$request->hasAny(['descripcion','gasto','periodoanual'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->periodoanual[$ids] == ""){
+                        $ggvotrogastoventa = Ggvotrogastoventa::find($ids);
+                        $ggvotrogastoventa->delete();
+                        $mensaje = "Otro Gasto Venta Eliminado(s) Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $gasto = $request->gasto[$ids];
+                        $periodoanual = $request->periodoanual[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($gasto == ""){
+                            throw new Exception("No puedes borrar el gasto");
+                        }
+
+                        $gastoDecimal = floatval($gasto);
+
+                        if($periodoanual == ""){
+                            throw new Exception("No puedes borrar el periodo anual");
+                        }
+
+                        DB::table('ggvotrogastoventas')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'periodoanual'=>$periodoanual]);
+                        $mensaje = "Otro Gasto Venta Actualizado(s) Correctamente";
                     }
-
-                    if($gasto == ""){
-                        throw new Exception("No puedes borrar el gasto");
-                    }
-
-                    $gastoDecimal = floatval($gasto);
-
-                    if($periodoanual == ""){
-                        throw new Exception("No puedes borrar el periodo anual");
-                    }
-
-                    DB::table('ggvotrogastoventas')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'periodoanual'=>$periodoanual]);
-                    $mensaje = "Otro Gasto Venta Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);
@@ -607,34 +639,38 @@ class GgController extends Controller
     public function actualizarggtpasajecombustible(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->periodoanual[$ids] == ""){
-                    $ggtpasajecombustible = Ggtpasajecombustible::find($ids);
-                    $ggtpasajecombustible->delete();
-                    $mensaje = "Pasajes y Combustible Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $gasto = $request->gasto[$ids];
-                    $periodoanual = $request->periodoanual[$ids];
+            if(!$request->hasAny(['descripcion','gasto','periodoanual'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->periodoanual[$ids] == ""){
+                        $ggtpasajecombustible = Ggtpasajecombustible::find($ids);
+                        $ggtpasajecombustible->delete();
+                        $mensaje = "Pasajes y Combustible Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $gasto = $request->gasto[$ids];
+                        $periodoanual = $request->periodoanual[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($gasto == ""){
+                            throw new Exception("No puedes borrar el gasto");
+                        }
+
+                        $gastoDecimal = floatval($gasto);
+
+                        if($periodoanual == ""){
+                            throw new Exception("No puedes borrar el periodo anual");
+                        }
+
+                        DB::table('ggtpasajecombustibles')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'periodoanual'=>$periodoanual]);
+                        $mensaje = "Pasajes y Combustible Actualizado Correctamente";
                     }
-
-                    if($gasto == ""){
-                        throw new Exception("No puedes borrar el gasto");
-                    }
-
-                    $gastoDecimal = floatval($gasto);
-
-                    if($periodoanual == ""){
-                        throw new Exception("No puedes borrar el periodo anual");
-                    }
-
-                    DB::table('ggtpasajecombustibles')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'periodoanual'=>$periodoanual]);
-                    $mensaje = "Pasajes y Combustible Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);
@@ -653,12 +689,13 @@ class GgController extends Controller
             $porcentajeuso = $request->porcentajeuso;
 
             $gastoDecimal = floatval($gasto);
+            $porcentajeusoDecimal = floatval($porcentajeuso);
             
             $ggtmantenimientoauto = new Ggtmantenimientoauto();
             $ggtmantenimientoauto->descripcion = $descripcion;
             $ggtmantenimientoauto->gasto = $gastoDecimal;
             $ggtmantenimientoauto->periodoanual = $periodoanual;
-            $ggtmantenimientoauto->porcentajeuso = $porcentajeuso;
+            $ggtmantenimientoauto->porcentajeuso = $porcentajeusoDecimal;
             $ggtmantenimientoauto->save();
 
             $mensaje = "Mantenimiento de Auto Guardado Correctamente";
@@ -672,37 +709,41 @@ class GgController extends Controller
     public function actualizarggtmantenimientoauto(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->periodoanual[$ids] == "" && $request->porcentajeuso[$ids] == ""){
-                    $ggtmantenimientoauto = Ggtmantenimientoauto::find($ids);
-                    $ggtmantenimientoauto->delete();
-                    $mensaje = "Mantenimiento de Auto Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $gasto = $request->gasto[$ids];
-                    $periodoanual = $request->periodoanual[$ids];
-                    $porcentajeuso = $request->porcentajeuso[$ids];
+            if(!$request->hasAny(['descripcion','gasto','periodoanual','porcentajeuso'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->gasto[$ids] == "" && $request->periodoanual[$ids] == "" && $request->porcentajeuso[$ids] == ""){
+                        $ggtmantenimientoauto = Ggtmantenimientoauto::find($ids);
+                        $ggtmantenimientoauto->delete();
+                        $mensaje = "Mantenimiento de Auto Eliminado(s) Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $gasto = $request->gasto[$ids];
+                        $periodoanual = $request->periodoanual[$ids];
+                        $porcentajeuso = $request->porcentajeuso[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($gasto == ""){
+                            throw new Exception("No puedes borrar el gasto");
+                        }
+
+                        $gastoDecimal = floatval($gasto);
+
+                        if($periodoanual == ""){
+                            throw new Exception("No puedes borrar el periodo anual");
+                        }
+
+                        $porcentajeusoDecimal = floatval($porcentajeuso);
+
+                        DB::table('ggtmantenimientoautos')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'periodoanual'=>$periodoanual,'porcentajeuso'=>$porcentajeusoDecimal]);
+                        $mensaje = "Mantenimiento de Auto Actualizado(s) Correctamente";
                     }
-
-                    if($gasto == ""){
-                        throw new Exception("No puedes borrar el gasto");
-                    }
-
-                    $gastoDecimal = floatval($gasto);
-
-                    if($periodoanual == ""){
-                        throw new Exception("No puedes borrar el periodo anual");
-                    }
-
-                    $porcentajeusoDecimal = floatval($porcentajeuso);
-
-                    DB::table('ggtmantenimientoautos')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'gasto'=>$gastoDecimal,'periodoanual'=>$periodoanual,'porcentajeuso'=>$porcentajeusoDecimal]);
-                    $mensaje = "Mantenimiento de Auto Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);
@@ -739,32 +780,36 @@ class GgController extends Controller
     public function actualizarggserviciosbasicos(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->costoservicio[$ids] == "" && $request->porcentajeuso[$ids] == ""){
-                    $ggserviciosbasico = Ggserviciobasico::find($ids);
-                    $ggserviciosbasico->delete();
-                    $mensaje = "Servicio Basico Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $costoservicio = $request->costoservicio[$ids];
-                    $porcentajeuso = $request->porcentajeuso[$ids];
+            if(!$request->hasAny(['descripcion','costoservicio','porcentajeuso'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->costoservicio[$ids] == "" && $request->porcentajeuso[$ids] == ""){
+                        $ggserviciosbasico = Ggserviciobasico::find($ids);
+                        $ggserviciosbasico->delete();
+                        $mensaje = "Servicio Basico Eliminado(s) Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $costoservicio = $request->costoservicio[$ids];
+                        $porcentajeuso = $request->porcentajeuso[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($costoservicio == ""){
+                            throw new Exception("No puedes borrar el gasto");
+                        }
+
+                        $costoservicioDecimal = floatval($costoservicio);
+
+                        $porcentajeusoDecimal = floatval($porcentajeuso);
+
+                        DB::table('ggserviciobasicos')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'costoservicio'=>$costoservicioDecimal,'porcentajeuso'=>$porcentajeusoDecimal]);
+                        $mensaje = "Servicio Basico Actualizado(s) Correctamente";
                     }
-
-                    if($costoservicio == ""){
-                        throw new Exception("No puedes borrar el gasto");
-                    }
-
-                    $costoservicioDecimal = floatval($costoservicio);
-
-                    $porcentajeusoDecimal = floatval($porcentajeuso);
-
-                    DB::table('ggserviciobasicos')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'costoservicio'=>$costoservicioDecimal,'porcentajeuso'=>$porcentajeusoDecimal]);
-                    $mensaje = "Servicio Basico Actualizado Correctamente";
                 }
             }
             return redirect()->route('gg.inicio')->with('mensajegg',$mensaje);

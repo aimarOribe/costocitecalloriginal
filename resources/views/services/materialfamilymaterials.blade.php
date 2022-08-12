@@ -29,9 +29,9 @@
                                 </div>
                             @endif  
 
-                            <div class="margenes-botones">
-                                <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormfmmateriales(this)">See Materials</button>
-                                <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormfmmateriales(this)">Register Material</button>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="displayFormfmmateriales">
+                                <label class="form-check-label" for="displayFormfmmateriales">Ver/Registrar Materiales</label>
                             </div>
                         
                             <div id="requestFormfmmateriales">
@@ -42,6 +42,10 @@
                                             <th scope="col">Familia de Materiales</th>
                                             <th scope="col">Material</th>
                                             <th scope="col">Unidad de Medida</th>
+                                            <th scope="col">Presentacion</th>
+                                            <th scope="col">Stock</th>
+                                            <th scope="col">Costo Promedio</th>
+                                            <th scope="col">Costo Real</th>
                                         </tr>
                                     </thead>
                                     <tbody style="border-color: #ed7d31">
@@ -49,8 +53,8 @@
                                         <tr>
                                             <input hidden name="id[]" value="<?php echo $fmmateriale->id ?>">
                                             <td>
-                                                <select class="form-control" id="familiamateriales_id" name="familiamateriales_id[<?php echo $fmmateriale->id ?>]">
-                                                    <option class="tamano-texto-cuerpo-lista" value="--">--</option>
+                                                <select class="form-control tamano-texto-cuerpo-lista" id="familiamateriales_id" name="familiamateriales_id[<?php echo $fmmateriale->id ?>]">
+                                                    <option class="tamano-texto-cuerpo-lista" value="">--</option>
                                                     @foreach ($familiasmateriales as $familiasmaterial)
                                                         <option class="tamano-texto-cuerpo-lista" value="{{$familiasmaterial->id}}" @if($familiasmaterial->id===$fmmateriale->familiamateriales_id) selected='selected' @endif>
                                                             {{$familiasmaterial->nombre}}
@@ -60,8 +64,8 @@
                                             </td>
                                             <td><input class="form-control tamano-texto-cuerpo-lista" type="text" name="nombre[<?php echo $fmmateriale->id ?>]" value="<?php echo $fmmateriale->nombre ?>"></td>
                                             <td>
-                                                <select class="form-control" id="unidadesmedidas_id" name="unidadesmedidas_id[<?php echo $fmmateriale->id ?>]">
-                                                    <option class="tamano-texto-cuerpo-lista" value="--">--</option>
+                                                <select class="form-control tamano-texto-cuerpo-lista" id="unidadesmedidas_id" name="unidadesmedidas_id[<?php echo $fmmateriale->id ?>]">
+                                                    <option class="tamano-texto-cuerpo-lista" value="">--</option>
                                                     @foreach ($unidadesmedidas as $unidadesmedida)
                                                         <option class="tamano-texto-cuerpo-lista" value="{{$unidadesmedida->id}}" @if($unidadesmedida->id===$fmmateriale->listaunidadmedida_id) selected='selected' @endif>
                                                             {{$unidadesmedida->nombre}}
@@ -69,12 +73,16 @@
                                                     @endforeach
                                                 </select>
                                             </td>
+                                            <td><input class="form-control tamano-texto-cuerpo-lista" type="text" name="presentacion[<?php echo $fmmateriale->id ?>]" value="<?php echo $fmmateriale->presentacion ?>"></td>
+                                            <td><input readonly class="form-control tamano-texto-cuerpo-lista" type="number" name="stock[<?php echo $fmmateriale->id ?>]" value="<?php echo $fmmateriale->stock ?>"></td>
+                                            <td><input readonly class="form-control tamano-texto-cuerpo-lista" type="text" name="costopromedio[<?php echo $fmmateriale->id ?>]" value="<?php echo $fmmateriale->costopromedio ?>"></td>
+                                            <td><input readonly class="form-control tamano-texto-cuerpo-lista" type="number" name="costoreal[<?php echo $fmmateriale->id ?>]" value="<?php echo $fmmateriale->costoreal ?>"></td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                                 @can('familiamaterialesmateriales.actualizarfamiliamaterialesmateriales')
-                                    <button type="submit" name="actualizarModelosInsumosModelos" class="btn btn-warning boton-actualizar tamano-texto-cuerpo-boton">Update<?php echo "<br/>" ?>Materials</button>
+                                    <button type="submit" name="actualizarModelosInsumosModelos" class="btn btn-success tamano-texto-cuerpo-boton">Guardar Materiales</button>
                                 @endcan
                                 {!! Form::close() !!}
                             </div>
@@ -88,15 +96,16 @@
                                                 <th scope="col">Familia de Materiales</th>
                                                 <th scope="col">Material</th>
                                                 <th scope="col">Unidad de Medida</th>
+                                                <th scope="col">Presentacion</th>
                                             </tr>
                                         </thead>
                                         <tbody style="border-color: #ed7d31">
                                             <tr class="fila-fija-fmmateriales">
                                                 <td>
-                                                    <select name="familiamateriales_id[]" class="form-select" aria-label="Default select example">
-                                                        <option>--</option>
+                                                    <select required name="familiamateriales_id[]" class="form-select tamano-texto-cuerpo-lista" aria-label="Default select example">
+                                                        <option class="tamano-texto-cuerpo-lista" value="">--</option>
                                                         @foreach ($familiasmateriales as $familiasmaterial)
-                                                            <option value="{{$familiasmaterial->id}}">
+                                                            <option class="tamano-texto-cuerpo-lista" value="{{$familiasmaterial->id}}">
                                                                 {{$familiasmaterial->nombre}}
                                                             </option>
                                                         @endforeach
@@ -104,21 +113,22 @@
                                                 </td>
                                                 <td><input required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
                                                 <td>
-                                                    <select name="unidadesmedidas_id[]" class="form-select" aria-label="Default select example">
-                                                        <option>--</option>
+                                                    <select required name="unidadesmedidas_id[]" class="form-select tamano-texto-cuerpo-lista" aria-label="Default select example">
+                                                        <option class="tamano-texto-cuerpo-lista" value="">--</option>
                                                         @foreach ($unidadesmedidas as $unidadesmedida)
-                                                            <option value="{{$unidadesmedida->id}}">
+                                                            <option class="tamano-texto-cuerpo-lista" value="{{$unidadesmedida->id}}">
                                                                 {{$unidadesmedida->nombre}}
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                 </td>
+                                                <td><input required name="presentacion[]" placeholder="Presentacion" class="form-control tamano-texto-cuerpo-lista"/></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <div class="btn-der">
                                         @can('familiamaterialesmateriales.registrarfamiliamaterialesmateriales')
-                                            <button type="submit" name="insertarfmmateriales" class="btn btn-info tamano-texto-cuerpo-boton">Insert<?php echo "<br/>" ?>Materials</button>
+                                            <button type="submit" name="insertarfmmateriales" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Materiales</button>
                                         @endcan
                                         <button id="adicionalfmmateriales" name="adicionalfmmateriales" type="button" class="btn btn-warning"> More + </button>
                                         <button id="eliminarfmmateriales" name="eliminarfmmateriales" type="button" class="btn btn-danger"> Less - </button>

@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gif;
-use App\Models\Gifcategoriaempleados;
-use App\Models\Gifempleados;
 use App\Models\Gifempleadosconbeneficio;
 use App\Models\Gifempleadossinbeneficio;
 use App\Models\Gifhmsialistado;
@@ -72,7 +70,6 @@ class GifController extends Controller
 
             $numeroDecimal = floatval($numero);
             
-
             $regimenlaboral = new Regimenlaboral();
             $regimenlaboral->nombre = $nombre;
             $regimenlaboral->numero = $numeroDecimal;
@@ -206,10 +203,6 @@ class GifController extends Controller
 
             $costoDecimal = floatval($sueldo);
 
-            if($costoDecimal == 0){
-                throw new Exception("No puedes poner texto en el costo");
-            }
-
             $gifempleadosconbeneficios = new Gifempleadossinbeneficio();
             $gifempleadosconbeneficios->nombre = $nombre;
             $sueldo = $gifempleadosconbeneficios->sueldo = $costoDecimal;
@@ -228,45 +221,45 @@ class GifController extends Controller
     public function actualizargifmanoobrasinbeneficios(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->nombre[$ids] == "" && $request->sueldo[$ids] == "" && $request->ntrabajadores[$ids] == "" && $request->regimenlaboral_id[$ids] == ""){
-                    $gifempleadossinbeneficios = Gifempleadossinbeneficio::find($ids);
-                    $gifempleadossinbeneficios->delete();
-                    $mensaje = "Mano de Obra Indirecta Eliminado Correctamente";
-                } else {
-                    $nombre = $request->nombre[$ids];
-                    $sueldo = $request->sueldo[$ids];
-                    $ntrabajadores = $request->ntrabajadores[$ids];
-                    $regimenlaboral_id = $request->regimenlaboral_id[$ids];
+            if(!$request->hasAny(['nombre','sueldo','ntrabajadores','regimenlaboral_id'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->nombre[$ids] == "" && $request->sueldo[$ids] == "" && $request->ntrabajadores[$ids] == "" && $request->regimenlaboral_id[$ids] == ""){
+                        $gifempleadossinbeneficios = Gifempleadossinbeneficio::find($ids);
+                        $gifempleadossinbeneficios->delete();
+                        $mensaje = "Mano de Obra Indirecta Eliminado(s) Correctamente";
+                    } else {
+                        $nombre = $request->nombre[$ids];
+                        $sueldo = $request->sueldo[$ids];
+                        $ntrabajadores = $request->ntrabajadores[$ids];
+                        $regimenlaboral_id = $request->regimenlaboral_id[$ids];
 
-                    if($nombre == ""){
-                        throw new Exception("No puedes borrar el nombre");
+                        if($nombre == ""){
+                            throw new Exception("No puedes borrar el nombre");
+                        }
+
+                        if($sueldo == ""){
+                            throw new Exception("No puedes borrar el sueldo");
+                        }
+
+                        $costoDecimal = floatval($sueldo);
+
+                        if($ntrabajadores == ""){
+                            throw new Exception("No puedes borrar la cantidad de trabajadores");
+                        }
+                        if($regimenlaboral_id == ""){
+                            throw new Exception("No puedes borrar el regimen laboral");
+                        }
+
+                        $regimenlaboralID = DB::table('regimenlaborals')->where('numero', $regimenlaboral_id)->first();
+                        $id = $regimenlaboralID->id;
+
+                        DB::table('gifempleadossinbeneficios')
+                            ->where('id',$ids)
+                            ->update(['nombre'=>$nombre,'sueldo'=>$costoDecimal,'ntrabajadores'=>$ntrabajadores,'regimenlaboral_id'=>$id]);
+                        $mensaje = "Mano de Obra Indirecta Actualizado Correctamente";
                     }
-
-                    if($sueldo == ""){
-                        throw new Exception("No puedes borrar el sueldo");
-                    }
-
-                    $costoDecimal = floatval($sueldo);
-
-                    if($costoDecimal == 0){
-                        throw new Exception("No puedes poner texto en el costo");
-                    }
-
-                    if($ntrabajadores == ""){
-                        throw new Exception("No puedes borrar la cantidad de trabajadores");
-                    }
-                    if($regimenlaboral_id == ""){
-                        throw new Exception("No puedes borrar el regimen laboral");
-                    }
-
-                    $regimenlaboralID = DB::table('regimenlaborals')->where('numero', $regimenlaboral_id)->first();
-                    $id = $regimenlaboralID->id;
-
-                    DB::table('gifempleadossinbeneficios')
-                        ->where('id',$ids)
-                        ->update(['nombre'=>$nombre,'sueldo'=>$costoDecimal,'ntrabajadores'=>$ntrabajadores,'regimenlaboral_id'=>$id]);
-                    $mensaje = "Mano de Obra Indirecta Actualizado Correctamente";
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -286,10 +279,6 @@ class GifController extends Controller
 
             $costoDecimal = floatval($sueldo);
 
-            if($costoDecimal == 0){
-                throw new Exception("No puedes poner texto en el costo");
-            }
-
             $gifempleadosconbeneficios = new Gifempleadosconbeneficio();
             $gifempleadosconbeneficios->nombre = $nombre;
             $sueldo = $gifempleadosconbeneficios->sueldo = $costoDecimal;
@@ -308,45 +297,45 @@ class GifController extends Controller
     public function actualizargifmanoobraconbeneficios(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->nombre[$ids] == "" && $request->sueldo[$ids] == "" && $request->ntrabajadores[$ids] == "" && $request->regimenlaboral_id[$ids] == ""){
-                    $gifempleadossinbeneficios = Gifempleadosconbeneficio::find($ids);
-                    $gifempleadossinbeneficios->delete();
-                    $mensaje = "Mano de Obra Indirecta con Beneficios Eliminado Correctamente";
-                } else {
-                    $nombre = $request->nombre[$ids];
-                    $sueldo = $request->sueldo[$ids];
-                    $ntrabajadores = $request->ntrabajadores[$ids];
-                    $regimenlaboral_id = $request->regimenlaboral_id[$ids];
+            if(!$request->hasAny(['nombre','sueldo','ntrabajadores','regimenlaboral_id'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->nombre[$ids] == "" && $request->sueldo[$ids] == "" && $request->ntrabajadores[$ids] == "" && $request->regimenlaboral_id[$ids] == ""){
+                        $gifempleadossinbeneficios = Gifempleadosconbeneficio::find($ids);
+                        $gifempleadossinbeneficios->delete();
+                        $mensaje = "Mano de Obra Indirecta con Beneficios Eliminado(s) Correctamente";
+                    } else {
+                        $nombre = $request->nombre[$ids];
+                        $sueldo = $request->sueldo[$ids];
+                        $ntrabajadores = $request->ntrabajadores[$ids];
+                        $regimenlaboral_id = $request->regimenlaboral_id[$ids];
 
-                    if($nombre == ""){
-                        throw new Exception("No puedes borrar el nombre");
+                        if($nombre == ""){
+                            throw new Exception("No puedes borrar el nombre");
+                        }
+
+                        if($sueldo == ""){
+                            throw new Exception("No puedes borrar el sueldo");
+                        }
+
+                        $costoDecimal = floatval($sueldo);
+
+                        if($ntrabajadores == ""){
+                            throw new Exception("No puedes borrar la cantidad de trabajadores");
+                        }
+                        if($regimenlaboral_id == ""){
+                            throw new Exception("No puedes borrar el regimen laboral");
+                        }
+
+                        $regimenlaboralID = DB::table('regimenlaboralconbeneficios')->where('numero', $regimenlaboral_id)->first();
+                        $id = $regimenlaboralID->id;
+
+                        DB::table('gifempleadosconbeneficios')
+                            ->where('id',$ids)
+                            ->update(['nombre'=>$nombre,'sueldo'=>$costoDecimal,'ntrabajadores'=>$ntrabajadores,'regimenlaboral_id'=>$id]);
+                        $mensaje = "Mano de Obra Indirecta con Beneficios Actualizado(s) Correctamente";
                     }
-
-                    if($sueldo == ""){
-                        throw new Exception("No puedes borrar el sueldo");
-                    }
-
-                    $costoDecimal = floatval($sueldo);
-
-                    if($costoDecimal == 0){
-                        throw new Exception("No puedes poner texto en el costo");
-                    }
-
-                    if($ntrabajadores == ""){
-                        throw new Exception("No puedes borrar la cantidad de trabajadores");
-                    }
-                    if($regimenlaboral_id == ""){
-                        throw new Exception("No puedes borrar el regimen laboral");
-                    }
-
-                    $regimenlaboralID = DB::table('regimenlaboralconbeneficios')->where('numero', $regimenlaboral_id)->first();
-                    $id = $regimenlaboralID->id;
-
-                    DB::table('gifempleadosconbeneficios')
-                        ->where('id',$ids)
-                        ->update(['nombre'=>$nombre,'sueldo'=>$costoDecimal,'ntrabajadores'=>$ntrabajadores,'regimenlaboral_id'=>$id]);
-                    $mensaje = "Mano de Obra Indirecta con Beneficios Actualizado Correctamente";
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -369,10 +358,6 @@ class GifController extends Controller
 
             $valorunitarioDecimal = floatval($valorunitario);
 
-            if($valorunitarioDecimal == 0){
-                throw new Exception("No puedes poner texto en el valor unitario");
-            }
-
             $gifhmsimodelajeseriado = new Gifhmsimodelajeseriado();
             $gifhmsimodelajeseriado->descripcion = $descripcion;
             $gifhmsimodelajeseriado->listaunidadmedida_id = $listaunidadmedida_id;
@@ -392,43 +377,43 @@ class GifController extends Controller
     public function actualizargifhmsiefmodelajeseriado(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
-                    $gifhmsimodelajeseriado = Gifhmsimodelajeseriado::find($ids);
-                    $gifhmsimodelajeseriado->delete();
-                    $mensaje = "Modelaje y Seriado Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
-                    $valorunitario = $request->valorunitario[$ids];
-                    $consumo = $request->consumo[$ids];
-                    $cantidadmeses = $request->cantidadmeses[$ids];
+            if(!$request->hasAny(['descripcion','listaunidadmedida_id','valorunitario','consumo','cantidadmeses'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
+                        $gifhmsimodelajeseriado = Gifhmsimodelajeseriado::find($ids);
+                        $gifhmsimodelajeseriado->delete();
+                        $mensaje = "Modelaje y Seriado Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
+                        $valorunitario = $request->valorunitario[$ids];
+                        $consumo = $request->consumo[$ids];
+                        $cantidadmeses = $request->cantidadmeses[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($listaunidadmedida_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
+
+                        $valorunitarioDecimal = floatval($valorunitario);
+
+                        if($consumo == ""){
+                            throw new Exception("No puedes borrar el consumo");
+                        }
+                        if($cantidadmeses == ""){
+                            throw new Exception("No puedes borrar la cantidad de meses");
+                        }
+
+                        DB::table('gifhmsimodelajeseriados')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
+                        $mensaje = "Modelaje y Seriado Actualizado Correctamente";
                     }
-
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes borrar la unidad de medida");
-                    }
-
-                    $valorunitarioDecimal = floatval($valorunitario);
-
-                    if($valorunitarioDecimal == 0){
-                        throw new Exception("No puedes poner texto en el valor unitario");
-                    }
-
-                    if($consumo == ""){
-                        throw new Exception("No puedes borrar el consumo");
-                    }
-                    if($cantidadmeses == ""){
-                        throw new Exception("No puedes borrar la cantidad de meses");
-                    }
-
-                    DB::table('gifhmsimodelajeseriados')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
-                    $mensaje = "Modelaje y Seriado Actualizado Correctamente";
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -451,10 +436,6 @@ class GifController extends Controller
 
             $valorunitarioDecimal = floatval($valorunitario);
 
-            if($valorunitarioDecimal == 0){
-                throw new Exception("No puedes poner texto en el valor unitario");
-            }
-
             $gifhmsicorte = new Gifhmsicorte();
             $gifhmsicorte->descripcion = $descripcion;
             $gifhmsicorte->listaunidadmedida_id = $listaunidadmedida_id;
@@ -474,43 +455,43 @@ class GifController extends Controller
     public function actualizargifhmsiefcorte(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
-                    $gifhmsicorte = Gifhmsicorte::find($ids);
-                    $gifhmsicorte->delete();
-                    $mensaje = "Corte Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
-                    $valorunitario = $request->valorunitario[$ids];
-                    $consumo = $request->consumo[$ids];
-                    $cantidadmeses = $request->cantidadmeses[$ids];
+            if(!$request->hasAny(['descripcion','listaunidadmedida_id','valorunitario','consumo','cantidadmeses'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
+                        $gifhmsicorte = Gifhmsicorte::find($ids);
+                        $gifhmsicorte->delete();
+                        $mensaje = "Corte Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
+                        $valorunitario = $request->valorunitario[$ids];
+                        $consumo = $request->consumo[$ids];
+                        $cantidadmeses = $request->cantidadmeses[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($listaunidadmedida_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
+
+                        $valorunitarioDecimal = floatval($valorunitario);
+
+                        if($consumo == ""){
+                            throw new Exception("No puedes borrar el consumo");
+                        }
+                        if($cantidadmeses == ""){
+                            throw new Exception("No puedes borrar la cantidad de meses");
+                        }
+
+                        DB::table('gifhmsicortes')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
+                        $mensaje = "Corte Actualizado Correctamente";
                     }
-
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes borrar la unidad de medida");
-                    }
-
-                    $valorunitarioDecimal = floatval($valorunitario);
-
-                    if($valorunitarioDecimal == 0){
-                        throw new Exception("No puedes poner texto en el valor unitario");
-                    }
-
-                    if($consumo == ""){
-                        throw new Exception("No puedes borrar el consumo");
-                    }
-                    if($cantidadmeses == ""){
-                        throw new Exception("No puedes borrar la cantidad de meses");
-                    }
-
-                    DB::table('gifhmsicortes')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
-                    $mensaje = "Corte Actualizado Correctamente";
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -531,10 +512,6 @@ class GifController extends Controller
 
             $valorunitarioDecimal = floatval($valorunitario);
 
-            if($valorunitarioDecimal == 0){
-                throw new Exception("No puedes poner texto en el valor unitario");
-            }
-
             $gifhmsiaparado = new Gifhmsiaparado();
             $gifhmsiaparado->descripcion = $descripcion;
             $gifhmsiaparado->listaunidadmedida_id = $listaunidadmedida_id;
@@ -554,43 +531,43 @@ class GifController extends Controller
     public function actualizargifhmsiefaparado(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
-                    $gifhmsiaparado = Gifhmsiaparado::find($ids);
-                    $gifhmsiaparado->delete();
-                    $mensaje = "Aparado Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
-                    $valorunitario = $request->valorunitario[$ids];
-                    $consumo = $request->consumo[$ids];
-                    $cantidadmeses = $request->cantidadmeses[$ids];
+            if(!$request->hasAny(['descripcion','listaunidadmedida_id','valorunitario','consumo','cantidadmeses'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
+                        $gifhmsiaparado = Gifhmsiaparado::find($ids);
+                        $gifhmsiaparado->delete();
+                        $mensaje = "Aparado Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
+                        $valorunitario = $request->valorunitario[$ids];
+                        $consumo = $request->consumo[$ids];
+                        $cantidadmeses = $request->cantidadmeses[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($listaunidadmedida_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
+
+                        $valorunitarioDecimal = floatval($valorunitario);
+
+                        if($consumo == ""){
+                            throw new Exception("No puedes borrar el consumo");
+                        }
+                        if($cantidadmeses == ""){
+                            throw new Exception("No puedes borrar la cantidad de meses");
+                        }
+
+                        DB::table('gifhmsiaparados')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
+                        $mensaje = "Aparado Actualizado Correctamente";
                     }
-
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes borrar la unidad de medida");
-                    }
-
-                    $valorunitarioDecimal = floatval($valorunitario);
-
-                    if($valorunitarioDecimal == 0){
-                        throw new Exception("No puedes poner texto en el valor unitario");
-                    }
-
-                    if($consumo == ""){
-                        throw new Exception("No puedes borrar el consumo");
-                    }
-                    if($cantidadmeses == ""){
-                        throw new Exception("No puedes borrar la cantidad de meses");
-                    }
-
-                    DB::table('gifhmsiaparados')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
-                    $mensaje = "Aparado Actualizado Correctamente";
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -611,10 +588,6 @@ class GifController extends Controller
 
             $valorunitarioDecimal = floatval($valorunitario);
 
-            if($valorunitarioDecimal == 0){
-                throw new Exception("No puedes poner texto en el valor unitario");
-            }
-
             $gifhmsiarmado = new Gifhmsiarmado();
             $gifhmsiarmado->descripcion = $descripcion;
             $gifhmsiarmado->listaunidadmedida_id = $listaunidadmedida_id;
@@ -634,43 +607,43 @@ class GifController extends Controller
     public function actualizargifhmsiefarmado(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
-                    $gifhmsiarmado = Gifhmsiarmado::find($ids);
-                    $gifhmsiarmado->delete();
-                    $mensaje = "Armado Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
-                    $valorunitario = $request->valorunitario[$ids];
-                    $consumo = $request->consumo[$ids];
-                    $cantidadmeses = $request->cantidadmeses[$ids];
+            if(!$request->hasAny(['descripcion','listaunidadmedida_id','valorunitario','consumo','cantidadmeses'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
+                        $gifhmsiarmado = Gifhmsiarmado::find($ids);
+                        $gifhmsiarmado->delete();
+                        $mensaje = "Armado Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
+                        $valorunitario = $request->valorunitario[$ids];
+                        $consumo = $request->consumo[$ids];
+                        $cantidadmeses = $request->cantidadmeses[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($listaunidadmedida_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
+
+                        $valorunitarioDecimal = floatval($valorunitario);
+
+                        if($consumo == ""){
+                            throw new Exception("No puedes borrar el consumo");
+                        }
+                        if($cantidadmeses == ""){
+                            throw new Exception("No puedes borrar la cantidad de meses");
+                        }
+
+                        DB::table('gifhmsiarmados')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
+                        $mensaje = "Armado Actualizado Correctamente";
                     }
-
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes borrar la unidad de medida");
-                    }
-
-                    $valorunitarioDecimal = floatval($valorunitario);
-
-                    if($valorunitarioDecimal == 0){
-                        throw new Exception("No puedes poner texto en el valor unitario");
-                    }
-
-                    if($consumo == ""){
-                        throw new Exception("No puedes borrar el consumo");
-                    }
-                    if($cantidadmeses == ""){
-                        throw new Exception("No puedes borrar la cantidad de meses");
-                    }
-
-                    DB::table('gifhmsiarmados')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
-                    $mensaje = "Armado Actualizado Correctamente";
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -691,10 +664,6 @@ class GifController extends Controller
 
             $valorunitarioDecimal = floatval($valorunitario);
 
-            if($valorunitarioDecimal == 0){
-                throw new Exception("No puedes poner texto en el valor unitario");
-            }
-
             $gifhmsialistado = new Gifhmsialistado();
             $gifhmsialistado->descripcion = $descripcion;
             $gifhmsialistado->listaunidadmedida_id = $listaunidadmedida_id;
@@ -714,43 +683,43 @@ class GifController extends Controller
     public function actualizargifhmsiefalistado(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
-                    $gifhmsialistado = Gifhmsialistado::find($ids);
-                    $gifhmsialistado->delete();
-                    $mensaje = "Alistado Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
-                    $valorunitario = $request->valorunitario[$ids];
-                    $consumo = $request->consumo[$ids];
-                    $cantidadmeses = $request->cantidadmeses[$ids];
+            if(!$request->hasAny(['descripcion','listaunidadmedida_id','valorunitario','consumo','cantidadmeses'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
+                        $gifhmsialistado = Gifhmsialistado::find($ids);
+                        $gifhmsialistado->delete();
+                        $mensaje = "Alistado Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
+                        $valorunitario = $request->valorunitario[$ids];
+                        $consumo = $request->consumo[$ids];
+                        $cantidadmeses = $request->cantidadmeses[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($listaunidadmedida_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
+
+                        $valorunitarioDecimal = floatval($valorunitario);
+
+                        if($consumo == ""){
+                            throw new Exception("No puedes borrar el consumo");
+                        }
+                        if($cantidadmeses == ""){
+                            throw new Exception("No puedes borrar la cantidad de meses");
+                        }
+
+                        DB::table('gifhmsialistados')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
+                        $mensaje = "Alistado Actualizado Correctamente";
                     }
-
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes borrar la unidad de medida");
-                    }
-
-                    $valorunitarioDecimal = floatval($valorunitario);
-
-                    if($valorunitarioDecimal == 0){
-                        throw new Exception("No puedes poner texto en el valor unitario");
-                    }
-
-                    if($consumo == ""){
-                        throw new Exception("No puedes borrar el consumo");
-                    }
-                    if($cantidadmeses == ""){
-                        throw new Exception("No puedes borrar la cantidad de meses");
-                    }
-
-                    DB::table('gifhmsialistados')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
-                    $mensaje = "Alistado Actualizado Correctamente";
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -771,10 +740,6 @@ class GifController extends Controller
 
             $valorunitarioDecimal = floatval($valorunitario);
 
-            if($valorunitarioDecimal == 0){
-                throw new Exception("No puedes poner texto en el valor unitario");
-            }
-
             $gifhmsilimpieza = new Gifhmsilimpieza();
             $gifhmsilimpieza->descripcion = $descripcion;
             $gifhmsilimpieza->listaunidadmedida_id = $listaunidadmedida_id;
@@ -794,43 +759,43 @@ class GifController extends Controller
     public function actualizargifhmsieflimpieza(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
-                    $gifhmsilimpieza = Gifhmsilimpieza::find($ids);
-                    $gifhmsilimpieza->delete();
-                    $mensaje = "Limpieza Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
-                    $valorunitario = $request->valorunitario[$ids];
-                    $consumo = $request->consumo[$ids];
-                    $cantidadmeses = $request->cantidadmeses[$ids];
+            if(!$request->hasAny(['descripcion','listaunidadmedida_id','valorunitario','consumo','cantidadmeses'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
+                        $gifhmsilimpieza = Gifhmsilimpieza::find($ids);
+                        $gifhmsilimpieza->delete();
+                        $mensaje = "Limpieza Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
+                        $valorunitario = $request->valorunitario[$ids];
+                        $consumo = $request->consumo[$ids];
+                        $cantidadmeses = $request->cantidadmeses[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($listaunidadmedida_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
+
+                        $valorunitarioDecimal = floatval($valorunitario);
+
+                        if($consumo == ""){
+                            throw new Exception("No puedes borrar el consumo");
+                        }
+                        if($cantidadmeses == ""){
+                            throw new Exception("No puedes borrar la cantidad de meses");
+                        }
+
+                        DB::table('gifhmsilimpiezas')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
+                        $mensaje = "Limpieza Actualizado Correctamente";
                     }
-
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes borrar la unidad de medida");
-                    }
-
-                    $valorunitarioDecimal = floatval($valorunitario);
-
-                    if($valorunitarioDecimal == 0){
-                        throw new Exception("No puedes poner texto en el valor unitario");
-                    }
-
-                    if($consumo == ""){
-                        throw new Exception("No puedes borrar el consumo");
-                    }
-                    if($cantidadmeses == ""){
-                        throw new Exception("No puedes borrar la cantidad de meses");
-                    }
-
-                    DB::table('gifhmsilimpiezas')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
-                    $mensaje = "Limpieza Actualizado Correctamente";
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -851,10 +816,6 @@ class GifController extends Controller
 
             $valorunitarioDecimal = floatval($valorunitario);
 
-            if($valorunitarioDecimal == 0){
-                throw new Exception("No puedes poner texto en el valor unitario");
-            }
-
             $gifhmsieppersonal = new Gifhmsieppersonal();
             $gifhmsieppersonal->descripcion = $descripcion;
             $gifhmsieppersonal->listaunidadmedida_id = $listaunidadmedida_id;
@@ -874,43 +835,43 @@ class GifController extends Controller
     public function actualizargifhmsiefeppersonal(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
-                    $gifhmsieppersonal = Gifhmsieppersonal::find($ids);
-                    $gifhmsieppersonal->delete();
-                    $mensaje = "Equipo de Proteccion Personal Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
-                    $valorunitario = $request->valorunitario[$ids];
-                    $consumo = $request->consumo[$ids];
-                    $cantidadmeses = $request->cantidadmeses[$ids];
+            if(!$request->hasAny(['descripcion','listaunidadmedida_id','valorunitario','consumo','cantidadmeses'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->valorunitario[$ids] == "" && $request->consumo[$ids] == ""  && $request->cantidadmeses[$ids] == ""){
+                        $gifhmsieppersonal = Gifhmsieppersonal::find($ids);
+                        $gifhmsieppersonal->delete();
+                        $mensaje = "Equipo de Proteccion Personal Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
+                        $valorunitario = $request->valorunitario[$ids];
+                        $consumo = $request->consumo[$ids];
+                        $cantidadmeses = $request->cantidadmeses[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
+
+                        if($listaunidadmedida_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
+
+                        $valorunitarioDecimal = floatval($valorunitario);
+
+                        if($consumo == ""){
+                            throw new Exception("No puedes borrar el consumo");
+                        }
+                        if($cantidadmeses == ""){
+                            throw new Exception("No puedes borrar la cantidad de meses");
+                        }
+
+                        DB::table('gifhmsieppersonals')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
+                        $mensaje = "Equipo de Proteccion Personal Actualizado Correctamente";
                     }
-
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes borrar la unidad de medida");
-                    }
-
-                    $valorunitarioDecimal = floatval($valorunitario);
-
-                    if($valorunitarioDecimal == 0){
-                        throw new Exception("No puedes poner texto en el valor unitario");
-                    }
-
-                    if($consumo == ""){
-                        throw new Exception("No puedes borrar el consumo");
-                    }
-                    if($cantidadmeses == ""){
-                        throw new Exception("No puedes borrar la cantidad de meses");
-                    }
-
-                    DB::table('gifhmsieppersonals')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'valorunitario'=>$valorunitarioDecimal,'consumo'=>$consumo,'cantidadmeses'=>$cantidadmeses]);
-                    $mensaje = "Equipo de Proteccion Personal Actualizado Correctamente";
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -927,13 +888,16 @@ class GifController extends Controller
             $listaunidadmedida_id = $request->listaunidadmedida_id;
             $cantidad = $request->cantidad;
             $gastomantenimiento = $request->gastomantenimiento;
+
+            $gastomantenimientoDecimal = floatval($gastomantenimiento);
+
             $frecuenciaanual = $request->frecuenciaanual;
 
             $gifrmcorte = new Rmcorte();
             $gifrmcorte->descripcion = $descripcion;
             $gifrmcorte->listaunidadmedida_id = $listaunidadmedida_id;
             $gifrmcorte->cantidad = $cantidad;
-            $gifrmcorte->gastomantenimiento = $gastomantenimiento;
+            $gifrmcorte->gastomantenimiento = $gastomantenimientoDecimal;
             $gifrmcorte->frecuenciaanual = $frecuenciaanual;
             $gifrmcorte->save();
 
@@ -948,41 +912,47 @@ class GifController extends Controller
     public function actualizargifrmcorte(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->cantidad[$ids] == "" && $request->gastomantenimiento[$ids] == ""  && $request->frecuenciaanual[$ids] == ""){
-                    $gifrmcorte = Rmcorte::find($ids);
-                    $gifrmcorte->delete();
-                    $mensaje = "RM Corte Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
-                    $cantidad = $request->cantidad[$ids];
-                    $gastomantenimiento = $request->gastomantenimiento[$ids];
-                    $frecuenciaanual = $request->frecuenciaanual[$ids];
+            if(!$request->hasAny(['descripcion','listaunidadmedida_id','cantidad','gastomantenimiento','frecuenciaanual'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->cantidad[$ids] == "" && $request->gastomantenimiento[$ids] == ""  && $request->frecuenciaanual[$ids] == ""){
+                        $gifrmcorte = Rmcorte::find($ids);
+                        $gifrmcorte->delete();
+                        $mensaje = "RM Corte Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
+                        $cantidad = $request->cantidad[$ids];
+                        $gastomantenimiento = $request->gastomantenimiento[$ids];
+                        $frecuenciaanual = $request->frecuenciaanual[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
-                    }
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
 
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes borrar la unidad de medida");
-                    }
+                        if($listaunidadmedida_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
 
-                    if($cantidad == ""){
-                        throw new Exception("No puedes borrar la cantidad");
-                    }
-                    if($gastomantenimiento == ""){
-                        throw new Exception("No puedes borrar el gasto por mantenimiento");
-                    }
+                        if($cantidad == ""){
+                            throw new Exception("No puedes borrar la cantidad");
+                        }
+                        if($gastomantenimiento == ""){
+                            throw new Exception("No puedes borrar el gasto por mantenimiento");
+                        }
 
-                    if($frecuenciaanual == ""){
-                        throw new Exception("No puedes borrar la frecuencia anual");
-                    }
+                        $gastomantenimientoDecimal = floatval($gastomantenimiento);
 
-                    DB::table('rmcortes')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'cantidad'=>$cantidad,'gastomantenimiento'=>$gastomantenimiento,'frecuenciaanual'=>$frecuenciaanual]);
-                    $mensaje = "RM Corte Actualizado Correctamente";
+                        if($frecuenciaanual == ""){
+                            throw new Exception("No puedes borrar la frecuencia anual");
+                        }
+
+                        DB::table('rmcortes')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'cantidad'=>$cantidad,'gastomantenimiento'=>$gastomantenimientoDecimal,'frecuenciaanual'=>$frecuenciaanual]);
+                        $mensaje = "RM Corte Actualizado Correctamente";
+                    }
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -999,13 +969,16 @@ class GifController extends Controller
             $listaunidadmedida_id = $request->listaunidadmedida_id;
             $cantidad = $request->cantidad;
             $gastomantenimiento = $request->gastomantenimiento;
+
+            $gastomantenimientoDecimal = floatval($gastomantenimiento);
+
             $frecuenciaanual = $request->frecuenciaanual;
 
             $gifrmaparado = new Gifrmaparado();
             $gifrmaparado->descripcion = $descripcion;
             $gifrmaparado->listaunidadmedida_id = $listaunidadmedida_id;
             $gifrmaparado->cantidad = $cantidad;
-            $gifrmaparado->gastomantenimiento = $gastomantenimiento;
+            $gifrmaparado->gastomantenimiento = $gastomantenimientoDecimal;
             $gifrmaparado->frecuenciaanual = $frecuenciaanual;
             $gifrmaparado->save();
 
@@ -1020,41 +993,47 @@ class GifController extends Controller
     public function actualizargifrmaparado(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->cantidad[$ids] == "" && $request->gastomantenimiento[$ids] == ""  && $request->frecuenciaanual[$ids] == ""){
-                    $gifrmaparado = Gifrmaparado::find($ids);
-                    $gifrmaparado->delete();
-                    $mensaje = "RM Aparado Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
-                    $cantidad = $request->cantidad[$ids];
-                    $gastomantenimiento = $request->gastomantenimiento[$ids];
-                    $frecuenciaanual = $request->frecuenciaanual[$ids];
+            if(!$request->hasAny(['descripcion','listaunidadmedida_id','cantidad','gastomantenimiento','frecuenciaanual'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->cantidad[$ids] == "" && $request->gastomantenimiento[$ids] == ""  && $request->frecuenciaanual[$ids] == ""){
+                        $gifrmaparado = Gifrmaparado::find($ids);
+                        $gifrmaparado->delete();
+                        $mensaje = "RM Aparado Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
+                        $cantidad = $request->cantidad[$ids];
+                        $gastomantenimiento = $request->gastomantenimiento[$ids];
+                        $frecuenciaanual = $request->frecuenciaanual[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
-                    }
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
 
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes borrar la unidad de medida");
-                    }
+                        if($listaunidadmedida_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
 
-                    if($cantidad == ""){
-                        throw new Exception("No puedes borrar la cantidad");
-                    }
-                    if($gastomantenimiento == ""){
-                        throw new Exception("No puedes borrar el gasto por mantenimiento");
-                    }
+                        if($cantidad == ""){
+                            throw new Exception("No puedes borrar la cantidad");
+                        }
+                        if($gastomantenimiento == ""){
+                            throw new Exception("No puedes borrar el gasto por mantenimiento");
+                        }
 
-                    if($frecuenciaanual == ""){
-                        throw new Exception("No puedes borrar la frecuencia anual");
-                    }
+                        $gastomantenimientoDecimal = floatval($gastomantenimiento);
 
-                    DB::table('gifrmaparados')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'cantidad'=>$cantidad,'gastomantenimiento'=>$gastomantenimiento,'frecuenciaanual'=>$frecuenciaanual]);
-                    $mensaje = "RM Aparado Actualizado Correctamente";
+                        if($frecuenciaanual == ""){
+                            throw new Exception("No puedes borrar la frecuencia anual");
+                        }
+
+                        DB::table('gifrmaparados')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'cantidad'=>$cantidad,'gastomantenimiento'=>$gastomantenimientoDecimal,'frecuenciaanual'=>$frecuenciaanual]);
+                        $mensaje = "RM Aparado Actualizado Correctamente";
+                    }
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);
@@ -1071,13 +1050,15 @@ class GifController extends Controller
             $listaunidadmedida_id = $request->listaunidadmedida_id;
             $cantidad = $request->cantidad;
             $gastomantenimiento = $request->gastomantenimiento;
-            $frecuenciaanual = $request->frecuenciaanual;
 
+            $gastomantenimientoDecimal = floatval($gastomantenimiento);
+
+            $frecuenciaanual = $request->frecuenciaanual;
             $gifrmarmado = new Gifrmarmado();
             $gifrmarmado->descripcion = $descripcion;
             $gifrmarmado->listaunidadmedida_id = $listaunidadmedida_id;
             $gifrmarmado->cantidad = $cantidad;
-            $gifrmarmado->gastomantenimiento = $gastomantenimiento;
+            $gifrmarmado->gastomantenimiento = $gastomantenimientoDecimal;
             $gifrmarmado->frecuenciaanual = $frecuenciaanual;
             $gifrmarmado->save();
 
@@ -1092,41 +1073,48 @@ class GifController extends Controller
     public function actualizargifrmarmado(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->cantidad[$ids] == "" && $request->gastomantenimiento[$ids] == ""  && $request->frecuenciaanual[$ids] == ""){
-                    $gifrmarmado = Gifrmarmado::find($ids);
-                    $gifrmarmado->delete();
-                    $mensaje = "RM Armado Eliminado Correctamente";
-                } else {
-                    $descripcion = $request->descripcion[$ids];
-                    $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
-                    $cantidad = $request->cantidad[$ids];
-                    $gastomantenimiento = $request->gastomantenimiento[$ids];
-                    $frecuenciaanual = $request->frecuenciaanual[$ids];
+            if(!$request->hasAny(['descripcion','listaunidadmedida_id','cantidad','gastomantenimiento','frecuenciaanual'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->descripcion[$ids] == "" && $request->listaunidadmedida_id[$ids] == "" && $request->cantidad[$ids] == "" && $request->gastomantenimiento[$ids] == ""  && $request->frecuenciaanual[$ids] == ""){
+                        $gifrmarmado = Gifrmarmado::find($ids);
+                        $gifrmarmado->delete();
+                        $mensaje = "RM Armado Eliminado Correctamente";
+                    } else {
+                        $descripcion = $request->descripcion[$ids];
+                        $listaunidadmedida_id = $request->listaunidadmedida_id[$ids];
+                        $cantidad = $request->cantidad[$ids];
+                        $gastomantenimiento = $request->gastomantenimiento[$ids];
+                        $frecuenciaanual = $request->frecuenciaanual[$ids];
 
-                    if($descripcion == ""){
-                        throw new Exception("No puedes borrar la descripcion");
-                    }
+                        if($descripcion == ""){
+                            throw new Exception("No puedes borrar la descripcion");
+                        }
 
-                    if($listaunidadmedida_id == ""){
-                        throw new Exception("No puedes borrar la unidad de medida");
-                    }
+                        if($listaunidadmedida_id == ""){
+                            throw new Exception("No puedes borrar la unidad de medida");
+                        }
 
-                    if($cantidad == ""){
-                        throw new Exception("No puedes borrar la cantidad");
-                    }
-                    if($gastomantenimiento == ""){
-                        throw new Exception("No puedes borrar el gasto por mantenimiento");
-                    }
+                        if($cantidad == ""){
+                            throw new Exception("No puedes borrar la cantidad");
+                        }
 
-                    if($frecuenciaanual == ""){
-                        throw new Exception("No puedes borrar la frecuencia anual");
-                    }
+                        if($gastomantenimiento == ""){
+                            throw new Exception("No puedes borrar el gasto por mantenimiento");
+                        }
 
-                    DB::table('gifrmarmados')
-                        ->where('id',$ids)
-                        ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'cantidad'=>$cantidad,'gastomantenimiento'=>$gastomantenimiento,'frecuenciaanual'=>$frecuenciaanual]);
-                    $mensaje = "RM Armado Actualizado Correctamente";
+                        $gastomantenimientoDecimal = floatval($gastomantenimiento);
+
+                        if($frecuenciaanual == ""){
+                            throw new Exception("No puedes borrar la frecuencia anual");
+                        }
+
+                        DB::table('gifrmarmados')
+                            ->where('id',$ids)
+                            ->update(['descripcion'=>$descripcion,'listaunidadmedida_id'=>$listaunidadmedida_id,'cantidad'=>$cantidad,'gastomantenimiento'=>$gastomantenimientoDecimal,'frecuenciaanual'=>$frecuenciaanual]);
+                        $mensaje = "RM Armado Actualizado Correctamente";
+                    }
                 }
             }
             return redirect()->route('gif.inicio')->with('mensajegif',$mensaje);

@@ -1,12 +1,5 @@
 .margen-listas{
-    text-align: center;
     margin-bottom: 20px;
-}
-.margenes-botones{
-    padding: 15px 0px 15px 0px;
-}
-.boton-actualizar{
-    max-width: 150px;
 }
 .tamano-texto-cuerpo-lista{
     font-size: 13px;

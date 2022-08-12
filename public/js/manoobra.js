@@ -1,4 +1,17 @@
 $(function(){
+
+    $("#displayFormManoObra").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormManoObra').toggle('show');
+            jQuery('#requestFormManoObra').hide();
+        }
+        else {
+            jQuery('#requestFormManoObra').toggle('show');
+            jQuery('#memberFormManoObra').hide();
+        }
+    })
+
     const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
     document.getElementById('familiaSeleccionado').addEventListener('change',(e)=>{
         fetch('modelos',{
@@ -23,7 +36,7 @@ $(function(){
     console.log(padre);
     for (let index = 1; index <= padre; index++) {
         const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
-        $(".opcionfamilia-"+index+"").on('mouseenter',(e)=>{
+        $(".opcionfamilia-"+index+"").on('mouseenter mouseleave',(e)=>{
             var vamos = $(".vamos-"+index+"").val();
             console.log(vamos);
             fetch('modelos',{
@@ -45,14 +58,3 @@ $(function(){
         })
     }
 });
-
-function displayFormManoObra(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormManoObra').toggle('show');
-        jQuery('#requestFormManoObra').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormManoObra').toggle('show');
-        jQuery('#memberFormManoObra').hide();
-    }
-};

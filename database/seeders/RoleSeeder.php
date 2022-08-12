@@ -105,6 +105,14 @@ class RoleSeeder extends Seeder
                             'description' => 'Registrar un nuevo item en Insumos de Modelos e Insumos'])->syncRoles([$roleAdmin,$rolaPersona]);
         Permission::create(['name' => 'modeloseinsumos.actualizarmodeloseinsumosinsumos',
                             'description' => 'Actualizar un item en Insumos de Modelos e Insumos'])->syncRoles([$roleAdmin]);
+
+        //Unidades de Medida de Conversion
+        Permission::create(['name' => 'unidadesmedidaconversion.inicio',
+                            'description' => 'Acceder a la navegacion de Lista Unidades de Conversion'])->syncRoles([$roleAdmin,$rolaPersona]);
+        Permission::create(['name' => 'unidadesmedidaconversion.registrarunidadesmedidaconversion',
+                            'description' => 'Registrar un nuevo item en Lista Unidades de Conversion'])->syncRoles([$roleAdmin,$rolaPersona]);
+        Permission::create(['name' => 'unidadesmedidaconversion.actualizarunidadesmedidaconversion',
+                            'description' => 'Actualizar un item en Lista Unidades de Conversion'])->syncRoles([$roleAdmin]);
         
         //Mano de Obra
         Permission::create(['name' => 'manoobra.inicio',

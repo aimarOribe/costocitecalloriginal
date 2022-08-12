@@ -40,33 +40,40 @@ class ListaController extends Controller
                 if($nombre === false) break;
             }
             $mensaje = "Unidad de Medida Agregada Correctamente";
-            return redirect()->route('listas.inicio')->with('mensajeunidadmedida',$mensaje);
+            return redirect()->route('listas.inicio')->with('mensajelistas',$mensaje);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('listas.inicio')->with('errorServidorUnidadesMedidas',$error);
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         }
     }
 
     public function actualizarlistaUnidadMedidas(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if($request->nombre[$ids] == ""){
-                    $listaUnidadDeMedida = Listaunidaddemedida::find($ids);
-                    $listaUnidadDeMedida->delete();
-                    $mensaje = "Unidad de Medida Eliminada Correctamente";
-                }else{
-                    $nombre = $request->nombre[$ids];
-                    DB::table('listaunidaddemedidas')
-                        ->where('id',$ids)
-                        ->update(['nombre'=>$nombre]);
-                    $mensaje = "Unidad de Medida Actualizada Correctamente";
+            if(!$request->has('nombre')){
+                $mensaje = "No hay nada que guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if($request->nombre[$ids] == ""){
+                        $listaUnidadDeMedida = Listaunidaddemedida::find($ids);
+                        $listaUnidadDeMedida->delete();
+                        $mensaje = "Unidad de Medida Eliminada Correctamente";
+                    }else{
+                        $nombre = $request->nombre[$ids];
+                        DB::table('listaunidaddemedidas')
+                            ->where('id',$ids)
+                            ->update(['nombre'=>$nombre]);
+                        $mensaje = "Unidad de Medida Actualizada Correctamente";
+                    }
                 }
             }
-            return redirect()->route('listas.inicio')->with('mensajeunidadmedida',$mensaje);
+            return redirect()->route('listas.inicio')->with('mensajelistas',$mensaje);
+        }catch (\Illuminate\Database\QueryException $e) {
+            $error = "No se puede eliminar este registro debido a que lo estas utilizando en tus demas procesos";
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('listas.inicio')->with('errorServidorUnidadesMedidas',$error);
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         } 
     }
 
@@ -86,33 +93,40 @@ class ListaController extends Controller
                 if($nombre === false) break;
             }
             $mensaje = "Proceso Agregado Correctamente";
-            return redirect()->route('listas.inicio')->with('mensajeprocesos',$mensaje);
+            return redirect()->route('listas.inicio')->with('mensajelistas',$mensaje);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('listas.inicio')->with('errorServidorlistaprocesos',$error);
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         }
     }
 
     public function actualizarlistaProcesos(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if($request->nombre[$ids] == ""){
-                    $listaProceso = Listaproceso::find($ids);
-                    $listaProceso->delete();
-                    $mensaje = "Proceso Eliminado Correctamente";
-                }else{
-                    $nombre = $request->nombre[$ids];
-                    DB::table('listaprocesos')
-                        ->where('id',$ids)
-                        ->update(['nombre'=>$nombre]);
-                    $mensaje = "Proceso Actializado Correctamente";
+            if(!$request->has('nombre')){
+                $mensaje = "No hay nada que guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if($request->nombre[$ids] == ""){
+                        $listaProceso = Listaproceso::find($ids);
+                        $listaProceso->delete();
+                        $mensaje = "Proceso Eliminado Correctamente";
+                    }else{
+                        $nombre = $request->nombre[$ids];
+                        DB::table('listaprocesos')
+                            ->where('id',$ids)
+                            ->update(['nombre'=>$nombre]);
+                        $mensaje = "Proceso Actializado Correctamente";
+                    }
                 }
             }
-            return redirect()->route('listas.inicio')->with('mensajeprocesos',$mensaje);
+            return redirect()->route('listas.inicio')->with('mensajelistas',$mensaje);
+        }catch (\Illuminate\Database\QueryException $e) {
+            $error = "No se puede eliminar este registro debido a que lo estas utilizando en tus demas procesos";
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('listas.inicio')->with('errorServidorlistaprocesos',$error);
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         }
     }
 
@@ -132,33 +146,40 @@ class ListaController extends Controller
                 if($nombre === false) break;
             }
             $mensaje = "Clasificacion Agregada Correctamente";
-            return redirect()->route('listas.inicio')->with('mensajeclasificacion',$mensaje);
+            return redirect()->route('listas.inicio')->with('mensajelistas',$mensaje);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('listas.inicio')->with('errorServidorclasificacion',$error);
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         }  
     }
 
     public function actualizarclasificacions(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if($request->nombre[$ids] == ""){
-                    $listaClasificacion = Clasificacion::find($ids);
-                    $listaClasificacion->delete();
-                    $mensaje = "Clasificacion Eliminado Correctamente";
-                }else{
-                    $nombre = $request->nombre[$ids];
-                    DB::table('clasificacions')
-                        ->where('id',$ids)
-                        ->update(['nombre'=>$nombre]);
-                    $mensaje = "Clasificacion Actualizado Correctamente";
+            if(!$request->has('nombre')){
+                $mensaje = "No hay nada que guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if($request->nombre[$ids] == ""){
+                        $listaClasificacion = Clasificacion::find($ids);
+                        $listaClasificacion->delete();
+                        $mensaje = "Clasificacion Eliminado Correctamente";
+                    }else{
+                        $nombre = $request->nombre[$ids];
+                        DB::table('clasificacions')
+                            ->where('id',$ids)
+                            ->update(['nombre'=>$nombre]);
+                        $mensaje = "Clasificacion Actualizado Correctamente";
+                    }
                 }
             }
-            return redirect()->route('listas.inicio')->with('mensajeclasificacion',$mensaje);
+            return redirect()->route('listas.inicio')->with('mensajelistas',$mensaje);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $error = "No se puede eliminar este registro debido a que lo estas utilizando en tus demas procesos";
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('listas.inicio')->with('errorServidorclasificacion',$error);
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         } 
     }
 
@@ -178,33 +199,40 @@ class ListaController extends Controller
                 if($nombre === false) break;
             }
             $mensaje = "Unidad de Consumo Agregada Correctamente";
-            return redirect()->route('listas.inicio')->with('mensajeunidadconsumo',$mensaje);
+            return redirect()->route('listas.inicio')->with('mensajelistas',$mensaje);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('listas.inicio')->with('errorServidorunidadconsumo',$error);
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         }  
     }
 
     public function actualizarlistaUnidadConsumo(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if($request->nombre[$ids] == ""){
-                    $listaUnidadConsumo = Listaunidaddeconsumo::find($ids);
-                    $listaUnidadConsumo->delete();
-                    $mensaje = "Unidad de Consumo Eliminada Correctamente";
-                }else{
-                    $nombre = $request->nombre[$ids];
-                    DB::table('listaunidaddeconsumos')
-                        ->where('id',$ids)
-                        ->update(['nombre'=>$nombre]);
-                    $mensaje = "Unidad de Consumo Actualizada Correctamente";
+            if(!$request->has('nombre')){
+                $mensaje = "No hay nada que guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if($request->nombre[$ids] == ""){
+                        $listaUnidadConsumo = Listaunidaddeconsumo::find($ids);
+                        $listaUnidadConsumo->delete();
+                        $mensaje = "Unidad de Consumo Eliminada Correctamente";
+                    }else{
+                        $nombre = $request->nombre[$ids];
+                        DB::table('listaunidaddeconsumos')
+                            ->where('id',$ids)
+                            ->update(['nombre'=>$nombre]);
+                        $mensaje = "Unidad de Consumo Actualizada Correctamente";
+                    }
                 }
             }
-            return redirect()->route('listas.inicio')->with('mensajeunidadconsumo',$mensaje);
+            return redirect()->route('listas.inicio')->with('mensajelistas',$mensaje);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $error = "No se puede eliminar este registro debido a que lo estas utilizando en tus demas procesos";
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('listas.inicio')->with('errorServidorunidadconsumo',$error);
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         } 
     }
 
@@ -224,33 +252,40 @@ class ListaController extends Controller
                 if($nombre === false) break;
             }
             $mensaje = "Familia de Materiales Agregada Correctamente";
-            return redirect()->route('listas.inicio')->with('mensajefamiliamateriales',$mensaje);
+            return redirect()->route('listas.inicio')->with('mensajelistas',$mensaje);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('listas.inicio')->with('errorServidorfamiliamateriales',$error);
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         }    
     }
 
     public function actualizarlistaFamiliasMateriales(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if($request->nombre[$ids] == ""){
-                    $listaFamiliasMateriales = Listafamiliademateriales::find($ids);
-                    $listaFamiliasMateriales->delete();
-                    $mensaje = "Familia de Materiales Eliminada Correctamente";
-                }else{
-                    $nombre = $request->nombre[$ids];
-                    DB::table('listafamiliademateriales')
-                        ->where('id',$ids)
-                        ->update(['nombre'=>$nombre]);
-                    $mensaje = "Familia de Materiales Actualizada Correctamente";
+            if(!$request->has('nombre')){
+                $mensaje = "No hay nada que guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if($request->nombre[$ids] == ""){
+                        $listaFamiliasMateriales = Listafamiliademateriales::find($ids);
+                        $listaFamiliasMateriales->delete();
+                        $mensaje = "Familia de Materiales Eliminada Correctamente";
+                    }else{
+                        $nombre = $request->nombre[$ids];
+                        DB::table('listafamiliademateriales')
+                            ->where('id',$ids)
+                            ->update(['nombre'=>$nombre]);
+                        $mensaje = "Familia de Materiales Actualizada Correctamente";
+                    }
                 }
             }
-            return redirect()->route('listas.inicio')->with('mensajefamiliamateriales',$mensaje);
+            return redirect()->route('listas.inicio')->with('mensajelistas',$mensaje);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $error = "No se puede eliminar este registro debido a que lo estas utilizando en tus demas procesos";
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('listas.inicio')->with('errorServidorfamiliamateriales',$error);
+            return redirect()->route('listas.inicio')->with('errorServidorlistas',$error);
         }
     }
 }

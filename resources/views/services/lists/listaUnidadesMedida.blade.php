@@ -1,23 +1,8 @@
 <div class="col-sm-6 col-md-3 offset-md-2 col-lg-3 offset-lg-0">
-    
-    @if (session('errorServidorUnidadesMedidas'))
-        <div class="alert alert-danger" role="alert">
-            {{session('errorServidorUnidadesMedidas')}}
-        </div>
-    @endif
 
-    @if (session('mensajeunidadmedida'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{session('mensajeunidadmedida')}}!</strong>
-            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
-                x
-            </button>
-        </div>
-    @endif
-
-    <div class="margenes-botones">
-        <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormListaUnidadMedida(this)">See Measurement units</button>
-        <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormListaUnidadMedida(this)">Register Unit of measurement</button>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="displayFormListaUnidadMedida">
+        <label class="form-check-label" for="displayFormListaUnidadMedida">Ver/Registrar Unidades de Medida</label>
     </div>
 
     <div id="requestFormListaUnidadDeMedidas">
@@ -38,7 +23,7 @@
             </tbody>
         </table>
         @can('listas.actualizarlistaUnidadMedidas')
-            <button type="submit" name="actualizarListaUnidadMedida" class="btn btn-warning boton-actualizar tamano-texto-cuerpo-boton">Update Unidad<?php echo "<br/>" ?>Medida</button>
+            <button type="submit" name="actualizarListaUnidadMedida" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton">Guardar Unidades<?php echo "<br/>" ?>de Medida</button>
         @endcan
         {!! Form::close() !!}
     </div>
@@ -60,7 +45,7 @@
             </table>
             <div class="btn-der">
                 @can('listas.registrarlistaUnidadMedidas')
-                    <button type="submit" name="insertarListaUnidadMedida" class="btn btn-info tamano-texto-cuerpo-boton">Insert Measurement<?php echo "<br/>" ?>Units</button>
+                    <button type="submit" name="insertarListaUnidadMedida" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Unidades<?php echo "<br/>" ?>de Medida</button>
                 @endcan
                 <button id="adicionalListaUnidadMedida" name="adicionalListaUnidadMedida" type="button" class="btn btn-warning "> More + </button>
                 <button id="eliminarListaUnidadMedida" name="eliminarListaUnidadMedida" type="button" class="btn btn-danger"> Less - </button>

@@ -6,19 +6,26 @@
         <p style="text-align: center">Costos de Mano de Obra Indirecta - Distribuidos Producción Mensual</p>
     </div>
     <div>
-        <input style="background-color: #2f5496" disabled class="form-control costomanoobrasinbeneficios" type="text">
+        <input readonly style="background-color: #2f5496" class="form-control costomanoobrasinbeneficios" type="text">
     </div>
 </div>
 
 <br>
 
 <div class="margenes-botones">
-    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormgifempleadosconsinbeneficios(this)">See Workforce</button>
-    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormgifempleadosconsinbeneficios(this)">Register Workforce</button>
-    {{-- <button type="button" class="btn btn-info btn-sm tamano-texto-cuerpo-boton" data-toggle="modal" data-target="#EjemploModal">Regimen Laboral</button> --}}
-    <button type="button" class="btn btn-info btn-sm tamano-texto-cuerpo-boton" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Regimen Laboral
-    </button>
+
+    <div class="container row">
+        <div class="form-check form-switch col-3">
+            <input class="form-check-input" type="checkbox" role="switch" id="displayFormgifempleadosconsinbeneficios">
+            <label class="form-check-label" for="displayFormgifempleadosconsinbeneficios">Ver/Registrar Mano de Obra</label>
+        </div>
+        <div class="col-9">
+            <button type="button" class="btn btn-secondary btn-sm tamano-texto-cuerpo-boton" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Regimen Laboral
+            </button>
+        </div>
+    </div>
+    
 </div>
 
 <div id="requestFormempleadosconsinbeneficios">
@@ -40,10 +47,10 @@
                 <tr>
                     <input hidden name="id[]" value="<?php echo $gifempleadossinbeneficio->id ?>">
                     <td><input type="text" class="nombre-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="nombre[<?php echo $gifempleadossinbeneficio->id ?>]" value="<?php echo $gifempleadossinbeneficio->nombre ?>"></td>
-                    <td><input class="sueldo-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="sueldo[<?php echo $gifempleadossinbeneficio->id ?>]" value="<?php echo $gifempleadossinbeneficio->sueldo ?>"></td>
-                    <td><input type="number" class="ntrabajadores-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="ntrabajadores[<?php echo $gifempleadossinbeneficio->id ?>]" value="<?php echo $gifempleadossinbeneficio->ntrabajadores ?>"></td>
+                    <td><input class="sueldo-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="sueldo[<?php echo $gifempleadossinbeneficio->id ?>]" value="<?php echo $gifempleadossinbeneficio->sueldo ?>"></td>
+                    <td><input type="number" class="ntrabajadores-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="ntrabajadores[<?php echo $gifempleadossinbeneficio->id ?>]" value="<?php echo $gifempleadossinbeneficio->ntrabajadores ?>"></td>
                     <td>
-                        <select class="regimenlaboral-<?php echo $i ?> form-control" name="regimenlaboral_id[<?php echo $gifempleadossinbeneficio->id ?>]">
+                        <select class="regimenlaboral-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="regimenlaboral_id[<?php echo $gifempleadossinbeneficio->id ?>]">
                             <option class="tamano-texto-cuerpo-lista" value="">--</option>
                             @foreach ($regimenlaborales as $regimenlaboral)
                                 <option class="tamano-texto-cuerpo-lista" value="{{$regimenlaboral->numero}}" @if($regimenlaboral->id===$gifempleadossinbeneficio->regimenlaboral_id) selected='selected' @endif>
@@ -52,13 +59,13 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input disabled class="totalgastomensual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" value=""></td>
+                    <td><input disabled class="totalgastomensual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" value=""></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @can('gif.actualizar')
-        <input type="submit" name="actualizarempleadosconsinbeneficios" value="Update Workforce" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarempleadosconsinbeneficios" value="Guardar Mano de Obra" class="btn btn-success tamano-texto-cuerpo-boton"/>
     @endcan
     
     {!! Form::close() !!}
@@ -96,7 +103,7 @@
         </table>
         <div class="btn-der">
             @can('gi.registrar')
-                <input type="submit" name="insertarempleadosconsinbeneficios" value="Insert Workforce" class="btn btn-info"/>
+                <input type="submit" name="insertarempleadosconsinbeneficios" value="Insertar Mano de Obra" class="btn btn-primary"/>
             @endcan
         </div>
     </form>
@@ -112,9 +119,9 @@
         </div>
         <div class="modal-body">
 
-            <div class="margenes-botones">
-                <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormgifempleadosconsinbeneficiosmodal(this)">Ver Regimenes Laborales</button>
-                <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormgifempleadosconsinbeneficiosmodal(this)">Registrar Regimen Laboral</button>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="displayFormgifempleadosconsinbeneficiosmodal">
+                <label class="form-check-label" for="displayFormgifempleadosconsinbeneficiosmodal">Ver/Registrar Regimenes Laborales</label>
             </div>
 
             <div id="requestFormempleadosconsinbeneficiosmodal">
@@ -131,12 +138,12 @@
                                 <tr>
                                     <input hidden name="id[]" value="<?php echo $regimenlaboral->id ?>">
                                     <td><input type="text" class="form-control tamano-texto-cuerpo-lista" name="nombre[<?php echo $regimenlaboral->id ?>]" value="<?php echo $regimenlaboral->nombre ?>"></td>
-                                    <td><input class="form-control familianumeroslista tamano-texto-cuerpo-lista" name="numero[<?php echo $regimenlaboral->id ?>]" value="<?php echo $regimenlaboral->numero ?>"></td>
+                                    <td><input class="form-control tamano-texto-cuerpo-lista" name="numero[<?php echo $regimenlaboral->id ?>]" value="<?php echo $regimenlaboral->numero ?>"></td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    <input type="submit" name="actualizarempleadosconsinbeneficiosmodal" value="Actualizar Regimenes Laborales" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+                    <input type="submit" name="actualizarempleadosconsinbeneficiosmodal" value="Guardar Regimenes Laborales" class="btn btn-success tamano-texto-cuerpo-boton"/>
                 {!! Form::close() !!}
             </div>
 
@@ -157,7 +164,7 @@
                     </tbody>
                 </table>
                 <div class="btn-der">
-                    <input type="submit" name="insertarempleadosconsinbeneficios" value="Insertar Regimen Laboral" class="btn btn-info"/>
+                    <input type="submit" name="insertarempleadosconsinbeneficios" value="Insertar Regimen Laboral" class="btn btn-primary"/>
                 </div>
                 {!! Form::close() !!}
             </div>

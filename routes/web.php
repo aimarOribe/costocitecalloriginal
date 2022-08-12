@@ -10,6 +10,7 @@ use App\Http\Controllers\GifController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\ListaController;
+use App\Http\Controllers\ListaUnidadMedidaConversionController;
 use App\Http\Controllers\ManoObraController;
 use App\Http\Controllers\ModeloInsumo;
 use App\Http\Controllers\ModeloInsumoController;
@@ -78,6 +79,16 @@ Route::post('/modeloseinsumosmodelos/actualizar',[ModeloInsumoController::class,
 Route::post('/modeloseinsumosinsumos',[ModeloInsumoController::class,'registrarmodeloseinsumosinsumos'])->name('modeloseinsumos.registrarmodeloseinsumosinsumos');
 Route::post('/modeloseinsumosinsumos/actualizar',[ModeloInsumoController::class,'actualizarmodeloseinsumosinsumos'])->name('modeloseinsumos.actualizarmodeloseinsumosinsumos');
 
+//Familia de Materiales Materiales
+Route::get('/familiamaterialesmateriales',[FamiliaMateMaterialesController::class,'inicio'])->middleware('auth')->name('familiamaterialesmateriales.inicio');
+Route::post('/familiamaterialesmateriales',[FamiliaMateMaterialesController::class,'registrarfamiliamaterialesmateriales'])->name('familiamaterialesmateriales.registrarfamiliamaterialesmateriales');
+Route::post('/familiamaterialesmateriales/actualizar',[FamiliaMateMaterialesController::class,'actualizarfamiliamaterialesmateriales'])->name('familiamaterialesmateriales.actualizarfamiliamaterialesmateriales');
+
+//Unidades Medida de Conversion
+Route::get('/unidadesmedidaconversion',[ListaUnidadMedidaConversionController::class,'inicio'])->middleware('auth')->name('unidadesmedidaconversion.inicio');
+Route::post('/unidadesmedidaconversion',[ListaUnidadMedidaConversionController::class,'registrarunidadesmedidaconversion'])->name('unidadesmedidaconversion.registrarunidadesmedidaconversion');
+Route::post('/unidadesmedidaconversion/actualizar',[ListaUnidadMedidaConversionController::class,'actualizarunidadesmedidaconversion'])->name('unidadesmedidaconversion.actualizarunidadesmedidaconversion');
+
 // Mano de Obra
 Route::get('/manoobra',[ManoObraController::class,'inicio'])->middleware('auth')->name('manoobra.inicio');
 Route::post('/modelos',[ManoObraController::class,'obtenerModelos'])->name('modelos');
@@ -85,10 +96,6 @@ Route::post('/modeloslista',[ManoObraController::class,'obtenerModeloslista'])->
 Route::post('/manoobra',[ManoObraController::class,'registrarmanoobra'])->name('manoobra.registrarmanoobra');
 Route::post('/manoobra/actualizar',[ManoObraController::class,'actualizarmanoobra'])->name('manoobra.actualizarmanoobra');
 
-//Familia de Materiales Materiales
-Route::get('/familiamaterialesmateriales',[FamiliaMateMaterialesController::class,'inicio'])->middleware('auth')->name('familiamaterialesmateriales.inicio');
-Route::post('/familiamaterialesmateriales',[FamiliaMateMaterialesController::class,'registrarfamiliamaterialesmateriales'])->name('familiamaterialesmateriales.registrarfamiliamaterialesmateriales');
-Route::post('/familiamaterialesmateriales/actualizar',[FamiliaMateMaterialesController::class,'actualizarfamiliamaterialesmateriales'])->name('familiamaterialesmateriales.actualizarfamiliamaterialesmateriales');
 
 // test Insumos
 Route::get('/insumos',[InsumoController::class,'inicio'])->name('insumos.inicio');

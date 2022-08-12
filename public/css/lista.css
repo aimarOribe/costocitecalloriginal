@@ -2,9 +2,6 @@
     text-align: center;
     margin-bottom: 20px;
 }
-.margenes-botones{
-    padding: 15px 0px 15px 0px;
-}
 .boton-actualizar{
     max-width: 150px;
 }
@@ -74,7 +71,7 @@
     background-color: #ddebf7;
 }
 .listaProcesostextolista{
-    text-align: center;
+    text-align: left;
 }
 /*Fin Tabla Lista Procesos*/
 

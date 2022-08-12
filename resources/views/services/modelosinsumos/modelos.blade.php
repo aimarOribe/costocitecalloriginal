@@ -15,9 +15,9 @@
         </div>
     @endif
 
-    <div class="margenes-botones">
-        <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormModelosInsumosModelos(this)">See Model Families</button>
-        <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormModelosInsumosModelos(this)">Register Model Family</button>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="displayFormModelosInsumosModelos">
+        <label class="form-check-label" for="displayFormModelosInsumosModelos" style="text-align: left;">Ver/Registrar Modelos de Familias</label>
     </div>
 
     <div id="requestFormModelosInsumosModelos">
@@ -34,8 +34,8 @@
                 <tr>
                     <input hidden name="id[]" value="<?php echo $modelofamilia->id ?>">
                     <td>
-                        <select class="form-control" id="familia_id" name="familia_id[<?php echo $modelofamilia->id ?>]">
-                            <option class="tamano-texto-cuerpo-lista" value="--">--</option>
+                        <select class="form-control tamano-texto-cuerpo-lista" id="familia_id" name="familia_id[<?php echo $modelofamilia->id ?>]">
+                            <option class="tamano-texto-cuerpo-lista" value="">--</option>
                             @foreach ($familias as $familia)
                                 <option class="tamano-texto-cuerpo-lista" value="{{$familia->id}}" @if($familia->id===$modelofamilia->familia_id) selected='selected' @endif>
                                     {{$familia->nombre}}
@@ -49,7 +49,7 @@
             </tbody>
         </table>
         @can('modeloseinsumos.actualizarmodeloseinsumosmodelos')
-            <button type="submit" name="actualizarModelosInsumosModelos" class="btn btn-warning boton-actualizar tamano-texto-cuerpo-boton">Update<?php echo "<br/>" ?>Models</button>
+            <button type="submit" name="actualizarModelosInsumosModelos" class="btn btn-success tamano-texto-cuerpo-boton">Guardar Modelos de Familia</button>
         @endcan
         {!! Form::close() !!}
     </div>
@@ -67,8 +67,8 @@
                 <tbody style="border-color: #ed7d31">
                     <tr class="fila-fija-modeloseinsumosmodelos">
                         <td>
-                            <select name="familia_id[]" class="form-select tamano-texto-cuerpo-lista" aria-label="Default select example">
-                                <option class="tamano-texto-cuerpo-lista">--</option>
+                            <select required name="familia_id[]" class="form-select tamano-texto-cuerpo-lista" aria-label="Default select example">
+                                <option class="tamano-texto-cuerpo-lista" value="">--</option>
                                 @foreach ($familias as $familia)
                                     <option class="tamano-texto-cuerpo-lista" value="{{$familia->id}}">
                                         {{$familia->nombre}}
@@ -82,7 +82,7 @@
             </table>
             <div class="btn-der">
                 @can('modeloseinsumos.registrarmodeloseinsumosmodelos')
-                    <button type="submit" name="insertarmodeloseinsumosmodelos" class="btn btn-info tamano-texto-cuerpo-boton">Insert<?php echo "<br/>" ?>Models</button>
+                    <button type="submit" name="insertarmodeloseinsumosmodelos" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Modelos de Familia</button>
                 @endcan
                 <button id="adicionalmodeloseinsumosmodelos" name="adicionalmodeloseinsumosmodelos" type="button" class="btn btn-warning"> More + </button>
                 <button id="eliminarmodeloseinsumosmodelos" name="eliminarmodeloseinsumosmodelos" type="button" class="btn btn-danger"> Less - </button>

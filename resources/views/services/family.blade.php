@@ -27,9 +27,10 @@
 
             <div class="card">
                 <div class="card-body">
-                    <div class="margenes-botones">
-                        <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayForm(this)">See Families</button>
-                        <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayForm(this)">Register Family</button>
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="displayForm">
+                        <label class="form-check-label" for="displayForm">Ver/Registrar Familias</label>
                     </div>
 
                     <div id="requestForm">
@@ -56,7 +57,7 @@
                             </tbody>
                         </table>
                         @can('familias.actualizar')
-                            <input type="submit" name="actualizar" value="Update Families" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+                            <input type="submit" name="actualizar" value="Guardar Familias" class="btn btn-success tamano-texto-cuerpo-boton"/>
                         @endcan
                         {!! Form::close() !!}
                     </div>
@@ -82,7 +83,7 @@
                             </table>
                             <div class="btn-der">
                                 @can('familias.registrar')
-                                    <input type="submit" name="insertar" value="Insert Families" class="btn btn-info"/>
+                                    <input type="submit" name="insertar" value="Insertar Familia" class="btn btn-primary"/>
                                 @endcan
                             </div>
                         </form>

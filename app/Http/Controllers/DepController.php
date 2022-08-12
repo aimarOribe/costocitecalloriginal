@@ -54,31 +54,6 @@ class DepController extends Controller
             $valorresidual = $request->valorresidual;
             $depreciacionanual = $request->depreciacionanual;
 
-            if($activo == ""){
-                throw new Exception("Tiene que introducir un activo");
-            }
-            if($fecha == ""){
-                throw new Exception("Tiene que introducir una fecha");
-            }
-            if($costodolar == ""){
-                throw new Exception("Tiene que introducir un costo en dolares");
-            }
-            if($cambiodolarfechacompra == ""){
-                throw new Exception("Tiene que introducir un cambio de dolar en la fecha de compra");
-            }
-            if($costosoles == ""){
-                throw new Exception("Tiene que introducir un costo en soles");
-            }
-            if($unidades == ""){
-                throw new Exception("Tiene que introducir unidades");
-            }
-            if($aniosadepreciar == ""){
-                throw new Exception("Tiene que introducir los años a depreciar");
-            }
-            if($valorresidual == ""){
-                throw new Exception("Tiene que introducir el valor residual");
-            }
-
             $dep = new Dep();
             $dep->activo = $activo;
             $dep->fecha = $fecha;
@@ -92,7 +67,7 @@ class DepController extends Controller
             $dep->depreciacionanual = $depreciacionanual;
             $dep->save();
 
-            $mensaje = "Dep Guardada Correctamente";
+            $mensaje = "Dep Guardado Correctamente";
 
             return redirect()->route('dep.inicio')->with('mensajeped',$mensaje);
         } catch (\Exception $e) {
@@ -104,59 +79,56 @@ class DepController extends Controller
     public function actualizardeps(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if($request->activo[$ids] == "" & $request->fecha[$ids] == "" & $request->costodolar[$ids] == "" & $request->cambiodolarfechacompra[$ids] == "" & $request->costosoles[$ids] == "" & $request->unidades[$ids] == "" & $request->costototal[$ids] == "" & $request->aniosadepreciar[$ids] == "" & $request->valorresidual[$ids] == "" & $request->depreciacionanual[$ids] == ""){
-                    $dep = Dep::find($ids);
-                    $dep->delete();
-                    $mensaje = "Dep Eliminada Correctamente";
-                }else{
-                    $activo = $request->activo[$ids];
-                    $fecha = $request->fecha[$ids];
-                    $costodolar = $request->costodolar[$ids];
-                    $cambiodolarfechacompra = $request->cambiodolarfechacompra[$ids];
-                    $costosoles = $request->costosoles[$ids];
-                    $unidades = $request->unidades[$ids];
-                    $costototal = $request->costototal[$ids];
-                    $aniosadepreciar = $request->aniosadepreciar[$ids];
-                    $valorresidual = $request->valorresidual[$ids];
-                    $depreciacionanual = $request->depreciacionanual[$ids];
+            if(!$request->hasAny(['activo','fecha','costodolar','cambiodolarfechacompra','costosoles','unidades','costototal','aniosadepreciar','valorresidual','depreciacionanual'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if($request->activo[$ids] == "" & $request->fecha[$ids] == "" & $request->costodolar[$ids] == "" & $request->cambiodolarfechacompra[$ids] == "" & $request->costosoles[$ids] == "" & $request->unidades[$ids] == "" & $request->costototal[$ids] == "" & $request->aniosadepreciar[$ids] == "" & $request->valorresidual[$ids] == "" & $request->depreciacionanual[$ids] == ""){
+                        $dep = Dep::find($ids);
+                        $dep->delete();
+                        $mensaje = "Dep Eliminado(s) Correctamente";
+                    }else{
+                        $activo = $request->activo[$ids];
+                        $fecha = $request->fecha[$ids];
+                        $costodolar = $request->costodolar[$ids];
+                        $cambiodolarfechacompra = $request->cambiodolarfechacompra[$ids];
+                        $costosoles = $request->costosoles[$ids];
+                        $unidades = $request->unidades[$ids];
+                        $costototal = $request->costototal[$ids];
+                        $aniosadepreciar = $request->aniosadepreciar[$ids];
+                        $valorresidual = $request->valorresidual[$ids];
+                        $depreciacionanual = $request->depreciacionanual[$ids];
 
-                    if($activo == ""){
-                        throw new Exception("Tiene que introducir un activo");
-                    }
-                    if($fecha == ""){
-                        throw new Exception("Tiene que introducir una fecha");
-                    }
-                    if($costodolar == ""){
-                        throw new Exception("Tiene que introducir un costo en dolares");
-                    }
-                    if($cambiodolarfechacompra == ""){
-                        throw new Exception("Tiene que introducir un cambio de dolar en la fecha de compra");
-                    }
-                    if($costosoles == ""){
-                        throw new Exception("Tiene que introducir un costo en soles");
-                    }
-                    if($unidades == ""){
-                        throw new Exception("Tiene que introducir unidades");
-                    }
-                    if($costototal == ""){
-                        throw new Exception("No puede borrar el costo total");
-                    }
-                    if($aniosadepreciar == ""){
-                        throw new Exception("Tiene que introducir los años a depreciar");
-                    }
-                    if($valorresidual == ""){
-                        throw new Exception("Tiene que introducir el valor residual");
-                    }
-                    if($depreciacionanual == ""){
-                        throw new Exception("No puede borrar la depreciacion anual");
-                    }
-                    
-                    DB::table('deps')
-                        ->where('id',$ids)
-                        ->update(['activo'=>$activo,'fecha'=>$fecha,'costodolar'=>$costodolar,'cambiodolarfechacompra'=>$cambiodolarfechacompra,'costosoles'=>$costosoles,'unidades'=>$unidades,'costototal'=>$costototal,'aniosadepreciar'=>$aniosadepreciar,'valorresidual'=>$valorresidual,'depreciacionanual'=>$depreciacionanual]);
-                    $mensaje = "Dep Actualizada Correctamente";
-                }   
+                        if($activo == ""){
+                            throw new Exception("Tiene que introducir un activo");
+                        }
+                        if($fecha == ""){
+                            throw new Exception("Tiene que introducir una fecha");
+                        }
+                        if($costodolar == ""){
+                            throw new Exception("Tiene que introducir un costo en dolares");
+                        }
+                        if($cambiodolarfechacompra == ""){
+                            throw new Exception("Tiene que introducir un cambio de dolar en la fecha de compra");
+                        }
+                        if($costosoles == ""){
+                            throw new Exception("Tiene que introducir un costo en soles");
+                        }
+                        if($unidades == ""){
+                            throw new Exception("Tiene que introducir unidades");
+                        }
+                        if($aniosadepreciar == ""){
+                            throw new Exception("Tiene que introducir los años a depreciar");
+                        }
+                        if($valorresidual == ""){
+                            throw new Exception("Tiene que introducir el valor residual");
+                        }                
+                        DB::table('deps')
+                            ->where('id',$ids)
+                            ->update(['activo'=>$activo,'fecha'=>$fecha,'costodolar'=>$costodolar,'cambiodolarfechacompra'=>$cambiodolarfechacompra,'costosoles'=>$costosoles,'unidades'=>$unidades,'costototal'=>$costototal,'aniosadepreciar'=>$aniosadepreciar,'valorresidual'=>$valorresidual,'depreciacionanual'=>$depreciacionanual]);
+                        $mensaje = "Dep Actualizado(s) Correctamente";
+                    }   
+                }
             }
             return redirect()->route('dep.inicio')->with('mensajeped',$mensaje);
         } catch (\Exception $e) {

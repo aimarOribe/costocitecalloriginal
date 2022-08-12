@@ -1,6 +1,32 @@
 $(function(){
 
     //Modelos
+    $("#displayFormModelosInsumosModelos").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormModelosInsumosModelos').toggle('show');
+            jQuery('#requestFormModelosInsumosModelos').hide();
+        }
+        else {
+            jQuery('#requestFormModelosInsumosModelos').toggle('show');
+            jQuery('#memberFormModelosInsumosModelos').hide();
+        }
+    })
+
+    //Insumos
+    $("#displayFormModelosInsumosInsumos").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormModelosInsumosInsumos').toggle('show');
+            jQuery('#requestFormModelosInsumosInsumos').hide();
+        }
+        else {
+            jQuery('#requestFormModelosInsumosInsumos').toggle('show');
+            jQuery('#memberFormModelosInsumosInsumos').hide();
+        }
+    })
+
+    //Modelos
     $("#adicionalmodeloseinsumosmodelos").on('click', function(){
         $("#tablamodeloseinsumosmodelos tbody tr:eq(0)").clone().removeClass('fila-fija-modeloseinsumosmodelos').appendTo("#tablamodeloseinsumosmodelos");
     });
@@ -20,26 +46,5 @@ $(function(){
 
 });
 
-//Modelos
-function displayFormModelosInsumosModelos(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormModelosInsumosModelos').toggle('show');
-        jQuery('#requestFormModelosInsumosModelos').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormModelosInsumosModelos').toggle('show');
-        jQuery('#memberFormModelosInsumosModelos').hide();
-    }
-};
 
-//Insumos
-function displayFormModelosInsumosInsumos(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormModelosInsumosInsumos').toggle('show');
-        jQuery('#requestFormModelosInsumosInsumos').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormModelosInsumosInsumos').toggle('show');
-        jQuery('#memberFormModelosInsumosInsumos').hide();
-    }
-};
+

@@ -1,4 +1,65 @@
 $(function(){
+
+    $("#displayFormListaUnidadMedida").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormListaUnidadDeMedidas').toggle('show');
+            jQuery('#requestFormListaUnidadDeMedidas').hide();
+        }
+        else {
+            jQuery('#requestFormListaUnidadDeMedidas').toggle('show');
+            jQuery('#memberFormListaUnidadDeMedidas').hide();
+        }
+    })
+
+    $("#displayFormListaProcesos").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormListaProcesos').toggle('show');
+            jQuery('#requestFormListaProcesos').hide();
+        }
+        else {
+            jQuery('#requestFormListaProcesos').toggle('show');
+            jQuery('#memberFormListaProcesos').hide();
+        }
+    })
+
+    $("#displayFormListaClasificacion").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormistaClasificacions').toggle('show');
+            jQuery('#requestFormListaClasificacions').hide();
+        }
+        else {
+            jQuery('#requestFormListaClasificacions').toggle('show');
+            jQuery('#memberFormistaClasificacions').hide();
+        }
+    })
+
+    $("#displayFormListaUnidadConsumo").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormListaUnidadConsumo').toggle('show');
+            jQuery('#requestFormListaUnidadConsumo').hide();
+        }
+        else {
+            jQuery('#requestFormListaUnidadConsumo').toggle('show');
+            jQuery('#memberFormListaUnidadConsumo').hide();
+        }
+    })
+
+    $("#displayFormListaFamiliasMateriales").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormListaFamiliasMateriales').toggle('show');
+            jQuery('#requestFormListaFamiliasMateriales').hide();
+        }
+        else {
+            jQuery('#requestFormListaFamiliasMateriales').toggle('show');
+            jQuery('#memberFormListaFamiliasMateriales').hide();
+        }
+    })
+
     //Unidades de Medida
     $("#adicionalListaUnidadMedida").on('click', function(){
         $("#tablaListaUnidadMedida tbody tr:eq(0)").clone().removeClass('fila-fija-listaUnidadDeMedidas').appendTo("#tablaListaUnidadMedida");
@@ -44,59 +105,4 @@ $(function(){
         $("#tablaListaFamiliasMateriales tbody tr:eq(0)").remove();
     });
 });
-
-function displayFormListaUnidadMedida(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormListaUnidadDeMedidas').toggle('show');
-        jQuery('#requestFormListaUnidadDeMedidas').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormListaUnidadDeMedidas').toggle('show');
-        jQuery('#memberFormListaUnidadDeMedidas').hide();
-    }
-};
-
-function displayFormListaProcesos(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormListaProcesos').toggle('show');
-        jQuery('#requestFormListaProcesos').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormListaProcesos').toggle('show');
-        jQuery('#memberFormListaProcesos').hide();
-    }
-};
-
-function displayFormListaClasificacion(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormistaClasificacions').toggle('show');
-        jQuery('#requestFormListaClasificacions').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormListaClasificacions').toggle('show');
-        jQuery('#memberFormistaClasificacions').hide();
-    }
-};
-
-function displayFormListaUnidadConsumo(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormListaUnidadConsumo').toggle('show');
-        jQuery('#requestFormListaUnidadConsumo').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormListaUnidadConsumo').toggle('show');
-        jQuery('#memberFormListaUnidadConsumo').hide();
-    }
-};
-
-function displayFormListaFamiliasMateriales(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormListaFamiliasMateriales').toggle('show');
-        jQuery('#requestFormListaFamiliasMateriales').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormListaFamiliasMateriales').toggle('show');
-        jQuery('#memberFormListaFamiliasMateriales').hide();
-    }
-};
 

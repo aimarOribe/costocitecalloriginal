@@ -26,21 +26,21 @@
 /* No tiene Permisos de hoja */
 
 /*Tabla Modelos*/
-.fmmateriales-tabla {
+.listaunidadmedidaconversion-tabla {
     border-color: #ed7d31;
     text-align: center;
 }
-.fmmateriales-tabla > thead {
+.listaunidadmedidaconversion-tabla > thead {
     background-color: #ed7d31;
     border-color: #ed7d31
 }
-.fmmateriales-tabla > thead > tr > th {
+.listaunidadmedidaconversion-tabla > thead > tr > th {
     color: white;
 }
-.fmmateriales-tabla > tbody {
+.listaunidadmedidaconversion-tabla > tbody {
     border-color: #ed7d31;
 }
-.fmmateriales-tabla > tbody > tr:nth-child(odd) {
+.listaunidadmedidaconversion-tabla > tbody > tr:nth-child(odd) {
     background-color: #fce4d6;
 }
 /*Fin Tabla Modelos*/

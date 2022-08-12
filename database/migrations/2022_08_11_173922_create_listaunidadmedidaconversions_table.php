@@ -13,21 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fmatematerials', function (Blueprint $table) {
+        Schema::create('listaunidadmedidaconversions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('familiamateriales_id');
-            $table->foreign('familiamateriales_id')
-                ->references('id')
-                ->on('listafamiliademateriales');
-            $table->string('nombre');
             $table->unsignedBigInteger('listaunidadmedida_id');
             $table->foreign('listaunidadmedida_id')
                 ->references('id')
                 ->on('listaunidaddemedidas');
-            $table->string('presentacion');
-            $table->integer('stock')->default(0);
-            $table->float('costopromedio',8,2)->default(0.00);
-            $table->float('costoreal',8,2)->default(0.00);
+            $table->unsignedBigInteger('material_id');
+            $table->foreign('material_id')
+                ->references('id')
+                ->on('fmatematerials');
+            $table->float('conversion',8,2);
             $table->timestamps();
         });
     }
@@ -39,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fmatematerials');
+        Schema::dropIfExists('listaunidadmedidaconversions');
     }
 };

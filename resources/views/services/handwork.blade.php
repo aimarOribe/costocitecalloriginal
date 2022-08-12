@@ -28,16 +28,9 @@
                         </div>
                     @endif
 
-                    <div class="margenes-botones">
-                        <input class="form-check-input" value="1" type="radio" name="formselector" onClick="displayFormManoObra(this)" id="checkAactualizar" checked>
-                        <label class="form-check-label" for="checkActualizar">
-                            Update
-                        </label>  
-                        
-                        <input class="form-check-input" value="2" type="radio" name="formselector" onClick="displayFormManoObra(this)" id="checkRegistrar">
-                        <label class="form-check-label" for="checkRegistrar">
-                            Register
-                        </label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" role="switch" id="displayFormManoObra">
+                        <label class="form-check-label" for="displayFormManoObra">Ver/Registrar Mano de Obra</label>
                     </div>
 
                     <div id="requestFormManoObra">
@@ -60,7 +53,7 @@
                                         <input hidden class="vamos-<?php echo $i ?>" value="<?php echo $manoobra->modelo_id ?>">
                                         <input hidden name="id[]" value="<?php echo $manoobra->id ?>">
                                         <td>
-                                            <select class="opcionfamilia-<?php echo $i ?> form-control" name="familia_id[<?php echo $manoobra->id ?>]">
+                                            <select class="opcionfamilia-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="familia_id[<?php echo $manoobra->id ?>]">
                                                 <option class="tamano-texto-cuerpo-lista" value="">--</option>
                                                 @foreach ($familias as $familia)
                                                     <option class="tamano-texto-cuerpo-lista" value="{{$familia->id}}" @if($familia->id===$manoobra->familia_id) selected='selected' @endif>
@@ -70,7 +63,7 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select class="opcionmodelo-<?php echo $i ?> form-control" name="modelo_id[<?php echo $manoobra->id ?>]">
+                                            <select class="opcionmodelo-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="modelo_id[<?php echo $manoobra->id ?>]">
                                             </select>
                                         </td>
                                         <td>
@@ -90,7 +83,7 @@
                             </tbody>
                         </table>
                         @can('manoobra.actualizarmanoobra')
-                            <input type="submit" name="actualizar" value="Update HandWork" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+                            <input type="submit" name="actualizar" value="Guardar Mano de Obra" class="btn btn-success tamano-texto-cuerpo-boton"/>
                         @endcan
                         {!! Form::close() !!}
                     </div>
@@ -111,37 +104,37 @@
                                 <tbody style="border-color: #ed7d31">
                                     <tr class="fila-fija-manoObra">
                                         <td>
-                                            <select name="familia_id" id="familiaSeleccionado" class="form-select" aria-label="Default select example">
+                                            <select required name="familia_id" id="familiaSeleccionado" class="form-select tamano-texto-cuerpo-lista" aria-label="Default select example">
                                                 <option value="">--</option>
                                                 @foreach ($familias as $familia)
-                                                    <option value="{{$familia->id}}">
+                                                    <option class="tamano-texto-cuerpo-lista" value="{{$familia->id}}">
                                                         {{$familia->nombre}}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </td>  
                                         <td>
-                                            <select name="modelo_id" id="modeloSeleccionado" class="form-select" aria-label="Default select example">
+                                            <select required name="modelo_id" id="modeloSeleccionado" class="form-select tamano-texto-cuerpo-lista" aria-label="Default select example">
                                             </select>
                                         </td>                                    
                                         <td>
-                                            <select name="proceso_id" class="form-select" aria-label="Default select example">
-                                                <option value="">--</option>
+                                            <select required name="proceso_id" class="form-select tamano-texto-cuerpo-lista" aria-label="Default select example">
+                                                <option class="tamano-texto-cuerpo-lista" value="">--</option>
                                                 @foreach ($procesos as $proceso)
-                                                    <option value="{{$proceso->id}}">
+                                                    <option class="tamano-texto-cuerpo-lista" value="{{$proceso->id}}">
                                                         {{$proceso->nombre}}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </td>   
-                                        <td><input type="number" name="tiempohora" placeholder="Tiempo en horas" class="form-control tamano-texto-cuerpo-lista"/></td>
-                                        <td><input name="costo" placeholder="Costo" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                        <td><input required type="number" name="tiempohora" placeholder="Tiempo en horas" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                        <td><input required name="costo" placeholder="Costo" class="form-control tamano-texto-cuerpo-lista"/></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="btn-der">
                                 @can('manoobra.registrarmanoobra')
-                                    <input type="submit" name="insertarManoObra" value="Insert HandWork" class="btn btn-info"/>
+                                    <input type="submit" name="insertarManoObra" value="Insert Mano de Obra" class="btn btn-primary"/>
                                 @endcan
                             </div>
                         </form>

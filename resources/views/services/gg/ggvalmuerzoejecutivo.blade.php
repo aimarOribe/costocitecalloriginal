@@ -1,6 +1,6 @@
-<div class="margenes-botones">
-    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormggvalmuerzoejecutivo(this)">Ver Almuerzos Ejecutivos</button>
-    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormggvalmuerzoejecutivo(this)">Registrar Almuerzo Ejecutivo</button>
+<div class="form-check form-switch col-4">
+    <input class="form-check-input" type="checkbox" role="switch" id="displayFormggvalmuerzoejecutivo">
+    <label class="form-check-label" for="displayFormggvalmuerzoejecutivo">Ver/Registrar Almuerzos Ejecutivos</label>
 </div>
 
 <div id="requestFormggvalmuerzoejecutivo">
@@ -23,15 +23,15 @@
                     <input hidden name="id[]" value="<?php echo $ggvalmuerzoejecutivo->id ?>">
                     <td><input hidden type="text"></td>
                     <td><input type="text" class="ggvaedescripcion-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="descripcion[<?php echo $ggvalmuerzoejecutivo->id ?>]" value="<?php echo $ggvalmuerzoejecutivo->descripcion ?>"></td>
-                    <td><input class="ggvaegasto-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="gasto[<?php echo $ggvalmuerzoejecutivo->id ?>]" value="<?php echo $ggvalmuerzoejecutivo->gasto ?>"></td>
-                    <td><input class="ggvaeperiodoanual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="periodoanual[<?php echo $ggvalmuerzoejecutivo->id ?>]" value="<?php echo $ggvalmuerzoejecutivo->periodoanual ?>"></td>
-                    <td><input disabled class="ggvaetotalgastomensual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" value=""></td>
+                    <td><input class="ggvaegasto-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="gasto[<?php echo $ggvalmuerzoejecutivo->id ?>]" value="<?php echo $ggvalmuerzoejecutivo->gasto ?>"></td>
+                    <td><input type="number" class="ggvaeperiodoanual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="periodoanual[<?php echo $ggvalmuerzoejecutivo->id ?>]" value="<?php echo $ggvalmuerzoejecutivo->periodoanual ?>"></td>
+                    <td><input readonly class="ggvaetotalgastomensual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" value=""></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @can('gg.actualizar')
-        <input type="submit" name="actualizarggvalmuerzoejecutivo" value="Actualizar Almuerzos Ejecutivos" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarggvalmuerzoejecutivo" value="Guardar Almuerzos Ejecutivos" class="btn btn-success tamano-texto-cuerpo-boton"/>
     @endcan
     
     {!! Form::close() !!}
@@ -54,13 +54,13 @@
                     <td><input hidden type="text"></td>
                     <td><input required type="text" class="form-control tamano-texto-cuerpo-lista" name="descripcion"></td>
                     <td><input required class="form-control tamano-texto-cuerpo-lista" name="gasto"></td>
-                    <td><input required class="form-control tamano-texto-cuerpo-lista" name="periodoanual"></td>
+                    <td><input required type="number" required class="form-control tamano-texto-cuerpo-lista" name="periodoanual"></td>
                 </tr>
             </tbody>
         </table>
         <div class="btn-der">
             @can('gg.registrar')
-                <input type="submit" name="insertarggvalmuerzoejecutivo" value="Insertar Almuerzo Ejecutivo" class="btn btn-info"/>
+                <input type="submit" name="insertarggvalmuerzoejecutivo" value="Insertar Almuerzo Ejecutivo" class="btn btn-primary"/>
             @endcan
         </div>
     </form>

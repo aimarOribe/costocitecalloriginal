@@ -36,10 +36,6 @@ class ModeloInsumoController extends Controller
                 $familia_id = current($familia_ids);
                 $modelo = current($modelos);
 
-                if($familia_id == "--"){
-                    throw new Exception("Debes ingresar una familia");
-                }
-
                 $modelofamilia = new Modelofamilia();
                 $modelofamilia->familia_id = $familia_id;
                 $modelofamilia->modelo = $modelo;
@@ -61,24 +57,40 @@ class ModeloInsumoController extends Controller
     public function actualizarmodeloseinsumosmodelos(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->familia_id[$ids] == "--" & $request->modelo[$ids] == ""){
-                    $modeloFamilia = Modelofamilia::find($ids);
-                    $modeloFamilia->delete();
-                    $mensaje = "Modelo Eliminado Correctamente";
-                } else {
-                    $familia_id = $request->familia_id[$ids];
-                    $modelo = $request->modelo[$ids];
-                    DB::table('modelofamilias')
-                        ->where('id',$ids)
-                        ->update(['familia_id'=>$familia_id,'modelo'=>$modelo]);
-                    $mensaje = "Modelo Actualizado Correctamente";
+            if(!$request->hasAny(['familia_id','modelo'])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->familia_id[$ids] == "" & $request->modelo[$ids] == ""){
+                        $modeloFamilia = Modelofamilia::find($ids);
+                        $modeloFamilia->delete();
+                        $mensaje = "Modelo(s) Eliminado(s) Correctamente";
+                    } else {
+                        $familia_id = $request->familia_id[$ids];
+                        $modelo = $request->modelo[$ids];
+
+                        if($familia_id == ""){
+                            throw new Exception("Debes ingresar una familia");
+                        }
+
+                        if($modelo == ""){
+                            throw new Exception("Debes ingresar un modelo");
+                        }
+
+                        DB::table('modelofamilias')
+                            ->where('id',$ids)
+                            ->update(['familia_id'=>$familia_id,'modelo'=>$modelo]);
+                        $mensaje = "Modelo(s) Actualizado(s) Correctamente";
+                    }
                 }
             }
             return redirect()->route('modeloseinsumos.inicio')->with('mensajemodelos',$mensaje);
-        } catch (\Exception $e) {
+        }catch (\Illuminate\Database\QueryException $e) {
+            $error = "No se puede eliminar este registro debido a que lo estas utilizando en tus demas procesos";
+            return redirect()->route('modeloseinsumos.inicio')->with('errorUserModelos',$error);
+        }catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('modeloseinsumos.inicio')->with('errorUserModelos','Debe elegir una familia o ingresar un modelo, si quiere borrar el registro vacie los dos campos');
+            return redirect()->route('modeloseinsumos.inicio')->with('errorUserModelos',$error);
         }
     }
 
@@ -90,14 +102,6 @@ class ModeloInsumoController extends Controller
             while(true){
                 $familia_id = current($familia_ids);
                 $listafamiliamateriales_id = current($listafamiliamateriales_ids);
-
-                if($familia_id == "--"){
-                    throw new Exception("Debes ingresar una familia");
-                }
-
-                if($listafamiliamateriales_id == "--"){
-                    throw new Exception("Debes ingresar una familia de materiales");
-                }
 
                 $insumofamilia = new Insumofamilia();
                 $insumofamilia->familia_id = $familia_id;
@@ -120,31 +124,31 @@ class ModeloInsumoController extends Controller
     public function actualizarmodeloseinsumosinsumos(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if ($request->familia_id[$ids] == "" & $request->listafamiliamateriales_id[$ids] == ""){
-                    $insumoFamilia = Insumofamilia::find($ids);
-                    $insumoFamilia->delete();
-                    $mensaje = "Insumo Eliminado Correctamente";
-                } else{
-                    $familia_id = $request->familia_id[$ids];
-                    $listafamiliamateriales_id = $request->listafamiliamateriales_id[$ids];
+            if(!$request->hasAny(['familia_id','listafamiliamateriales_id',])){
+                $mensaje = "No se encontro registros a guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if ($request->familia_id[$ids] == "" & $request->listafamiliamateriales_id[$ids] == ""){
+                        $insumoFamilia = Insumofamilia::find($ids);
+                        $insumoFamilia->delete();
+                        $mensaje = "Insumo(s) Eliminado(s) Correctamente";
+                    } else{
+                        $familia_id = $request->familia_id[$ids];
+                        $listafamiliamateriales_id = $request->listafamiliamateriales_id[$ids];
 
-                    if($familia_id == "" && $listafamiliamateriales_id == ""){
-                        throw new Exception("No puedes vaciar el campo de familia Y familia de materiales");
+                        if($familia_id == ""){
+                            throw new Exception("No puedes vaciar el campo de familia");
+                        }
+
+                        if($listafamiliamateriales_id == ""){
+                            throw new Exception("No puedes vaciar el campo de familia de materiales");
+                        }
+
+                        DB::table('insumofamilias')
+                            ->where('id',$ids)
+                            ->update(['familia_id'=>$familia_id,'listafamiliamateriales_id'=>$listafamiliamateriales_id]);
+                        $mensaje = "Insumo(s) Actualizado(s) Correctamente";
                     }
-
-                    if($familia_id == ""){
-                        throw new Exception("No puedes vaciar el campo de familia");
-                    }
-
-                    if($listafamiliamateriales_id == ""){
-                        throw new Exception("No puedes vaciar el campo de familia de materiales");
-                    }
-
-                    DB::table('insumofamilias')
-                        ->where('id',$ids)
-                        ->update(['familia_id'=>$familia_id,'listafamiliamateriales_id'=>$listafamiliamateriales_id]);
-                    $mensaje = "Insumo Actualizado Correctamente";
                 }
             }
             return redirect()->route('modeloseinsumos.inicio')->with('mensajeinsumos',$mensaje);

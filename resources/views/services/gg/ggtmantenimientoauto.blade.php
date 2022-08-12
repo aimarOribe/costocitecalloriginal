@@ -1,6 +1,6 @@
-<div class="margenes-botones">
-    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormggtmantenimientoauto(this)">Ver Mantenimiento de Autos</button>
-    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormggtmantenimientoauto(this)">Registrar Mantenimiento de Auto</button>
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="displayFormggtmantenimientoauto">
+    <label class="form-check-label" for="displayFormggtmantenimientoauto">Ver/Registrar Mantenimiento de Auto</label>
 </div>
 
 <div id="requestFormggtmantenimientoauto">
@@ -24,16 +24,16 @@
                     <input hidden name="id[]" value="<?php echo $ggtmantenimientoauto->id ?>">
                     <td><input hidden type="text"></td>
                     <td><input type="text" class="ggtmadescripcion-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="descripcion[<?php echo $ggtmantenimientoauto->id ?>]" value="<?php echo $ggtmantenimientoauto->descripcion ?>"></td>
-                    <td><input class="ggtmagasto-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="gasto[<?php echo $ggtmantenimientoauto->id ?>]" value="<?php echo $ggtmantenimientoauto->gasto ?>"></td>
-                    <td><input class="ggtmaperiodoanual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="periodoanual[<?php echo $ggtmantenimientoauto->id ?>]" value="<?php echo $ggtmantenimientoauto->periodoanual ?>"></td>
-                    <td><input class="ggtmaporcentajeuso-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="porcentajeuso[<?php echo $ggtmantenimientoauto->id ?>]" value="<?php echo $ggtmantenimientoauto->porcentajeuso ?>"></td>
-                    <td><input disabled class="ggtmatotalgastomensual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" value=""></td>
+                    <td><input class="ggtmagasto-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="gasto[<?php echo $ggtmantenimientoauto->id ?>]" value="<?php echo $ggtmantenimientoauto->gasto ?>"></td>
+                    <td><input type="number" class="ggtmaperiodoanual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="periodoanual[<?php echo $ggtmantenimientoauto->id ?>]" value="<?php echo $ggtmantenimientoauto->periodoanual ?>"></td>
+                    <td><input class="ggtmaporcentajeuso-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="porcentajeuso[<?php echo $ggtmantenimientoauto->id ?>]" value="<?php echo $ggtmantenimientoauto->porcentajeuso ?>"></td>
+                    <td><input readonly class="ggtmatotalgastomensual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" value=""></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @can('gg.actualizar')
-        <input type="submit" name="actualizarggtmantenimientoauto" value="Actualizar Mantenimiento de Autos" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarggtmantenimientoauto" value="Guardar Mantenimiento de Autos" class="btn btn-success tamano-texto-cuerpo-boton"/>
     @endcan
     
     {!! Form::close() !!}
@@ -57,14 +57,14 @@
                     <td><input hidden type="text"></td>
                     <td><input required type="text" class="form-control tamano-texto-cuerpo-lista" name="descripcion"></td>
                     <td><input required class="form-control tamano-texto-cuerpo-lista" name="gasto"></td>
-                    <td><input required class="form-control tamano-texto-cuerpo-lista" name="periodoanual"></td>
+                    <td><input required type="number" required class="form-control tamano-texto-cuerpo-lista" name="periodoanual"></td>
                     <td><input required class="form-control tamano-texto-cuerpo-lista" name="porcentajeuso"></td>
                 </tr>
             </tbody>
         </table>
         <div class="btn-der">
             @can('gg.registrar')
-                <input type="submit" name="insertarggtmantenimientoauto" value="Insertar Mantenimiento de Auto" class="btn btn-info"/>
+                <input type="submit" name="insertarggtmantenimientoauto" value="Insertar Mantenimiento de Auto" class="btn btn-primary"/>
             @endcan
         </div>
     </form>

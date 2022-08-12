@@ -40,10 +40,4 @@
 .dep-tabla > tbody > tr > td:nth-child(10) {
     background-color: #ddebf7;
 }
-.margenes-botones{
-    padding: 0px 0px 15px 0px;
-}
-.familianumeroslista{
-    text-align: right;
-}
 /*Fin Tabla Familia*/

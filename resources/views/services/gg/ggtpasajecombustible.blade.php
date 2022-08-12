@@ -12,9 +12,9 @@
 
 <br>
 
-<div class="margenes-botones">
-    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormggtpasajecombustible(this)">Ver Pasajes y Combustible</button>
-    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormggtpasajecombustible(this)">Registrar Pasaje y Combustible</button>
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="displayFormggtpasajecombustible">
+    <label class="form-check-label" for="displayFormggtpasajecombustible">Ver/Registrar Pasajes y Combustible</label>
 </div>
 
 <div id="requestFormggtpasajecombustible">
@@ -37,15 +37,15 @@
                     <input hidden name="id[]" value="<?php echo $ggtpasajecombustible->id ?>">
                     <td><input hidden type="text"></td>
                     <td><input type="text" class="ggtpcdescripcion-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="descripcion[<?php echo $ggtpasajecombustible->id ?>]" value="<?php echo $ggtpasajecombustible->descripcion ?>"></td>
-                    <td><input class="ggtpcgasto-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="gasto[<?php echo $ggtpasajecombustible->id ?>]" value="<?php echo $ggtpasajecombustible->gasto ?>"></td>
-                    <td><input class="ggtpcperiodoanual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="periodoanual[<?php echo $ggtpasajecombustible->id ?>]" value="<?php echo $ggtpasajecombustible->periodoanual ?>"></td>
-                    <td><input disabled class="ggtpctotalgastomensual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" value=""></td>
+                    <td><input class="ggtpcgasto-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="gasto[<?php echo $ggtpasajecombustible->id ?>]" value="<?php echo $ggtpasajecombustible->gasto ?>"></td>
+                    <td><input type="number" class="ggtpcperiodoanual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="periodoanual[<?php echo $ggtpasajecombustible->id ?>]" value="<?php echo $ggtpasajecombustible->periodoanual ?>"></td>
+                    <td><input readonly class="ggtpctotalgastomensual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" value=""></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @can('gg.actualizar')
-        <input type="submit" name="actualizargggasueldosadministrativos" value="Actualizar Pasajes y Combustible" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizargggasueldosadministrativos" value="Guardar Pasajes y Combustible" class="btn btn-success tamano-texto-cuerpo-boton"/>
     @endcan
     
     {!! Form::close() !!}
@@ -68,13 +68,13 @@
                     <td><input hidden type="text"></td>
                     <td><input required type="text" class="form-control tamano-texto-cuerpo-lista" name="descripcion"></td>
                     <td><input required class="form-control tamano-texto-cuerpo-lista" name="gasto"></td>
-                    <td><input required class="form-control tamano-texto-cuerpo-lista" name="periodoanual"></td>
+                    <td><input required type="number" required class="form-control tamano-texto-cuerpo-lista" name="periodoanual"></td>
                 </tr>
             </tbody>
         </table>
         <div class="btn-der">
             @can('gg.registrar')
-                <input type="submit" name="insertarggtpasajecombustible" value="Insertar Pasaje y Combustible" class="btn btn-info"/>
+                <input type="submit" name="insertarggtpasajecombustible" value="Insertar Pasaje y Combustible" class="btn btn-primary"/>
             @endcan
         </div>
     </form>

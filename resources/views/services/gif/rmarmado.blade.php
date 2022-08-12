@@ -1,8 +1,8 @@
 <br>
 
-<div class="margenes-botones">
-    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormrmarmado(this)">Ver Armados</button>
-    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormrmarmado(this)">Registrar Armados</button>
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="displayFormrmarmado">
+    <label class="form-check-label" for="displayFormrmarmado">Ver/Registrar Armado</label>
 </div>
 
 <div id="requestFormrmarmado">
@@ -37,7 +37,7 @@
                     <td><input hidden type="text"></td>
                     <td><input type="text" class="rmarmadodescripcion-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="descripcion[<?php echo $rmarmado->id ?>]" value="<?php echo $rmarmado->descripcion ?>"></td>
                     <td>
-                        <select class="rmarmadounidadmedida-<?php echo $i ?> form-control" name="listaunidadmedida_id[<?php echo $rmarmado->id ?>]">
+                        <select class="rmarmadounidadmedida-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="listaunidadmedida_id[<?php echo $rmarmado->id ?>]">
                             <option class="tamano-texto-cuerpo-lista" value="">--</option>
                             @foreach ($unidaddemedidas as $unidaddemedida)
                                 <option class="tamano-texto-cuerpo-lista" value="{{$unidaddemedida->id}}" @if($unidaddemedida->id===$rmarmado->listaunidadmedida_id) selected='selected' @endif>
@@ -46,16 +46,16 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input class="rmarmadocantidad-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="cantidad[<?php echo $rmarmado->id ?>]" value="<?php echo $rmarmado->cantidad ?>"></td>
-                    <td><input type="number" class="rmarmadogastomanetenimiento-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="gastomantenimiento[<?php echo $rmarmado->id ?>]" value="<?php echo $rmarmado->gastomantenimiento ?>"></td>
-                    <td><input type="number" class="rmarmadofrecuenciaanual-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="frecuenciaanual[<?php echo $rmarmado->id ?>]" value="<?php echo $rmarmado->frecuenciaanual ?>"></td>
-                    <td><input disabled class="totalgastomensualrmarmado-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" value=""></td>
+                    <td><input type="number" class="rmarmadocantidad-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="cantidad[<?php echo $rmarmado->id ?>]" value="<?php echo $rmarmado->cantidad ?>"></td>
+                    <td><input class="rmarmadogastomanetenimiento-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="gastomantenimiento[<?php echo $rmarmado->id ?>]" value="<?php echo $rmarmado->gastomantenimiento ?>"></td>
+                    <td><input type="number" class="rmarmadofrecuenciaanual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="frecuenciaanual[<?php echo $rmarmado->id ?>]" value="<?php echo $rmarmado->frecuenciaanual ?>"></td>
+                    <td><input readonly class="totalgastomensualrmarmado-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" value=""></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @can('gif.actualizar')
-        <input type="submit" name="actualizarrmarmado" value="Update armed" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarrmarmado" value="Guardar Armado" class="btn btn-success tamano-texto-cuerpo-boton"/>
     @endcan
     {!! Form::close() !!}
 </div>
@@ -87,7 +87,7 @@
                     <td><input hidden type="text"></td>
                     <td><input required type="text" class="form-control tamano-texto-cuerpo-lista" name="descripcion"></td>
                     <td>
-                        <select required class="form-control" name="listaunidadmedida_id">
+                        <select required class="form-control tamano-texto-cuerpo-lista" name="listaunidadmedida_id">
                             <option class="tamano-texto-cuerpo-lista" value="">--</option>
                             @foreach ($unidaddemedidas as $unidaddemedida)
                                 <option class="tamano-texto-cuerpo-lista" value="{{$unidaddemedida->id}}">
@@ -97,14 +97,14 @@
                         </select>
                     </td>
                     <td><input required type="number" class="form-control tamano-texto-cuerpo-lista" name="cantidad"></td>
-                    <td><input required type="number" class="form-control tamano-texto-cuerpo-lista" name="gastomantenimiento"></td>
+                    <td><input required class="form-control tamano-texto-cuerpo-lista" name="gastomantenimiento"></td>
                     <td><input required type="number" class="form-control tamano-texto-cuerpo-lista" name="frecuenciaanual"></td>
                 </tr>
             </tbody>
         </table>
         <div class="btn-der">
             @can('gi.registrar')
-                <input type="submit" name="insertarrmarmado" value="Insert armed" class="btn btn-info"/>
+                <input type="submit" name="insertarrmarmado" value="Insertar Armado" class="btn btn-primary"/>
             @endcan
         </div>
     </form>

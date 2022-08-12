@@ -1,8 +1,8 @@
 <br>
 
-<div class="margenes-botones">
-    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormhmsidflimpieza(this)">See cleaning</button>
-    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormhmsidflimpieza(this)">Register cleaning</button>
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="displayFormhmsidflimpieza">
+    <label class="form-check-label" for="displayFormhmsidflimpieza">Ver/Registrar Limpieza</label>
 </div>
 
 <div id="requestFormhmsidflimpieza">
@@ -46,16 +46,16 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input class="hmsidflimpiezavalorunitario-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="valorunitario[<?php echo $hmsieflimpieza->id ?>]" value="<?php echo $hmsieflimpieza->valorunitario ?>"></td>
-                    <td><input type="number" class="hmsidflimpiezaconsumo-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="consumo[<?php echo $hmsieflimpieza->id ?>]" value="<?php echo $hmsieflimpieza->consumo ?>"></td>
-                    <td><input type="number" class="hmsidflimpiezacantidadmeses-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="cantidadmeses[<?php echo $hmsieflimpieza->id ?>]" value="<?php echo $hmsieflimpieza->cantidadmeses ?>"></td>
-                    <td><input disabled class="totalgastomensualhmsidflimpieza-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" value=""></td>
+                    <td><input class="hmsidflimpiezavalorunitario-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="valorunitario[<?php echo $hmsieflimpieza->id ?>]" value="<?php echo $hmsieflimpieza->valorunitario ?>"></td>
+                    <td><input type="number" class="hmsidflimpiezaconsumo-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="consumo[<?php echo $hmsieflimpieza->id ?>]" value="<?php echo $hmsieflimpieza->consumo ?>"></td>
+                    <td><input type="number" class="hmsidflimpiezacantidadmeses-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="cantidadmeses[<?php echo $hmsieflimpieza->id ?>]" value="<?php echo $hmsieflimpieza->cantidadmeses ?>"></td>
+                    <td><input disabled class="totalgastomensualhmsidflimpieza-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" value=""></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @can('gif.actualizar')
-        <input type="submit" name="actualizarhmsidflimpieza" value="Update cleaning" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarhmsidflimpieza" value="Guardar Limpieza" class="btn btn-success tamano-texto-cuerpo-boton"/>
     @endcan
     {!! Form::close() !!}
 </div>
@@ -104,7 +104,7 @@
         </table>
         <div class="btn-der">
             @can('gi.registrar')
-                <input type="submit" name="insertarhmsidflimpieza" value="Insert cleaning" class="btn btn-info"/>
+                <input type="submit" name="insertarhmsidflimpieza" value="Insertar Limpieza" class="btn btn-primary"/>
             @endcan
         </div>
     </form>

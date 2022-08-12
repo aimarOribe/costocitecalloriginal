@@ -1,23 +1,8 @@
 <div class="col-sm-6 col-md-3 offset-md-2 col-lg-2 offset-lg-0">
-    
-    @if (session('errorServidorlistaprocesos'))
-        <div class="alert alert-danger" role="alert">
-            {{session('errorServidorlistaprocesos')}}
-        </div>
-    @endif
 
-    @if (session('mensajeprocesos'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{session('mensajeprocesos')}}!</strong>
-            <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
-                x
-            </button>
-        </div>
-    @endif
-    
-    <div class="margenes-botones">
-        <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormListaProcesos(this)">See Processes</button>
-        <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormListaProcesos(this)">Register Process</button>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="displayFormListaProcesos">
+        <label class="form-check-label" for="displayFormListaProcesos">Ver/Registrar Procesos</label>
     </div>
 
     <div id="requestFormListaProcesos">
@@ -38,7 +23,7 @@
             </tbody>
         </table>
         @can('listas.actualizarlistaProcesos')
-        <button type="submit" name="actualizarListaProceso" class="btn btn-warning boton-actualizar tamano-texto-cuerpo-boton">Update<?php echo "<br/>" ?>Procesos</button>
+        <button type="submit" name="actualizarListaProceso" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton">Guardar<?php echo "<br/>" ?>Procesos</button>
         @endcan
         {!! Form::close() !!}
     </div>
@@ -60,7 +45,7 @@
             </table>
             <div class="btn-der">
                 @can('listas.registrarlistaProcesos')
-                    <button type="submit" name="insertarListaProcesos" class="btn btn-info tamano-texto-cuerpo-boton">Insert<?php echo "<br/>" ?>Processes</button>
+                    <button type="submit" name="insertarListaProcesos" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar<?php echo "<br/>" ?>Procesos</button>
                 @endcan
                 <button id="adicionalListaProcesos" name="adicionalListaProcesos" type="button" class="btn btn-warning"> More + </button>
                 <button id="eliminarListaProcesos" name="eliminarListaProcesos" type="button" class="btn btn-danger"> Less - </button>

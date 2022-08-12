@@ -4,15 +4,28 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('css/lista.css')}}">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css"> --}}
 @endsection
 
 @section('content')
     @if (auth()->user()->can('listas.inicio'))
         <div class="container margen-listas">
             <div class="margen-principal">
+
+                @if (session('errorServidorlistas'))
+                    <div class="alert alert-danger" role="alert">
+                        {{session('errorServidorlistas')}}
+                    </div>
+                @endif
+                
+                @if (session('mensajelistas'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{session('mensajelistas')}}!</strong>
+                        <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                            x
+                        </button>
+                    </div>
+                @endif
+
                 <div class="card" style="padding: 20px">
                     <div class="row">
                         
@@ -49,15 +62,4 @@
 
 @section('js')
     <script type="text/javascript" src="{{asset('js/lista.js')}}"></script>
-    {{-- <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
-    <script>
-        $('#unidadMedidas').DataTable({
-            searching: false,
-            responsive: true,
-            autoWidth: false
-        });
-    </script> --}}
 @endsection

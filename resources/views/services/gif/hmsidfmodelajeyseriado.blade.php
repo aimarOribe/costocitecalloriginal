@@ -6,15 +6,15 @@
         <p style="text-align: center">HERRAMIENTAS, MATERIALES O SUMINISTROS INDIRECTOS DE FABRICACIÓN - MENSUAL</p>
     </div>
     <div>
-        <input style="background-color: #2f5496" disabled class="form-control costohmsidf" type="text">
+        <input readonly style="background-color: #2f5496" class="form-control costohmsidf" type="text">
     </div>
 </div>
 
 <br>
 
-<div class="margenes-botones">
-    <button type="button" class="btn btn-success btn-sm tamano-texto-cuerpo-boton" value="1" onClick="displayFormhmsidfmodelajeseriado(this)">See Modeling and Series</button>
-    <button type="button" class="btn btn-primary btn-sm tamano-texto-cuerpo-boton" value="2" onClick="displayFormhmsidfmodelajeseriado(this)">Register Modeling and Series</button>
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="displayFormhmsidfmodelajeseriado">
+    <label class="form-check-label" for="displayFormhmsidfmodelajeseriado">Ver/Registrar Modelajes y Seriado</label>
 </div>
 
 <div id="requestFormhmsidfmodelajeseriado">
@@ -49,7 +49,7 @@
                     <td><input hidden type="text"></td>
                     <td><input type="text" class="modelajeseriadodescripcion-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="descripcion[<?php echo $hmsiefmodelajeseriado->id ?>]" value="<?php echo $hmsiefmodelajeseriado->descripcion ?>"></td>
                     <td>
-                        <select class="modelajeseriadounidadmedida-<?php echo $i ?> form-control" name="listaunidadmedida_id[<?php echo $hmsiefmodelajeseriado->id ?>]">
+                        <select class="modelajeseriadounidadmedida-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="listaunidadmedida_id[<?php echo $hmsiefmodelajeseriado->id ?>]">
                             <option class="tamano-texto-cuerpo-lista" value="">--</option>
                             @foreach ($unidaddemedidas as $unidaddemedida)
                                 <option class="tamano-texto-cuerpo-lista" value="{{$unidaddemedida->id}}" @if($unidaddemedida->id===$hmsiefmodelajeseriado->listaunidadmedida_id) selected='selected' @endif>
@@ -58,16 +58,16 @@
                             @endforeach
                         </select>
                     </td>
-                    <td><input class="modelajeseriadovalorunitario-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="valorunitario[<?php echo $hmsiefmodelajeseriado->id ?>]" value="<?php echo $hmsiefmodelajeseriado->valorunitario ?>"></td>
-                    <td><input type="number" class="modelajeseriadoconsumo-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="consumo[<?php echo $hmsiefmodelajeseriado->id ?>]" value="<?php echo $hmsiefmodelajeseriado->consumo ?>"></td>
-                    <td><input type="number" class="modelajeseriadocantidadmeses-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" name="cantidadmeses[<?php echo $hmsiefmodelajeseriado->id ?>]" value="<?php echo $hmsiefmodelajeseriado->cantidadmeses ?>"></td>
-                    <td><input disabled class="totalgastomensualmodelajeseriado-<?php echo $i ?> form-control familianumeroslista tamano-texto-cuerpo-lista" value=""></td>
+                    <td><input class="modelajeseriadovalorunitario-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="valorunitario[<?php echo $hmsiefmodelajeseriado->id ?>]" value="<?php echo $hmsiefmodelajeseriado->valorunitario ?>"></td>
+                    <td><input type="number" class="modelajeseriadoconsumo-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="consumo[<?php echo $hmsiefmodelajeseriado->id ?>]" value="<?php echo $hmsiefmodelajeseriado->consumo ?>"></td>
+                    <td><input type="number" class="modelajeseriadocantidadmeses-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="cantidadmeses[<?php echo $hmsiefmodelajeseriado->id ?>]" value="<?php echo $hmsiefmodelajeseriado->cantidadmeses ?>"></td>
+                    <td><input disabled class="totalgastomensualmodelajeseriado-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" value=""></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
     @can('gif.actualizar')
-        <input type="submit" name="actualizarhmsidfmodelajeseriado" value="Update Modeling and Series" class="btn btn-warning tamano-texto-cuerpo-boton"/>
+        <input type="submit" name="actualizarhmsidfmodelajeseriado" value="Guardar Modelajes y Seriado" class="btn btn-success tamano-texto-cuerpo-boton"/>
     @endcan
     {!! Form::close() !!}
 </div>
@@ -99,7 +99,7 @@
                     <td><input hidden type="text"></td>
                     <td><input required type="text" class="form-control tamano-texto-cuerpo-lista" name="descripcion"></td>
                     <td>
-                        <select required class="form-control" name="listaunidadmedida_id">
+                        <select required class="form-control tamano-texto-cuerpo-lista" name="listaunidadmedida_id">
                             <option class="tamano-texto-cuerpo-lista" value="">--</option>
                             @foreach ($unidaddemedidas as $unidaddemedida)
                                 <option class="tamano-texto-cuerpo-lista" value="{{$unidaddemedida->id}}">
@@ -116,7 +116,7 @@
         </table>
         <div class="btn-der">
             @can('gi.registrar')
-                <input type="submit" name="insertarhmsidfmodelajeseriado" value="Insert Modeling and Series" class="btn btn-info"/>
+                <input type="submit" name="insertarhmsidfmodelajeseriado" value="Insertar Modelaje y Seriado" class="btn btn-primary"/>
             @endcan
         </div>
     </form>

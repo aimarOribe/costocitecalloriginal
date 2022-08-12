@@ -1,5 +1,137 @@
 $(function(){
 
+    $("#displayFormgggasueldosadministrativosmodal").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormgggasueldosadministrativosmodal').toggle('show');
+            jQuery('#requestFormgggasueldosadministrativosmodal').hide();
+        }
+        else {
+            jQuery('#requestFormgggasueldosadministrativosmodal').toggle('show');
+            jQuery('#memberFormgggasueldosadministrativosmodal').hide();
+        }
+    })
+
+    $("#displayFormggvsueldosadministrativosmodal").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormggvsueldosadministrativosmodal').toggle('show');
+            jQuery('#requestFormggvsueldosadministrativosmodal').hide();
+        }
+        else {
+            jQuery('#requestFormggvsueldosadministrativosmodal').toggle('show');
+            jQuery('#memberFormggvsueldosadministrativosmodal').hide();
+        }
+    })
+
+    $("#displayFormgggasueldosadministrativos").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormgggasueldosadministrativos').toggle('show');
+            jQuery('#requestFormgggasueldosadministrativos').hide();
+        }
+        else {
+            jQuery('#requestFormgggasueldosadministrativos').toggle('show');
+            jQuery('#memberFormgggasueldosadministrativos').hide();
+        }
+    })
+
+    $("#displayFormgggautilesescritorio").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormgggautilesescritorio').toggle('show');
+            jQuery('#requestFormgggautilesescritorio').hide();
+        }
+        else {
+            jQuery('#requestFormgggautilesescritorio').toggle('show');
+            jQuery('#memberFormgggautilesescritorio').hide();
+        }
+    })
+
+    $("#displayFormgggaeventosanuales").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormgggaeventosanuales').toggle('show');
+            jQuery('#requestFormgggaeventosanuales').hide();
+        }
+        else {
+            jQuery('#requestFormgggaeventosanuales').toggle('show');
+            jQuery('#memberFormgggaeventosanuales').hide();
+        }
+    })
+
+    $("#displayFormggvsueldosadministrativos").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormggvsueldosadministrativos').toggle('show');
+            jQuery('#requestFormggvsueldosadministrativos').hide();
+        }
+        else {
+            jQuery('#requestFormggvsueldosadministrativos').toggle('show');
+            jQuery('#memberFormggvsueldosadministrativos').hide();
+        }
+    })
+
+    $("#displayFormggvalmuerzoejecutivo").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormggvalmuerzoejecutivo').toggle('show');
+            jQuery('#requestFormggvalmuerzoejecutivo').hide();
+        }
+        else {
+            jQuery('#requestFormggvalmuerzoejecutivo').toggle('show');
+            jQuery('#memberFormggvalmuerzoejecutivo').hide();
+        }
+    })
+
+    $("#displayFormggvotrogastoventa").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormggvotrogastoventa').toggle('show');
+            jQuery('#requestFormggvotrogastoventa').hide();
+        }
+        else {
+            jQuery('#requestFormggvotrogastoventa').toggle('show');
+            jQuery('#memberFormggvotrogastoventa').hide();
+        }
+    })
+
+    $("#displayFormggtpasajecombustible").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormggtpasajecombustible').toggle('show');
+            jQuery('#requestFormggtpasajecombustible').hide();
+        }
+        else {
+            jQuery('#requestFormggtpasajecombustible').toggle('show');
+            jQuery('#memberFormggtpasajecombustible').hide();
+        }
+    })
+
+    $("#displayFormggtmantenimientoauto").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormggtmantenimientoauto').toggle('show');
+            jQuery('#requestFormggtmantenimientoauto').hide();
+        }
+        else {
+            jQuery('#requestFormggtmantenimientoauto').toggle('show');
+            jQuery('#memberFormggtmantenimientoauto').hide();
+        }
+    })
+
+    $("#displayFormggserviciobasico").change(function(){
+        var agreed = $(this).is(':checked');
+        if(agreed === true) { 
+            jQuery('#memberFormggserviciobasico').toggle('show');
+            jQuery('#requestFormggserviciobasico').hide();
+        }
+        else {
+            jQuery('#requestFormggserviciobasico').toggle('show');
+            jQuery('#memberFormggserviciobasico').hide();
+        }
+    })
+
     //Obtener el token de la pagina para poder realizar ajax.
     const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
 
@@ -283,125 +415,3 @@ $(function(){
     });
 
 });
-
-function displayFormgggasueldosadministrativos(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormgggasueldosadministrativos').toggle('show');
-        jQuery('#requestFormgggasueldosadministrativos').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormgggasueldosadministrativos').toggle('show');
-        jQuery('#memberFormgggasueldosadministrativos').hide();
-    }
-};
-
-function displayFormgggasueldosadministrativosmodal(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormgggasueldosadministrativosmodal').toggle('show');
-        jQuery('#requestFormgggasueldosadministrativosmodal').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormgggasueldosadministrativosmodal').toggle('show');
-        jQuery('#memberFormgggasueldosadministrativosmodal').hide();
-    }
-};
-
-function displayFormgggautilesescritorio(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormgggautilesescritorio').toggle('show');
-        jQuery('#requestFormgggautilesescritorio').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormgggautilesescritorio').toggle('show');
-        jQuery('#memberFormgggautilesescritorio').hide();
-    }
-};
-
-function displayFormgggaeventosanuales(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormgggaeventosanuales').toggle('show');
-        jQuery('#requestFormgggaeventosanuales').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormgggaeventosanuales').toggle('show');
-        jQuery('#memberFormgggaeventosanuales').hide();
-    }
-};
-
-function displayFormggvsueldosadministrativos(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormggvsueldosadministrativos').toggle('show');
-        jQuery('#requestFormggvsueldosadministrativos').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormggvsueldosadministrativos').toggle('show');
-        jQuery('#memberFormggvsueldosadministrativos').hide();
-    }
-};
-
-function displayFormgggasueldosadministrativosmodal(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormggvsueldosadministrativosmodal').toggle('show');
-        jQuery('#requestFormggvsueldosadministrativosmodal').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormggvsueldosadministrativosmodal').toggle('show');
-        jQuery('#memberFormggvsueldosadministrativosmodal').hide();
-    }
-};
-
-function displayFormggvalmuerzoejecutivo(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormggvalmuerzoejecutivo').toggle('show');
-        jQuery('#requestFormggvalmuerzoejecutivo').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormggvalmuerzoejecutivo').toggle('show');
-        jQuery('#memberFormggvalmuerzoejecutivo').hide();
-    }
-};
-
-function displayFormggvotrogastoventa(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormggvotrogastoventa').toggle('show');
-        jQuery('#requestFormggvotrogastoventa').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormggvotrogastoventa').toggle('show');
-        jQuery('#memberFormggvotrogastoventa').hide();
-    }
-};
-
-function displayFormggtpasajecombustible(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormggtpasajecombustible').toggle('show');
-        jQuery('#requestFormggtpasajecombustible').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormggtpasajecombustible').toggle('show');
-        jQuery('#memberFormggtpasajecombustible').hide();
-    }
-};
-
-function displayFormggtmantenimientoauto(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormggtmantenimientoauto').toggle('show');
-        jQuery('#requestFormggtmantenimientoauto').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormggtmantenimientoauto').toggle('show');
-        jQuery('#memberFormggtmantenimientoauto').hide();
-    }
-};
-
-function displayFormggserviciobasico(c) {
-    if (c.value == "2") {    
-        jQuery('#memberFormggserviciobasico').toggle('show');
-        jQuery('#requestFormggserviciobasico').hide();
-    }
-        if (c.value == "1") {
-        jQuery('#requestFormggserviciobasico').toggle('show');
-        jQuery('#memberFormggserviciobasico').hide();
-    }
-};
-

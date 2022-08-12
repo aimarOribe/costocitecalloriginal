@@ -34,7 +34,7 @@
                             <p>3. GASTOS INDIRECTOS DE FABRICACIÓN POR MES</p>
                         </div>
                         <div>
-                            <input disabled style="background-color: #ffff00" class="form-control costototalgif" type="text">                    
+                            <input readonly style="background-color: #ffff00" class="form-control costototalgif" type="text">                    
                         </div>
                     </div>
 
