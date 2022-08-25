@@ -30,9 +30,7 @@
             @endforeach
         </tbody>
     </table>
-    @can('gg.actualizar')
-        <input type="submit" name="actualizargggaeventosanuales" value="Guardar Eventos Anuales para el Personal" class="btn btn-success tamano-texto-cuerpo-boton"/>
-    @endcan
+    <input type="submit" name="actualizargggaeventosanuales" value="Guardar Eventos Anuales para el Personal" class="btn btn-success tamano-texto-cuerpo-boton"/>
     
     {!! Form::close() !!}
 </div>
@@ -59,9 +57,7 @@
             </tbody>
         </table>
         <div class="btn-der">
-            @can('gg.registrar')
-                <input type="submit" name="insertargggaeventosanuales" value="Insertar Evento Anual para el Personal" class="btn btn-primary"/>
-            @endcan
+            <input type="submit" name="insertargggaeventosanuales" value="Insertar Evento Anual para el Personal" class="btn btn-primary"/>
         </div>
     </form>
 </div>

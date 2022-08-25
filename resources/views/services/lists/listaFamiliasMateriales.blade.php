@@ -22,10 +22,7 @@
                 @endforeach
             </tbody>
         </table>
-        @can('listas.actualizarlistaFamiliasMateriales')
-            <button type="submit" name="actualizarListaFamiliasMateriale" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton">Guardar Familia<?php echo "<br/>" ?>de Materiales</button>
-        @endcan
-        
+        <button type="submit" name="actualizarListaFamiliasMateriale" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton">Guardar Familia<?php echo "<br/>" ?>de Materiales</button>
         {!! Form::close() !!}
     </div>
 
@@ -45,9 +42,7 @@
                 </tbody>
             </table>
             <div class="btn-der">
-                @can('listas.registrarlistaFamiliasMateriales')
-                    <button type="submit" name="insertarListaFamiliasMateriales" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Familia<?php echo "<br/>" ?>de Material</button>
-                @endcan
+                <button type="submit" name="insertarListaFamiliasMateriales" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Familia<?php echo "<br/>" ?>de Material</button>
                 <button id="adicionalListaFamiliasMateriales" name="adicionalListaFamiliasMateriales" type="button" class="btn btn-warning"> More + </button>
                 <button id="eliminarListaFamiliasMateriales" name="eliminarListaFamiliasMateriales" type="button" class="btn btn-danger"> Less - </button>
             </div>

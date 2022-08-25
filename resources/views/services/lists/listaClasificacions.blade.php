@@ -22,9 +22,7 @@
                 @endforeach
             </tbody>
         </table>
-        @can('listas.actualizarclasificacions')
-            <button type="submit" name="actualizarListaClasificacion" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton">Guardar<?php echo "<br/>" ?>Clasificaciones</button>
-        @endcan
+        <button type="submit" name="actualizarListaClasificacion" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton">Guardar<?php echo "<br/>" ?>Clasificaciones</button>
         {!! Form::close() !!}
     </div>
 
@@ -44,9 +42,7 @@
                 </tbody>
             </table>
             <div class="btn-der">
-                @can('listas.registrarclasificacions')
-                    <button type="submit" name="insertarListaClasificacions" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar<?php echo "<br/>" ?>Clasificaciones</button>
-                @endcan
+                <button type="submit" name="insertarListaClasificacions" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar<?php echo "<br/>" ?>Clasificaciones</button>
                 <button id="adicionalListaClasificacions" name="adicionalListaClasificacions" type="button" class="btn btn-warning"> More + </button>
                 <button id="eliminarListaClasificacions" name="eliminarListaClasificacions" type="button" class="btn btn-danger"> Less - </button>
             </div>

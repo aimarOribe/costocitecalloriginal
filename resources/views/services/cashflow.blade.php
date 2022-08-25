@@ -79,10 +79,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        @can('flujodecajas.actualizar')
-                            <input type="submit" name="actualizarFlujoCaja" value="Update Cash Flow" class="btn btn-warning tamano-texto-cuerpo-boton"/>
-                        @endcan
-                        
+                        <input type="submit" name="actualizarFlujoCaja" value="Update Cash Flow" class="btn btn-warning tamano-texto-cuerpo-boton"/>                       
                         {!! Form::close() !!}
                     </div>
                     
@@ -111,9 +108,7 @@
                                 </tr>
                             </table>
                             <div class="btn-der">
-                                @can('flujodecajas.registrar')
-                                    <input type="submit" name="insertarFlujoCaja" value="Insert Cash Flow" class="btn btn-info"/>
-                                @endcan
+                                <input type="submit" name="insertarFlujoCaja" value="Insert Cash Flow" class="btn btn-info"/>
                                 <button id="adicionalFlujoCaja" name="adicionalFlujoCaja" type="button" class="btn btn-warning"> More + </button>
                                 <button id="eliminarFlujoCaja" name="eliminarFlujoCaja" type="button" class="btn btn-danger"> Less - </button>
                             </div>
@@ -141,15 +136,4 @@
 
 @section('js')
     <script type="text/javascript" src="{{asset('js/flujocaja.js')}}"></script>
-    {{-- <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
-    <script>
-        $('#familias').DataTable({
-            searching: false,
-            responsive: true,
-            autoWidth: false
-        });
-    </script> --}}
 @endsection

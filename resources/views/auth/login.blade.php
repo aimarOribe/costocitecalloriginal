@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <img src="https://scontent.ftru3-1.fna.fbcdn.net/v/t39.30808-6/293164450_353506510296821_5028679871833543578_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeFD4cttxTLclbsoQcOHkIGEoLi0DWyc8iGguLQNbJzyIS2XnMQut1IxosSiVv7juKAyDVYS4iIHSAu62Y8Xsz9b&_nc_ohc=0OiEjSGF8DsAX9uis-E&_nc_ht=scontent.ftru3-1.fna&oh=00_AT_dvaZOuETA8akGTGoFnGuGedNCKwTq37yNt1ivLeBd0A&oe=62EBF72F" width="150" height="150" class="d-inline-block align-text-top" alt="Logo CiteCall">
+            <img src="{{asset('img/logocitecall.png')}}" alt="Tabla Indice de Conversion" width="200px" height="200px" class="m-2">
         </x-slot>
 
         <!-- Session Status -->

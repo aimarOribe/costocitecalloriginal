@@ -22,9 +22,7 @@
                 @endforeach
             </tbody>
         </table>
-        @can('listas.actualizarlistaUnidadConsumo')
-            <button type="submit" name="actualizarListaUnidadConsumo" class="btn btn-success tamano-texto-cuerpo-boton boton-actualizar">Guardar Unidades<?php echo "<br/>" ?>de Consumo</button>
-        @endcan
+        <button type="submit" name="actualizarListaUnidadConsumo" class="btn btn-success tamano-texto-cuerpo-boton boton-actualizar">Guardar Unidades<?php echo "<br/>" ?>de Consumo</button>
         {!! Form::close() !!}
     </div>
 
@@ -44,9 +42,7 @@
                 </tbody>
             </table>
             <div class="btn-der">
-                @can('listas.registrarlistaUnidadConsumo')
-                    <button type="submit" name="insertarListaUnidadConsumos" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Unidades<?php echo "<br/>" ?>de Consumo</button>
-                @endcan
+                <button type="submit" name="insertarListaUnidadConsumos" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Unidades<?php echo "<br/>" ?>de Consumo</button>
                 <button id="adicionalListaUnidadConsumos" name="adicionalListaUnidadConsumos" type="button" class="btn btn-warning"> More + </button>
                 <button id="eliminarListaUnidadConsumos" name="eliminarListaUnidadConsumos" type="button" class="btn btn-danger"> Less - </button>
             </div>

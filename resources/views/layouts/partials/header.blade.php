@@ -98,6 +98,10 @@
                             {{auth()->user()->name}}
                         </a>
                         <ul class="dropdown-menu">
+                            <?php
+                                $perfil = Auth::user();
+                            ?>
+                            <a class="dropdown-item" href="{{route('admin.perfil.edit',$perfil)}}">Perfil</a>
                             @can('admin.personal')
                                 <a class="dropdown-item" href="{{route('admin.users.index')}}">Employees</a>
                             @endcan

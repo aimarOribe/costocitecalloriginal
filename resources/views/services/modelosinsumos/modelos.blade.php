@@ -48,9 +48,7 @@
                 @endforeach
             </tbody>
         </table>
-        @can('modeloseinsumos.actualizarmodeloseinsumosmodelos')
-            <button type="submit" name="actualizarModelosInsumosModelos" class="btn btn-success tamano-texto-cuerpo-boton">Guardar Modelos de Familia</button>
-        @endcan
+        <button type="submit" name="actualizarModelosInsumosModelos" class="btn btn-success tamano-texto-cuerpo-boton">Guardar Modelos de Familia</button>
         {!! Form::close() !!}
     </div>
 
@@ -81,9 +79,7 @@
                 </tbody>
             </table>
             <div class="btn-der">
-                @can('modeloseinsumos.registrarmodeloseinsumosmodelos')
-                    <button type="submit" name="insertarmodeloseinsumosmodelos" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Modelos de Familia</button>
-                @endcan
+                <button type="submit" name="insertarmodeloseinsumosmodelos" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar Modelos de Familia</button>
                 <button id="adicionalmodeloseinsumosmodelos" name="adicionalmodeloseinsumosmodelos" type="button" class="btn btn-warning"> More + </button>
                 <button id="eliminarmodeloseinsumosmodelos" name="eliminarmodeloseinsumosmodelos" type="button" class="btn btn-danger"> Less - </button>
             </div>

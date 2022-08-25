@@ -32,10 +32,7 @@
             @endforeach
         </tbody>
     </table>
-    @can('gg.actualizar')
         <input type="submit" name="actualizargggautilesescritorio" value="Guardar Utiles de Escritorio" class="btn btn-success tamano-texto-cuerpo-boton"/>
-    @endcan
-    
     {!! Form::close() !!}
 </div>
 
@@ -63,9 +60,7 @@
             </tbody>
         </table>
         <div class="btn-der">
-            @can('gg.registrar')
-                <input type="submit" name="insertargggasueldosadministrativos" value="Insertar Utiles de Escritorio" class="btn btn-primary"/>
-            @endcan
+            <input type="submit" name="insertargggasueldosadministrativos" value="Insertar Utiles de Escritorio" class="btn btn-primary"/>
         </div>
     </form>
 </div>

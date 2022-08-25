@@ -66,9 +66,7 @@
             @endforeach
         </tbody>
     </table>
-    @can('gif.actualizar')
-        <input type="submit" name="actualizarhmsidfmodelajeseriado" value="Guardar Modelajes y Seriado" class="btn btn-success tamano-texto-cuerpo-boton"/>
-    @endcan
+    <input type="submit" name="actualizarhmsidfmodelajeseriado" value="Guardar Modelajes y Seriado" class="btn btn-success tamano-texto-cuerpo-boton"/>
     {!! Form::close() !!}
 </div>
 
@@ -115,9 +113,7 @@
             </tbody>
         </table>
         <div class="btn-der">
-            @can('gi.registrar')
-                <input type="submit" name="insertarhmsidfmodelajeseriado" value="Insertar Modelaje y Seriado" class="btn btn-primary"/>
-            @endcan
+            <input type="submit" name="insertarhmsidfmodelajeseriado" value="Insertar Modelaje y Seriado" class="btn btn-primary"/>
         </div>
     </form>
 </div>

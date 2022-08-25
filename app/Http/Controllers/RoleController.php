@@ -38,15 +38,16 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=>'required'
-        ]);
-
-        $role = Role::create($request->all());
-
-        $role->permissions()->sync($request->permissions);
-        
-        return redirect()->route('admin.roles.edit',$role)->with('info','The role was created successfully');
+        try{
+            $request->validate([
+                'name'=>'required'
+            ]);
+            $role = Role::create($request->all());
+            $role->permissions()->sync($request->permissions);
+            return redirect()->route('admin.roles.edit',$role)->with('info','El rol fue creado correctamente');
+        }catch (\Exception $e) {
+            return redirect()->route('admin.roles.create')->with('errorRol','El nombre del rol ya existe actualmente');
+        }
     }
 
     /**
@@ -89,7 +90,7 @@ class RoleController extends Controller
 
         $role->permissions()->sync($request->permissions);
         
-        return redirect()->route('admin.roles.edit',$role)->with('info','The role was successfully updated');
+        return redirect()->route('admin.roles.edit',$role)->with('info','El rol fue actualizado correctamente');
     }
 
     /**
@@ -100,7 +101,11 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $role->delete();
-        return redirect()->route('admin.roles.index')->with('info','The role was deleted successfully');
+        try{
+            $role->delete();
+            return redirect()->route('admin.roles.index')->with('info','El rol fue eliminado correctamente');
+        }catch (\Exception $e) {
+            return redirect()->route('admin.roles.index')->with('errorRol','No se puede eliminar debido a que se esta utilizando en este momento');
+        }
     }
 }

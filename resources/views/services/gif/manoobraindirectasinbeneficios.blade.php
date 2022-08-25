@@ -64,10 +64,7 @@
             @endforeach
         </tbody>
     </table>
-    @can('gif.actualizar')
-        <input type="submit" name="actualizarempleadosconsinbeneficios" value="Guardar Mano de Obra" class="btn btn-success tamano-texto-cuerpo-boton"/>
-    @endcan
-    
+    <input type="submit" name="actualizarempleadosconsinbeneficios" value="Guardar Mano de Obra" class="btn btn-success tamano-texto-cuerpo-boton"/>
     {!! Form::close() !!}
 </div>
 
@@ -102,9 +99,7 @@
             </tbody>
         </table>
         <div class="btn-der">
-            @can('gi.registrar')
-                <input type="submit" name="insertarempleadosconsinbeneficios" value="Insertar Mano de Obra" class="btn btn-primary"/>
-            @endcan
+            <input type="submit" name="insertarempleadosconsinbeneficios" value="Insertar Mano de Obra" class="btn btn-primary"/>
         </div>
     </form>
 </div>

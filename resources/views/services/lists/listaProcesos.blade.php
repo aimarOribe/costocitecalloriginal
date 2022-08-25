@@ -22,9 +22,7 @@
                 @endforeach
             </tbody>
         </table>
-        @can('listas.actualizarlistaProcesos')
         <button type="submit" name="actualizarListaProceso" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton">Guardar<?php echo "<br/>" ?>Procesos</button>
-        @endcan
         {!! Form::close() !!}
     </div>
 
@@ -44,9 +42,7 @@
                 </tbody>
             </table>
             <div class="btn-der">
-                @can('listas.registrarlistaProcesos')
-                    <button type="submit" name="insertarListaProcesos" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar<?php echo "<br/>" ?>Procesos</button>
-                @endcan
+                <button type="submit" name="insertarListaProcesos" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar<?php echo "<br/>" ?>Procesos</button>
                 <button id="adicionalListaProcesos" name="adicionalListaProcesos" type="button" class="btn btn-warning"> More + </button>
                 <button id="eliminarListaProcesos" name="eliminarListaProcesos" type="button" class="btn btn-danger"> Less - </button>
             </div>

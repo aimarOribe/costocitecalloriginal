@@ -1,0 +1,22 @@
+.tamano-texto-cuerpo-lista{
+    font-size: 16px;
+    font-weight: 500;
+}
+.tamano-texto-cuerpo-boton{
+    font-size: 15px;
+    font-weight: 500;
+    color: white;
+}
+/* No tiene Permisos de hoja */
+.centrar-texto{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-size: 40px;
+    font-weight: bold;
+}
+.tamano-texto{
+    font-size: 30px;
+}
+/* No tiene Permisos de hoja */

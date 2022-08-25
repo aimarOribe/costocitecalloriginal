@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $correo = Auth::user()->email;
+        $users = User::whereNotIn('email',[$correo])->get();
         return view('admin.users.index',compact('users'));
     }
     public function edit(User $user)
@@ -20,8 +24,12 @@ class UserController extends Controller
     }
     public function update(Request $request, User $user)
     {
-        $user->roles()->sync($request->roles);
-
-        return redirect()->route('admin.users.edit',$user)->with('info','Se asignó los roles correctamente');
+        try {
+            $user->roles()->sync($request->roles);
+            return redirect()->route('admin.users.edit',$user)->with('info','Se asignó los roles correctamente');
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
+            return redirect()->route('admin.users.edit',$user)->with('errorRol',$error);
+        }
     }
 }

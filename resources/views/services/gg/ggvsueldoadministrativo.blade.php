@@ -64,10 +64,7 @@
             @endforeach
         </tbody>
     </table>
-    @can('gg.actualizar')
-        <input type="submit" name="actualizarggvsueldosadministrativos" value="Guardar Sueldos Administrativos" class="btn btn-success tamano-texto-cuerpo-boton"/>
-    @endcan
-    
+    <input type="submit" name="actualizarggvsueldosadministrativos" value="Guardar Sueldos Administrativos" class="btn btn-success tamano-texto-cuerpo-boton"/>
     {!! Form::close() !!}
 </div>
 
@@ -104,9 +101,7 @@
             </tbody>
         </table>
         <div class="btn-der">
-            @can('gg.registrar')
-                <input type="submit" name="insertarggvsueldosadministrativos" value="Insertar Sueldo Administrativo" class="btn btn-primary"/>
-            @endcan
+            <input type="submit" name="insertarggvsueldosadministrativos" value="Insertar Sueldo Administrativo" class="btn btn-primary"/>
         </div>
     </form>
 </div>

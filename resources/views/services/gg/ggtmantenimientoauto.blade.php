@@ -32,10 +32,7 @@
             @endforeach
         </tbody>
     </table>
-    @can('gg.actualizar')
-        <input type="submit" name="actualizarggtmantenimientoauto" value="Guardar Mantenimiento de Autos" class="btn btn-success tamano-texto-cuerpo-boton"/>
-    @endcan
-    
+    <input type="submit" name="actualizarggtmantenimientoauto" value="Guardar Mantenimiento de Autos" class="btn btn-success tamano-texto-cuerpo-boton"/>
     {!! Form::close() !!}
 </div>
 
@@ -63,9 +60,7 @@
             </tbody>
         </table>
         <div class="btn-der">
-            @can('gg.registrar')
-                <input type="submit" name="insertarggtmantenimientoauto" value="Insertar Mantenimiento de Auto" class="btn btn-primary"/>
-            @endcan
+            <input type="submit" name="insertarggtmantenimientoauto" value="Insertar Mantenimiento de Auto" class="btn btn-primary"/>
         </div>
     </form>
 </div>

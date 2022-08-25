@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfigUserController;
 use App\Http\Controllers\DepController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FamiliaController;
@@ -12,11 +13,10 @@ use App\Http\Controllers\InsumoController;
 use App\Http\Controllers\ListaController;
 use App\Http\Controllers\ListaUnidadMedidaConversionController;
 use App\Http\Controllers\ManoObraController;
-use App\Http\Controllers\ModeloInsumo;
 use App\Http\Controllers\ModeloInsumoController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Livewire\Manoobralivewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,18 +29,23 @@ use App\Http\Livewire\Manoobralivewire;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
 //Home
 Route::get('/home',[HomeController::class,'inicio'])->middleware('auth')->name('home.inicio');
 
-//Users
-Route::resource('/users', UserController::class)->only(['index','edit','update'])->middleware('can:admin.personal')->names('admin.users');
+//Usuarios
+Route::resource('/users', UserController::class)->only(['index','edit','update'])->middleware('auth')->names('admin.users');
+
+// Agregar, Editar y Eliminar Usuarios
+Route::post('/configusuariomodal',[ConfigUserController::class,'agregarConfigUsuario'])->name('configuser.inicio');
+Route::get('/configusuariomodal/{user}',[ConfigUserController::class,'verconfigUsuario'])->name('configuser.verconfigUsuario');
+Route::put('/configusuariomodal/actualizar/{user}',[ConfigUserController::class,'actualizarconfigUsuario'])->name('configuser.actualizarconfigUsuario');
+Route::get('/configusuariomodal/eliminar/{user}',[ConfigUserController::class,'eliminarconfigUsuario'])->name('configuser.eliminarconfigUsuario');
 
 //Roles
-Route::resource('/roles', RoleController::class)->names('admin.roles');
+Route::resource('/roles', RoleController::class)->middleware('auth')->names('admin.roles');
+
+//Perfil
+Route::resource('/perfil', PerfilController::class)->only(['edit','update'])->middleware('auth')->names('admin.perfil');;
 
 //Familias
 Route::get('/familias',[FamiliaController::class,'inicio'])->middleware('auth')->name('familias.inicio');
