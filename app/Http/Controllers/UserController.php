@@ -13,13 +13,21 @@ class UserController extends Controller
 {
     public function index()
     {
-        $correo = Auth::user()->email;
-        $users = User::whereNotIn('email',[$correo])->get();
+        $correos = array();
+
+        $users = User::role('Admin')->get();
+
+        foreach ($users as $user) {
+            $correos[] = $user->email;
+        }
+
+        $users = User::whereNotIn('email',$correos)->get(); 
         return view('admin.users.index',compact('users'));
     }
     public function edit(User $user)
     {
-        $roles = Role::all();
+        //$roles = Role::all();
+        $roles = Role::whereNotIn('name',['Admin'])->get(); 
         return view('admin.users.edit', compact('user','roles'));
     }
     public function update(Request $request, User $user)

@@ -9,10 +9,14 @@
 @section('content')
     <div class="margen-principal">
         @if (session('info'))
-            <div class="alert alert-success">
-                {{session('info')}}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{session('info')}}!</strong>
+                <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                    x
+                </button>
             </div>
         @endif
+        
         <div class="card">
             <div class="card-body">
                 {!! Form::model($role, ['route'=>['admin.roles.update',$role],'method'=>'put']) !!}

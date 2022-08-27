@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -15,7 +16,8 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        //$roles = Role::all();
+        $roles = Role::whereNotIn('name',['Admin'])->get(); 
         return view('admin.roles.index',compact('roles'));
     }
 
@@ -38,15 +40,25 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        $mensaje = "";
         try{
             $request->validate([
                 'name'=>'required'
             ]);
+
+            $users = Role::where("name","=",$request->name)->get()->first();
+
+            if($users){
+                throw new Exception("El nombre del rol ya existe, intente con otro nombre");
+            }
+
             $role = Role::create($request->all());
             $role->permissions()->sync($request->permissions);
-            return redirect()->route('admin.roles.edit',$role)->with('info','El rol fue creado correctamente');
+            $mensaje = "El Rol fue registrado correctamente";
+            return redirect()->route('admin.roles.edit',$role)->with('info',$mensaje);
         }catch (\Exception $e) {
-            return redirect()->route('admin.roles.create')->with('errorRol','El nombre del rol ya existe actualmente');
+            $error = $e->getMessage();
+            return redirect()->route('admin.roles.create')->with('errorRol',$error);
         }
     }
 
@@ -69,7 +81,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        $permissions = Permission::all();
+        //$permissions = Permission::all();
+        $permissions = Permission::whereNotIn('name',['admin.roles'])->get(); 
         return view('admin.roles.edit',compact('role','permissions'));
     }
 
@@ -103,7 +116,7 @@ class RoleController extends Controller
     {
         try{
             $role->delete();
-            return redirect()->route('admin.roles.index')->with('info','El rol fue eliminado correctamente');
+            return redirect()->route('admin.roles.index')->with('info','El rol '.$role->name.' fue eliminado correctamente');
         }catch (\Exception $e) {
             return redirect()->route('admin.roles.index')->with('errorRol','No se puede eliminar debido a que se esta utilizando en este momento');
         }

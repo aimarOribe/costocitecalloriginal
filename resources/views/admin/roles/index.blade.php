@@ -9,19 +9,27 @@
 @section('content')
     @if (auth()->user()->can('admin.roles'))
         <div class="margen-principal">
-            <a class="btn btn-success mb-2" href="{{route('admin.roles.create')}}">Agregar Rol</a>
-
+            
             @if (session('errorRol'))
-                    <div class="alert alert-warning" role="alert">
-                        {{session('errorRol')}}
-                    </div>
-                @endif
-
-            @if (session('info'))
-                <div class="alert alert-success">
-                    {{session('info')}}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>{{session('errorRol')}}!</strong>
+                    <button type="button" class="close btn btn-warning btn-sm" data-dismiss="alert" aria-label="Close">
+                        x
+                    </button>
                 </div>
             @endif
+
+            @if (session('info'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>{{session('info')}}!</strong>
+                    <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
+                        x
+                    </button>
+                </div>
+            @endif
+
+            <a class="btn btn-success mb-2" href="{{route('admin.roles.create')}}">Agregar Rol</a>
+
             <div class="card">
                 <div class="card-body">
                     <table class="table table-striped">
