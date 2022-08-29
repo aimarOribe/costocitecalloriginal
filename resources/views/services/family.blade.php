@@ -73,9 +73,9 @@
                                 </thead>
                                 <tbody style="border-color: #ed7d31">
                                     <tr class="fila-fija">
-                                        <td><input type="text" required name="nombre[]" placeholder="FAMILIA" class="form-control tamano-texto-cuerpo-lista"/></td>
-                                        <td><input type="number" name="capprosemdocenas[]" placeholder="CAP. PROD SEM (DOCENAS)" class="semanal form-control tamano-texto-cuerpo-lista"/></td>
-                                        <td><input type="number" name="capprodmensual[]" placeholder="CAP PROD MENSUAL" class="mensual form-control tamano-texto-cuerpo-lista"/></td>
+                                        <td><input type="text" required name="nombre" placeholder="FAMILIA" class="form-control tamano-texto-cuerpo-lista"/></td>
+                                        <td><input type="number" name="capprosemdocenas" placeholder="CAP. PROD SEM (DOCENAS)" class="semanal form-control tamano-texto-cuerpo-lista"/></td>
+                                        <td><input type="number" name="capprodmensual" placeholder="CAP PROD MENSUAL" class="mensual form-control tamano-texto-cuerpo-lista"/></td>
                                     </tr>
                                 </tbody>
                             </table>

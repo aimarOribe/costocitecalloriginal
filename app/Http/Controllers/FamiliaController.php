@@ -24,28 +24,18 @@ class FamiliaController extends Controller
 
         try {
             $mensaje = "";
-            $nombres = $request->nombre;
-            $capprosemdocenass = $request->capprosemdocenas;
-            $capprodmensuals = $request->capprodmensual;
-            while(true){
-                $nombre = current($nombres);
-                $capprosemdocenas = current($capprosemdocenass);
-                $capprodmensual = current($capprodmensuals);
+            $nombre = $request->nombre;
+            $capprosemdocenas = $request->capprosemdocenas;
+            $capprodmensual = $request->capprodmensual;
 
-                $familia = new Familia();
-                $familia->nombre = $nombre;
-                $familia->capprosemdocenas = $capprosemdocenas;
-                $familia->capprodmensual = $capprodmensual;
-                $familia->save();
+            $familia = new Familia();
+            $familia->nombre = $nombre;
+            $familia->capprosemdocenas = $capprosemdocenas;
+            $familia->capprodmensual = $capprodmensual;
+            $familia->save();
 
-                $mensaje = "Familia Guardada Correctamente";
+            $mensaje = "Familia Guardada Correctamente";
 
-                $nombre = next($nombres);
-                $capprosemdocenas = next($capprosemdocenass);
-                $capprodmensual = next($capprodmensuals);
-
-                if($nombre === false && $capprosemdocenas === false && $capprodmensual === false) break;
-            }
             return redirect()->route('familias.inicio')->with('mensajefamilia',$mensaje);
         } catch (\Exception $e) {
             $error = $e->getMessage();
@@ -62,10 +52,8 @@ class FamiliaController extends Controller
                 foreach ($request->id as $ids) {
                     if($request->nombre[$ids] == "" & $request->capprosemdocenas[$ids] == "" & $request->capprodmensual[$ids] == ""){
                         $familia = Familia::find($ids);
-                        $familiaEliminada = $familia->delete();
-                        if($familiaEliminada == 1){
-                            $mensaje = "Familia Eliminada Correctamente";
-                        }
+                        $familia->delete();
+                        $mensaje = "Familia Eliminada Correctamente";
                     }else{
                         $nombre = $request->nombre[$ids];
                         $capprosemdocenas = $request->capprosemdocenas[$ids];
