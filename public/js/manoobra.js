@@ -1,8 +1,8 @@
-$(function(){
+$(function () {
 
-    $("#displayFormManoObra").change(function(){
+    $("#displayFormManoObra").change(function () {
         var agreed = $(this).is(':checked');
-        if(agreed === true) { 
+        if (agreed === true) {
             jQuery('#memberFormManoObra').toggle('show');
             jQuery('#requestFormManoObra').hide();
         }
@@ -13,48 +13,48 @@ $(function(){
     })
 
     const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
-    document.getElementById('familiaSeleccionado').addEventListener('change',(e)=>{
-        fetch('modelos',{
-            method : 'POST',
-            body: JSON.stringify({texto : e.target.value}),
-            headers:{
+    document.getElementById('familiaSeleccionado').addEventListener('change', (e) => {
+        fetch('modelos', {
+            method: 'POST',
+            body: JSON.stringify({ texto: e.target.value }),
+            headers: {
                 'Content-Type': 'application/json',
                 "X-CSRF-Token": csrfToken
             }
-        }).then(response =>{
+        }).then(response => {
             return response.json()
-        }).then( data =>{
-            var opciones ="<option value=''>--</option>";
+        }).then(data => {
+            var opciones = "<option value=''>--</option>";
             data.lista.forEach(modelo => {
-                opciones+= '<option value="'+modelo.id+'">'+modelo.modelo+'</option>';
+                opciones += '<option value="' + modelo.id + '">' + modelo.modelo + '</option>';
             });
             document.getElementById("modeloSeleccionado").innerHTML = opciones;
-        }).catch(error =>console.error(error));
+        }).catch(error => console.error(error));
     })
 
     var padre = $(".cuerpopadremanoobra tr").length;
-    console.log(padre);
     for (let index = 1; index <= padre; index++) {
         const csrfToken = document.head.querySelector("[name~=csrf-token][content]").content;
-        $(".opcionfamilia-"+index+"").on('mouseenter mouseleave',(e)=>{
-            var vamos = $(".vamos-"+index+"").val();
+        $(".opcionfamilia-" + index + "").on('mouseenter mouseleave', (e) => {
+            var vamos = $(".vamos-" + index + "").val();
             console.log(vamos);
-            fetch('modelos',{
-                method : 'POST',
-                body: JSON.stringify({texto : e.target.value}),
-                headers:{
+            fetch('modelos', {
+                method: 'POST',
+                body: JSON.stringify({ texto: e.target.value }),
+                headers: {
                     'Content-Type': 'application/json',
                     "X-CSRF-Token": csrfToken
                 }
-            }).then(response =>{
+            }).then(response => {
                 return response.json()
-            }).then( data =>{
-                var opciones ="<option value=''>--</option>";
+            }).then(data => {
+                var opciones = "<option value=''>--</option>";
                 for (let index = 0; index < data.lista.length; index++) {
-                    opciones+= '<option value="'+data.lista[index].id+'" '+ (data.lista[index].id == vamos ? selected="selected":"") + '>'+data.lista[index].modelo+'</option>';
+                    opciones += '<option value="' + data.lista[index].id + '" ' + (data.lista[index].id == vamos ? selected = "selected" : "") + '>' + data.lista[index].modelo + '</option>';
                 }
-                $(".opcionmodelo-"+index+"").html(opciones);
-            }).catch(error =>console.error(error));
+                $(".opcionmodelo-" + index + "").html(opciones);
+            }).catch(error => console.error(error));
         })
     }
+
 });

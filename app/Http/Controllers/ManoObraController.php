@@ -55,14 +55,18 @@ class ManoObraController extends Controller
             $tiempohora = $request->tiempohora;
             $costo = $request->costo;
 
-            $costoDecimal = floatval($costo);
+            if(floatval($costo)){
+                $costo = floatval($costo);
+            }else{
+                $costo = 0.0;
+            }
 
             $manoobra = new Manoobra();
             $manoobra->familia_id = $familia_id;
             $manoobra->modelo_id = $modelo_id;
             $manoobra->proceso_id = $proceso_id;
             $manoobra->tiempohoras = $tiempohora;
-            $manoobra->costo = $costoDecimal;
+            $manoobra->costo = $costo;
             $manoobra->save();
 
             $mensaje = "Mano de Obra Agregada Correctamente";
@@ -110,11 +114,15 @@ class ManoObraController extends Controller
                             throw new Exception("No puedes vaciar el costo");
                         }
 
-                        $costoDecimal = floatval($costo);
+                        if(floatval($costo)){
+                            $costo = floatval($costo);
+                        }else{
+                            $costo = 0.0;
+                        }
 
                         DB::table('manoobras')
                             ->where('id',$ids)
-                            ->update(['familia_id'=>$familia_id,'modelo_id'=>$modelo_id,'proceso_id'=>$proceso_id,'tiempohoras'=>$tiempohoras,'costo'=>$costoDecimal]);
+                            ->update(['familia_id'=>$familia_id,'modelo_id'=>$modelo_id,'proceso_id'=>$proceso_id,'tiempohoras'=>$tiempohoras,'costo'=>$costo]);
                         $mensaje = "Mano de Obra Actualizado(s) Correctamente";
                     } 
                 }
@@ -122,6 +130,9 @@ class ManoObraController extends Controller
             return redirect()->route('manoobra.inicio')->with('mensajemanoobra',$mensaje);
         } catch (\Exception $e) {
             $error = $e->getMessage();
+            if($error == "Trying to access array offset on value of type null"){
+                $error = "Todos los campos deben ser mostrados, pasa el raton sobre las familias para obtener el modelo";
+            }
             return redirect()->route('manoobra.inicio')->with('errorUserHandWork',$error);
         } 
     }

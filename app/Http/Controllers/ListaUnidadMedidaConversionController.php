@@ -34,6 +34,12 @@ class ListaUnidadMedidaConversionController extends Controller
                 $unidadesmedidas_id = current($unidadesmedidas_ids);
                 $conversion = current($conversiones);
 
+                if(floatval($conversion)){
+                    $conversion = floatval($conversion);
+                }else{
+                    $conversion = 0.0;
+                }
+
                 $listaunidadconversion = new Listaunidadmedidaconversion();
                 $listaunidadconversion->listaunidadmedida_id = $unidadesmedidas_id;
                 $listaunidadconversion->material_id = $material_id;
@@ -73,11 +79,19 @@ class ListaUnidadMedidaConversionController extends Controller
                         if($material_id == ""){
                             throw new Exception("No puedes borrar el material");
                         }
+                        
                         if($unidadesmedidas_id == ""){
                             throw new Exception("No puedes borrar la unidad de medida");
                         }
+
                         if($conversion == ""){
                             throw new Exception("No puedes borrar la conversion");
+                        }
+                        
+                        if(floatval($conversion)){
+                            $conversion = floatval($conversion);
+                        }else{
+                            $conversion = 0.0;
                         }
 
                         DB::table('listaunidadmedidaconversions')

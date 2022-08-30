@@ -49,6 +49,7 @@ Route::resource('/perfil', PerfilController::class)->only(['edit','update'])->mi
 
 //Familias
 Route::get('/familias',[FamiliaController::class,'inicio'])->middleware('auth')->name('familias.inicio');
+Route::get('/obtenerFamilias',[FamiliaController::class,'obtenerFamilias']);
 Route::post('/familias',[FamiliaController::class,'registrar'])->name('familias.registrar');
 Route::post('/familias/actualizar',[FamiliaController::class,'actualizar'])->name('familias.actualizar');
 
@@ -60,18 +61,23 @@ Route::post('/flujodecajas/actualizar',[FlujoCajaController::class,'actualizar']
 //Listas
 Route::get('/listas',[ListaController::class,'inicio'])->middleware('auth')->name('listas.inicio');
 //Unidad de Medidas
+Route::get('/listasUnidadMedida',[ListaController::class,'listasUnidadMedida']);
 Route::post('/listaUnidadMedidas',[ListaController::class,'registrarlistaUnidadMedidas'])->name('listas.registrarlistaUnidadMedidas');
 Route::post('/listaUnidadMedidas/actualizar',[ListaController::class,'actualizarlistaUnidadMedidas'])->name('listas.actualizarlistaUnidadMedidas');
 //Procesos
+Route::get('/listasProcesos',[ListaController::class,'listasProcesos']);
 Route::post('/listaProcesos',[ListaController::class,'registrarlistaProcesos'])->name('listas.registrarlistaProcesos');
 Route::post('/listaProcesos/actualizar',[ListaController::class,'actualizarlistaProcesos'])->name('listas.actualizarlistaProcesos');
 //Clasificacion
+Route::get('/listasClasificacion',[ListaController::class,'listasClasificacion']);
 Route::post('/listaClasificacions',[ListaController::class,'registrarclasificacions'])->name('listas.registrarclasificacions');
 Route::post('/listaClasificacions/actualizar',[ListaController::class,'actualizarclasificacions'])->name('listas.actualizarclasificacions');
 //Unidad de Consumo
+Route::get('/listasUnidadConsumo',[ListaController::class,'listasUnidadConsumo']);
 Route::post('/listaUnidadConsumo',[ListaController::class,'registrarlistaUnidadConsumo'])->name('listas.registrarlistaUnidadConsumo');
 Route::post('/listaUnidadConsumo/actualizar',[ListaController::class,'actualizarlistaUnidadConsumo'])->name('listas.actualizarlistaUnidadConsumo');
 //Familias de Materiales
+Route::get('/listasFamiliasMateriales',[ListaController::class,'listasFamiliasMateriales']);
 Route::post('/listaFamiliasMateriales',[ListaController::class,'registrarlistaFamiliasMateriales'])->name('listas.registrarlistaFamiliasMateriales');
 Route::post('/listaFamiliasMateriales/actualizar',[ListaController::class,'actualizarlistaFamiliasMateriales'])->name('listas.actualizarlistaFamiliasMateriales');
 

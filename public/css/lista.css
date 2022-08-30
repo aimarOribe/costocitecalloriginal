@@ -139,7 +139,7 @@
 .listaFamiliasMateriales-tabla > tbody > tr:nth-child(odd) {
     background-color: #ddebf7;
 }
-.listaUnidadConsumoStextolista{
+.listaFamiliaMaterialesStextolista{
     text-align: left;
 }
 /*Fin Tabla Lista Familias de Materiales*/

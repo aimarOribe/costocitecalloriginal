@@ -8,7 +8,7 @@
             @if (auth()->user()->can('familias.inicio'))
                 <form action="{{route('familias.inicio')}}" method="GET">
                     <div class="centrar-texto">
-                        <img src="{{asset('img/portada-costos.png')}}" height="650" width="650px" alt="Portada" style="margin: 0">
+                        <img src="{{asset('img/portada-costos.png')}}" height="100%" width="50%" alt="Portada" style="margin: 0">
                         <button type="submit" class="btn btn-danger tamano-texto">
                             Empecemos
                         </button>
@@ -19,81 +19,81 @@
             @elseif (auth()->user()->can('flujodecajas.inicio'))
                 <form action="{{route('flujodecajas.inicio')}}" method="GET">
                     <div class="centrar-texto">
-                        <img src="{{asset('img/portada-costos.png')}}" height="400px" width="400px" alt="Portada">
-                        <button type="submit" class="btn btn-success tamano-texto">
-                            Ir a la hoja u hojas
+                        <img src="{{asset('img/portada-costos.png')}}" height="100%" width="50%" alt="Portada" style="margin: 0">
+                        <button type="submit" class="btn btn-danger tamano-texto">
+                            Empecemos
                         </button>
                     </div>
                 </form>
             @elseif (auth()->user()->can('listas.inicio'))
                 <form action="{{route('listas.inicio')}}" method="GET">
                     <div class="centrar-texto">
-                        <img src="{{asset('img/portada-costos.png')}}" height="400px" width="400px" alt="Portada">
-                        <button type="submit" class="btn btn-success tamano-texto">
-                            Ir a la hoja u hojas
+                        <img src="{{asset('img/portada-costos.png')}}" height="100%" width="50%" alt="Portada" style="margin: 0">
+                        <button type="submit" class="btn btn-danger tamano-texto">
+                            Empecemos
                         </button>
                     </div>
                 </form>
             @elseif (auth()->user()->can('modeloseinsumos.inicio'))
                 <form action="{{route('modeloseinsumos.inicio')}}" method="GET">
                     <div class="centrar-texto">
-                        <img src="{{asset('img/portada-costos.png')}}" height="400px" width="400px" alt="Portada">
-                        <button type="submit" class="btn btn-success tamano-texto">
-                            Ir a la hoja u hojas
+                        <img src="{{asset('img/portada-costos.png')}}" height="100%" width="50%" alt="Portada" style="margin: 0">
+                        <button type="submit" class="btn btn-danger tamano-texto">
+                            Empecemos
                         </button>
                     </div>
                 </form>
             @elseif (auth()->user()->can('familiamaterialesmateriales.inicio'))
                 <form action="{{route('familiamaterialesmateriales.inicio')}}" method="GET">
                     <div class="centrar-texto">
-                        <img src="{{asset('img/portada-costos.png')}}" height="400px" width="400px" alt="Portada">
-                        <button type="submit" class="btn btn-success tamano-texto">
-                            Ir a la hoja u hojas
+                        <img src="{{asset('img/portada-costos.png')}}" height="100%" width="50%" alt="Portada" style="margin: 0">
+                        <button type="submit" class="btn btn-danger tamano-texto">
+                            Empecemos
                         </button>
                     </div>
                 </form>
             @elseif (auth()->user()->can('unidadesmedidaconversion.inicio'))
                 <form action="{{route('unidadesmedidaconversion.inicio')}}" method="GET">
                     <div class="centrar-texto">
-                        <img src="{{asset('img/portada-costos.png')}}" height="400px" width="400px" alt="Portada">
-                        <button type="submit" class="btn btn-success tamano-texto">
-                            Ir a la hoja u hojas
+                        <img src="{{asset('img/portada-costos.png')}}" height="100%" width="50%" alt="Portada" style="margin: 0">
+                        <button type="submit" class="btn btn-danger tamano-texto">
+                            Empecemos
                         </button>
                     </div>
                 </form>
             @elseif (auth()->user()->can('manoobra.inicio'))
                 <form action="{{route('manoobra.inicio')}}" method="GET">
                     <div class="centrar-texto">
-                        <img src="{{asset('img/portada-costos.png')}}" height="400px" width="400px" alt="Portada">
-                        <button type="submit" class="btn btn-success tamano-texto">
-                            Ir a la hoja u hojas
+                        <img src="{{asset('img/portada-costos.png')}}" height="100%" width="50%" alt="Portada" style="margin: 0">
+                        <button type="submit" class="btn btn-danger tamano-texto">
+                            Empecemos
                         </button>
                     </div>
                 </form>
             @elseif (auth()->user()->can('dep.inicio'))
                 <form action="{{route('dep.inicio')}}" method="GET">
                     <div class="centrar-texto">
-                        <img src="{{asset('img/portada-costos.png')}}" height="400px" width="400px" alt="Portada">
-                        <button type="submit" class="btn btn-success tamano-texto">
-                            Ir a la hoja u hojas
+                        <img src="{{asset('img/portada-costos.png')}}" height="100%" width="50%" alt="Portada" style="margin: 0">
+                        <button type="submit" class="btn btn-danger tamano-texto">
+                            Empecemos
                         </button>
                     </div>
                 </form>
             @elseif (auth()->user()->can('gif.inicio'))
                 <form action="{{route('gif.inicio')}}" method="GET">
                     <div class="centrar-texto">
-                        <img src="{{asset('img/portada-costos.png')}}" height="400px" width="400px" alt="Portada">
-                        <button type="submit" class="btn btn-success tamano-texto">
-                            Ir a la hoja u hojas
+                        <img src="{{asset('img/portada-costos.png')}}" height="100%" width="50%" alt="Portada" style="margin: 0">
+                        <button type="submit" class="btn btn-danger tamano-texto">
+                            Empecemos
                         </button>
                     </div>
                 </form>
             @elseif (auth()->user()->can('gg.inicio'))
                 <form action="{{route('gg.inicio')}}" method="GET">
                     <div class="centrar-texto">
-                        <img src="{{asset('img/portada-costos.png')}}" height="400px" width="400px" alt="Portada">
-                        <button type="submit" class="btn btn-success tamano-texto">
-                            Ir a la hoja u hojas
+                        <img src="{{asset('img/portada-costos.png')}}" height="100%" width="50%" alt="Portada" style="margin: 0">
+                        <button type="submit" class="btn btn-danger tamano-texto">
+                            Empecemos
                         </button>
                     </div>
                 </form>

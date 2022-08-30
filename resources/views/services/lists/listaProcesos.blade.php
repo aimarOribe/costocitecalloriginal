@@ -6,46 +6,32 @@
     </div>
 
     <div id="requestFormListaProcesos">
-        {!! Form::open(['url' => 'listaProcesos/actualizar', 'method' => 'post']) !!}
         <table id="listaProcesos" class="listaProcesos-tabla table table-bordered">
             <thead>
                 <tr>
                     <th scope="col">PROCESO</th>
                 </tr>
             </thead>
-            <tbody style="border-color: #5b9bd5">
-                @foreach ($listaProcesos as $listaProceso)
-                <tr>
-                    <input hidden name="id[]" value="<?php echo $listaProceso->id ?>">
-                    <td><input type="text" class="form-control listaProcesostextolista tamano-texto-cuerpo-lista" name="nombre[<?php echo $listaProceso->id ?>]" value="<?php echo $listaProceso->nombre ?>"></td>
-                </tr>
-                @endforeach
-            </tbody>
+            <tbody style="border-color: #5b9bd5" id="cuerpopadrelistaprocesos"></tbody>
         </table>
-        <button type="submit" name="actualizarListaProceso" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton">Guardar<?php echo "<br/>" ?>Procesos</button>
-        {!! Form::close() !!}
+        <button type="submit" name="actualizarListaProceso" class="btn btn-success boton-actualizar tamano-texto-cuerpo-boton" id="clavebotoneditareliminarlistaproceso">Guardar<?php echo "<br/>" ?>Procesos</button>
     </div>
 
     <div style="display:none" id="memberFormListaProcesos">
-        <form action="{{route('listas.registrarlistaProcesos')}}" method="POST">
-            @csrf
-            <table class="listaProcesos-tabla table table-bordered" id="tablaListaProcesos">
-                <thead>
-                    <tr>
-                        <th scope="col">PROCESO</th>
-                    </tr>
-                </thead>
-                <tbody style="border-color: #5b9bd5">
-                    <tr class="fila-fija-listaProcesos">
-                        <td><input type="text" required name="nombre[]" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista"/></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="btn-der">
-                <button type="submit" name="insertarListaProcesos" class="btn btn-primary tamano-texto-cuerpo-boton">Insertar<?php echo "<br/>" ?>Procesos</button>
-                <button id="adicionalListaProcesos" name="adicionalListaProcesos" type="button" class="btn btn-warning"> More + </button>
-                <button id="eliminarListaProcesos" name="eliminarListaProcesos" type="button" class="btn btn-danger"> Less - </button>
-            </div>
-        </form>
+        <table class="listaProcesos-tabla table table-bordered" id="tablaListaProcesos">
+            <thead>
+                <tr>
+                    <th scope="col">PROCESO</th>
+                </tr>
+            </thead>
+            <tbody style="border-color: #5b9bd5">
+                <tr class="fila-fija-listaProcesos">
+                    <td><input type="text" required name="nombre" placeholder="Nombre" class="form-control tamano-texto-cuerpo-lista" id="claveprocesoslistaregistrar"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="btn-der">
+            <button type="submit" name="insertarListaProcesos" class="btn btn-primary tamano-texto-cuerpo-boton" id="clavebotonguardarlistaproceso">Insertar<?php echo "<br/>" ?>Procesos</button>
+        </div>
     </div>
 </div>
