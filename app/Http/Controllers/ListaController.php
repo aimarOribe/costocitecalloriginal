@@ -20,12 +20,7 @@ class ListaController extends Controller
     }
 
     public function inicio(){
-        $listaUnidadDeMedidas = Listaunidaddemedida::all();
-        $listaProcesos = Listaproceso::all();
-        $listaClasificacions = Clasificacion::all();
-        $listaUnidadConsumos = Listaunidaddeconsumo::all();
-        $listaFamiliasMateriales = Listafamiliademateriales::all();
-        return view('services.lists',compact('listaUnidadDeMedidas','listaProcesos','listaClasificacions','listaUnidadConsumos','listaFamiliasMateriales'));
+        return view('services.lists');
     }
 
     public function listasUnidadMedida(){

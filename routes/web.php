@@ -84,13 +84,16 @@ Route::post('/listaFamiliasMateriales/actualizar',[ListaController::class,'actua
 //Modelos E Insumos
 Route::get('/modeloseinsumos',[ModeloInsumoController::class,'inicio'])->middleware('auth')->name('modeloseinsumos.inicio');
 //Modelos E Insumos -> Modelos
+Route::get('/obtenerModelosInsumosModelos',[ModeloInsumoController::class,'obtenerModelosInsumosModelos']);
 Route::post('/modeloseinsumosmodelos',[ModeloInsumoController::class,'registrarmodeloseinsumosmodelos'])->name('modeloseinsumos.registrarmodeloseinsumosmodelos');
 Route::post('/modeloseinsumosmodelos/actualizar',[ModeloInsumoController::class,'actualizarmodeloseinsumosmodelos'])->name('modeloseinsumos.actualizarmodeloseinsumosmodelos');
 //Modelos E Insumos -> Insumos
+Route::get('/obtenerModelosInsumosInsumos',[ModeloInsumoController::class,'obtenerModelosInsumosInsumos']);
 Route::post('/modeloseinsumosinsumos',[ModeloInsumoController::class,'registrarmodeloseinsumosinsumos'])->name('modeloseinsumos.registrarmodeloseinsumosinsumos');
 Route::post('/modeloseinsumosinsumos/actualizar',[ModeloInsumoController::class,'actualizarmodeloseinsumosinsumos'])->name('modeloseinsumos.actualizarmodeloseinsumosinsumos');
 
 //Familia de Materiales Materiales
+Route::get('/obtenerfamiliamaterialesmateriales',[FamiliaMateMaterialesController::class,'obtenerfamiliamaterialesmateriales']);
 Route::get('/familiamaterialesmateriales',[FamiliaMateMaterialesController::class,'inicio'])->middleware('auth')->name('familiamaterialesmateriales.inicio');
 Route::post('/familiamaterialesmateriales',[FamiliaMateMaterialesController::class,'registrarfamiliamaterialesmateriales'])->name('familiamaterialesmateriales.registrarfamiliamaterialesmateriales');
 Route::post('/familiamaterialesmateriales/actualizar',[FamiliaMateMaterialesController::class,'actualizarfamiliamaterialesmateriales'])->name('familiamaterialesmateriales.actualizarfamiliamaterialesmateriales');

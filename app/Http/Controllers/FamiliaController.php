@@ -16,7 +16,6 @@ class FamiliaController extends Controller
     }
 
     public function inicio(){
-        $familias = Familia::all();
         return view('services.family');
     }
 

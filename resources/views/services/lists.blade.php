@@ -11,21 +11,6 @@
         <div class="container margen-listas">
             <div class="margen-principal">
 
-                @if (session('errorServidorlistas'))
-                    <div class="alert alert-danger" role="alert">
-                        {{session('errorServidorlistas')}}
-                    </div>
-                @endif
-                
-                @if (session('mensajelistas'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{session('mensajelistas')}}!</strong>
-                        <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
-                            x
-                        </button>
-                    </div>
-                @endif
-
                 <div class="card" style="padding: 20px">
                     <div class="row">
                         

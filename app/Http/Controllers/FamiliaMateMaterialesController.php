@@ -17,47 +17,70 @@ class FamiliaMateMaterialesController extends Controller
     }
 
     public function inicio(){
+        $familiasmateriales = Listafamiliademateriales::all();
+        $unidadesmedidas = Listaunidaddemedida::all();
+        return view('services.materialfamilymaterials',compact('familiasmateriales','unidadesmedidas'));
+    }
+
+    public function obtenerfamiliamaterialesmateriales(){
         $fmmateriales = Fmatematerial::all();
         $familiasmateriales = Listafamiliademateriales::all();
         $unidadesmedidas = Listaunidaddemedida::all();
-        return view('services.materialfamilymaterials',compact('fmmateriales','familiasmateriales','unidadesmedidas'));
+        return response()->json(
+            [
+                'fmmateriales' => $fmmateriales,
+                'familiasmateriales' => $familiasmateriales,
+                'unidadesmedidas' => $unidadesmedidas
+            ]
+        );
     }
 
     public function registrarfamiliamaterialesmateriales(Request $request){
         try {
             $mensaje = "";
-            $familiamateriales_ids = $request->familiamateriales_id;
-            $nombres = $request->nombre;
-            $unidadesmedidas_ids = $request->unidadesmedidas_id;
-            $presentaciones = $request->presentacion;
-            while(true){
-                $familiamateriales_id = current($familiamateriales_ids);
-                $nombre = current($nombres);
-                $unidadesmedidas_id = current($unidadesmedidas_ids);
-                $presentacion = current($presentaciones);
+            $familiamateriales_id = $request->familiamateriales_id;
+            $nombre = $request->nombre;
+            $unidadesmedidas_id = $request->unidadesmedidas_id;
+            $presentacion = $request->presentacion;
 
-                $fmmateriales = new Fmatematerial();
-                $fmmateriales->familiamateriales_id = $familiamateriales_id;
-                $fmmateriales->nombre = $nombre;
-                $fmmateriales->listaunidadmedida_id = $unidadesmedidas_id;
-                $fmmateriales->presentacion = $presentacion;
-                $fmmateriales->stock = 0;
-                $fmmateriales->costopromedio = 0.00;
-                $fmmateriales->costoreal = 0.00;
-                $fmmateriales->save();
-                $mensaje = "Material(es) Registrado(s) Correctamente";
-
-                $familiamateriales_id = next($familiamateriales_ids);
-                $nombre = next($nombres);
-                $unidadesmedidas_id = next($unidadesmedidas_ids);
-                $presentacion = next($presentaciones);
-
-                if($familiamateriales_id === false && $nombre === false && $unidadesmedidas_id === false && $presentacion === false) break;
+            if($familiamateriales_id == ""){
+                throw new Exception("Debes ingresar una familia de materiales");
             }
-            return redirect()->route('familiamaterialesmateriales.inicio')->with('mensajemateriales',$mensaje);
+            if($nombre == ""){
+                throw new Exception("Debes ingresar un nombre");
+            }
+            if($unidadesmedidas_id == ""){
+                throw new Exception("Debes ingresar una unidad de medida");
+            }
+            if($presentacion == ""){
+                throw new Exception("Debes ingresar una presentacion");
+            }
+
+            $fmmateriales = new Fmatematerial();
+            $fmmateriales->familiamateriales_id = $familiamateriales_id;
+            $fmmateriales->nombre = $nombre;
+            $fmmateriales->listaunidadmedida_id = $unidadesmedidas_id;
+            $fmmateriales->presentacion = $presentacion;
+            $fmmateriales->stock = 0;
+            $fmmateriales->costopromedio = 0.00;
+            $fmmateriales->costoreal = 0.00;
+            $fmmateriales->save();
+            $mensaje = "Material Registrado Correctamente";
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'mensaje' => $mensaje
+                ]
+            );
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('familiamaterialesmateriales.inicio')->with('errorUserMateriales',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         } 
     }
 
@@ -97,13 +120,28 @@ class FamiliaMateMaterialesController extends Controller
                     }
                 }
             }
-            return redirect()->route('familiamaterialesmateriales.inicio')->with('mensajemateriales',$mensaje);
+            return response()->json(
+                [
+                    'success' => true,
+                    'mensaje' => $mensaje
+                ]
+            );
         } catch (\Illuminate\Database\QueryException $e) {
             $error = "No se puede eliminar este registro debido a que lo estas utilizando en tus demas procesos";
-            return redirect()->route('familiamaterialesmateriales.inicio')->with('errorUserMateriales',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('familiamaterialesmateriales.inicio')->with('errorUserMateriales',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         }
     }
 }

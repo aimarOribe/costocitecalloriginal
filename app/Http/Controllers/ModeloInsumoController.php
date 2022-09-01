@@ -19,38 +19,58 @@ class ModeloInsumoController extends Controller
     }
 
     public function inicio(){
-        $modelofamilias = Modelofamilia::all();
-        $insumofamilias = Insumofamilia::all();
         $familias = Familia::all();
-        $unidaddemendidas = Listaunidaddemedida::all();
         $familiasMateriales = Listafamiliademateriales::all();
-        return view('services.modelsupplies',compact('familias','modelofamilias','insumofamilias','unidaddemendidas','familiasMateriales'));
+        return view('services.modelsupplies',compact('familias','familiasMateriales'));
+    }
+
+    public function obtenerModelosInsumosModelos(){
+        $modelofamilias = Modelofamilia::all();
+        $familias = Familia::all();
+        return response()->json(
+            [
+                'modeloinsumomodelo' => $modelofamilias,
+                'familias' => $familias
+            ]
+        );
     }
 
     public function registrarmodeloseinsumosmodelos(Request $request){
         try {
             $mensaje = "";
-            $familia_ids = $request->familia_id;
-            $modelos = $request->modelo;
-            while(true){
-                $familia_id = current($familia_ids);
-                $modelo = current($modelos);
+            $familia_id = $request->familia_id;
+            $modelo = $request->modelo;
 
-                $modelofamilia = new Modelofamilia();
-                $modelofamilia->familia_id = $familia_id;
-                $modelofamilia->modelo = $modelo;
-                $modelofamilia->save();
-                $mensaje = "Modelo(s) Registrados Correctamente";
-
-                $familia_id = next($familia_ids);
-                $modelo = next($modelos);
-
-                if($familia_id === false && $modelo === false) break;
+            if($familia_id == ""){
+                throw new Exception("El campo familia no puede estar vacio");
             }
-            return redirect()->route('modeloseinsumos.inicio')->with('mensajemodelos',$mensaje);
+
+            if($modelo == ""){
+                throw new Exception("El campo modelo no puede estar vacio");
+            }
+
+            $modelofamilia = new Modelofamilia();
+            $modelofamilia->familia_id = $familia_id;
+            $modelofamilia->modelo = $modelo;
+            $modelofamilia->save();
+            $mensaje = "Modelo(s) Registrados Correctamente";
+
+            //return redirect()->route('modeloseinsumos.inicio')->with('mensajemodelos',$mensaje);
+            return response()->json(
+                [
+                    'success' => true,
+                    'mensaje' => $mensaje
+                ]
+            );
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('modeloseinsumos.inicio')->with('errorUserModelos',$error);
+            //return redirect()->route('modeloseinsumos.inicio')->with('errorUserModelos',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         } 
     }
 
@@ -70,11 +90,11 @@ class ModeloInsumoController extends Controller
                         $modelo = $request->modelo[$ids];
 
                         if($familia_id == ""){
-                            throw new Exception("Debes ingresar una familia");
+                            throw new Exception("No puedes borrar la familia");
                         }
 
                         if($modelo == ""){
-                            throw new Exception("Debes ingresar un modelo");
+                            throw new Exception("No puedes borrar el modelo");
                         }
 
                         DB::table('modelofamilias')
@@ -84,40 +104,83 @@ class ModeloInsumoController extends Controller
                     }
                 }
             }
-            return redirect()->route('modeloseinsumos.inicio')->with('mensajemodelos',$mensaje);
+            //return redirect()->route('modeloseinsumos.inicio')->with('mensajemodelos',$mensaje);
+            return response()->json(
+                [
+                    'success' => true,
+                    'mensaje' => $mensaje
+                ]
+            );
         }catch (\Illuminate\Database\QueryException $e) {
             $error = "No se puede eliminar este registro debido a que lo estas utilizando en tus demas procesos";
-            return redirect()->route('modeloseinsumos.inicio')->with('errorUserModelos',$error);
+            //return redirect()->route('modeloseinsumos.inicio')->with('errorUserModelos',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         }catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('modeloseinsumos.inicio')->with('errorUserModelos',$error);
+            //return redirect()->route('modeloseinsumos.inicio')->with('errorUserModelos',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         }
+    }
+
+    public function obtenerModelosInsumosInsumos(){
+        $insumofamilias = Insumofamilia::all();
+        $familias = Familia::all();
+        $familiasMateriales = Listafamiliademateriales::all();
+        return response()->json(
+            [
+                'insumofamilias' => $insumofamilias,
+                'familias' => $familias,
+                'familiasMateriales' => $familiasMateriales
+            ]
+        );
     }
 
     public function registrarmodeloseinsumosinsumos(Request $request){
         try {
             $mensaje = "";
-            $familia_ids = $request->familia_id;
-            $listafamiliamateriales_ids = $request->listafamiliamateriales_id;
-            while(true){
-                $familia_id = current($familia_ids);
-                $listafamiliamateriales_id = current($listafamiliamateriales_ids);
+            $familia_id = $request->familia_id;
+            $listafamiliamateriales_id = $request->listafamiliamateriales_id;
 
-                $insumofamilia = new Insumofamilia();
-                $insumofamilia->familia_id = $familia_id;
-                $insumofamilia->listafamiliamateriales_id = $listafamiliamateriales_id;
-                $insumofamilia->save();
-                $mensaje = "Insumo(s) Registrados Correctamente";
-
-                $familia_id = next($familia_ids);
-                $listafamiliamateriales_id = next($listafamiliamateriales_ids);
-
-                if($familia_id === false && $listafamiliamateriales_id === false) break;
+            if($familia_id == ""){
+                throw new Exception("El campo familia no puede estar vacio");
             }
-            return redirect()->route('modeloseinsumos.inicio')->with('mensajeinsumos',$mensaje);
+
+            if($listafamiliamateriales_id == ""){
+                throw new Exception("El campo familia de materiales no puede estar vacio");
+            }
+
+            $insumofamilia = new Insumofamilia();
+            $insumofamilia->familia_id = $familia_id;
+            $insumofamilia->listafamiliamateriales_id = $listafamiliamateriales_id;
+            $insumofamilia->save();
+            $mensaje = "Insumo(s) Registrados Correctamente";
+
+            //return redirect()->route('modeloseinsumos.inicio')->with('mensajeinsumos',$mensaje);
+            return response()->json(
+                [
+                    'success' => true,
+                    'mensaje' => $mensaje
+                ]
+            );
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('modeloseinsumos.inicio')->with('errorUserInsumos',$error);
+            //return redirect()->route('modeloseinsumos.inicio')->with('errorUserInsumos',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         }  
     }
 
@@ -151,10 +214,20 @@ class ModeloInsumoController extends Controller
                     }
                 }
             }
-            return redirect()->route('modeloseinsumos.inicio')->with('mensajeinsumos',$mensaje);
+            return response()->json(
+                [
+                    'success' => true,
+                    'mensaje' => $mensaje
+                ]
+            );
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('modeloseinsumos.inicio')->with('errorUserInsumos',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         }   
     }
 }

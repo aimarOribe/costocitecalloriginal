@@ -10,21 +10,6 @@
     @if (auth()->user()->can('familias.inicio'))
         <div class="margen-principal">
 
-            @if (session('errorUser'))
-                <div class="alert alert-warning" role="alert">
-                    {{session('errorUser')}}
-                </div>
-            @endif
-
-            @if (session('mensajefamilia'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>{{session('mensajefamilia')}}!</strong>
-                    <button type="button" class="close btn btn-success btn-sm" data-dismiss="alert" aria-label="Close">
-                        x
-                    </button>
-                </div>
-            @endif
-
             <div class="card">
                 <div class="card-body">
 
