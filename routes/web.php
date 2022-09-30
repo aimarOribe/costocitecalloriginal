@@ -99,11 +99,13 @@ Route::post('/familiamaterialesmateriales',[FamiliaMateMaterialesController::cla
 Route::post('/familiamaterialesmateriales/actualizar',[FamiliaMateMaterialesController::class,'actualizarfamiliamaterialesmateriales'])->name('familiamaterialesmateriales.actualizarfamiliamaterialesmateriales');
 
 //Unidades Medida de Conversion
+Route::get('/obtenerunidadesmedidaconversion',[ListaUnidadMedidaConversionController::class,'obtenerunidadesmedidaconversion']);
 Route::get('/unidadesmedidaconversion',[ListaUnidadMedidaConversionController::class,'inicio'])->middleware('auth')->name('unidadesmedidaconversion.inicio');
 Route::post('/unidadesmedidaconversion',[ListaUnidadMedidaConversionController::class,'registrarunidadesmedidaconversion'])->name('unidadesmedidaconversion.registrarunidadesmedidaconversion');
 Route::post('/unidadesmedidaconversion/actualizar',[ListaUnidadMedidaConversionController::class,'actualizarunidadesmedidaconversion'])->name('unidadesmedidaconversion.actualizarunidadesmedidaconversion');
 
 // Mano de Obra
+Route::get('/obtenermanoobra',[ManoObraController::class,'obtenermanoobra']);
 Route::get('/manoobra',[ManoObraController::class,'inicio'])->middleware('auth')->name('manoobra.inicio');
 Route::post('/modelos',[ManoObraController::class,'obtenerModelos'])->name('modelos');
 Route::post('/modeloslista',[ManoObraController::class,'obtenerModeloslista'])->name('modeloslista');
@@ -115,6 +117,7 @@ Route::post('/manoobra/actualizar',[ManoObraController::class,'actualizarmanoobr
 Route::get('/insumos',[InsumoController::class,'inicio'])->name('insumos.inicio');
 
 //DEP
+Route::get('/obtenerDeps',[DepController::class,'obtenerDeps']);
 Route::get('/dep',[DepController::class,'inicio'])->middleware('auth')->name('dep.inicio');
 Route::post('/dep',[DepController::class,'registrardeps'])->name('dep.registrardeps');
 Route::post('/dep/actualizar',[DepController::class,'actualizardeps'])->name('dep.actualizardeps');

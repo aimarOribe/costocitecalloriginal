@@ -53,7 +53,6 @@
                     </div>
 
                     <div id="requestFormdep">
-                        {!! Form::open(['url' => 'dep/actualizar', 'method' => 'post']) !!}
                         <table id="dep" class="dep-tabla table table-bordered">
                             <thead>
                                 <tr>
@@ -69,67 +68,45 @@
                                     <th scope="col">DEPRECIACIÓN ANUAL</th>
                                 </tr>
                             </thead>
-                            <tbody style="border-color: #5b9bd5" class="cuerpopadredep">
-                                <?php $i = 0; ?>
-                                @foreach ($deps as $dep)
-                                    <?php $i++; ?>
-                                    <tr>
-                                        <input hidden name="id[]" value="<?php echo $dep->id ?>">
-                                        <td><input type="text" class="form-control tamano-texto-cuerpo-lista" name="activo[<?php echo $dep->id ?>]" value="<?php echo $dep->activo ?>"></td>
-                                        <td><input type="date" class="depfecha-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="fecha[<?php echo $dep->id ?>]" value="<?php echo $dep->fecha ?>"></td>
-                                        <td><input class="depcostodolar-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="costodolar[<?php echo $dep->id ?>]" value="<?php echo $dep->costodolar ?>"></td>
-                                        <td><input class="depccambiodolar-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="cambiodolarfechacompra[<?php echo $dep->id ?>]" value="<?php echo $dep->cambiodolarfechacompra ?>"></td>
-                                        <td><input class="depcostosoles-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="costosoles[<?php echo $dep->id ?>]" value="<?php echo $dep->costosoles ?>"></td>
-                                        <td><input type="number" class="depunidades-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="unidades[<?php echo $dep->id ?>]" value="<?php echo $dep->unidades ?>"></td>
-                                        <td><input readonly class="depcostototal-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="costototal[<?php echo $dep->id ?>]" value="<?php echo $dep->costototal ?>"></td>
-                                        <td><input type="number" class="depaniosdepreciar-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="aniosadepreciar[<?php echo $dep->id ?>]" value="<?php echo $dep->aniosadepreciar ?>"></td>
-                                        <td><input class="depvalorresidual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="valorresidual[<?php echo $dep->id ?>]" value="<?php echo $dep->valorresidual ?>"></td>
-                                        <td><input readonly class="depdepreciacionanual-<?php echo $i ?> form-control tamano-texto-cuerpo-lista" name="depreciacionanual[<?php echo $dep->id ?>]" value="<?php echo $dep->depreciacionanual ?>"></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                            <tbody style="border-color: #5b9bd5" class="cuerpopadredep" id="cuerpopadredep"></tbody>
                         </table>
-                        <input type="submit" name="actualizar" value="Guardar DEP" class="btn btn-success tamano-texto-cuerpo-boton"/>
-                        {!! Form::close() !!}
+                        <input type="submit" name="actualizar" value="Guardar DEP" class="btn btn-success tamano-texto-cuerpo-boton" id="clavebotonactualizareliminardep"/>
                     </div>
                     
                     <div style="display:none" id="memberFormdep">
-                        <form action="{{route('dep.registrardeps')}}" method="POST">
-                            @csrf
-                            <table class="dep-tabla table table-bordered" id="tabla">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ACTIVO</th>
-                                        <th scope="col">FECHA</th>
-                                        <th scope="col">COSTO ($)</th>
-                                        <th scope="col">CAMBIO DE DÓLAR EN LA FECHA DE COMPRA</th>
-                                        <th scope="col">COSTO (S/)</th>
-                                        <th scope="col">UNIDADES</th>
-                                        <th scope="col">COSTO TOTAL</th>
-                                        <th scope="col">AÑOS A DEPRECIAR</th>
-                                        <th scope="col">VALOR RESIDUAL</th>
-                                        <th scope="col">DEPRECIACIÓN ANUAL</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="border-color: #5b9bd5">
-                                    <tr class="fila-fija">
-                                        <td><input required type="text" class="form-control tamano-texto-cuerpo-lista" name="activo" /></td>
-                                        <td><input required type="date" class="depfecha semanal form-control tamano-texto-cuerpo-lista" name="fecha"/></td>
-                                        <td><input class="depcostodolar form-control tamano-texto-cuerpo-lista" name="costodolar" value="0"/></td>
-                                        <td><input class="depccambiodolar form-control tamano-texto-cuerpo-lista" name="cambiodolarfechacompra" value="0"></td>
-                                        <td><input class="depcostosoles form-control tamano-texto-cuerpo-lista" name="costosoles" value="0"></td>
-                                        <td><input type="number" class="depunidades form-control tamano-texto-cuerpo-lista" name="unidades" value="0"></td>
-                                        <td><input readonly class="depcostototal form-control tamano-texto-cuerpo-lista" name="costototal" value="0"></td>
-                                        <td><input type="number" class="depaniosdepreciar form-control tamano-texto-cuerpo-lista" name="aniosadepreciar" value="0"></td>
-                                        <td><input class="depvalorresidual form-control tamano-texto-cuerpo-lista" name="valorresidual" value="0"></td>
-                                        <td><input readonly class="depdepreciacionanual form-control tamano-texto-cuerpo-lista" name="depreciacionanual" value="0"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="btn-der">
-                                <input type="submit" name="insertar" value="Insertar DEP" class="btn btn-primary"/>
-                            </div>
-                        </form>
+                        <table class="dep-tabla table table-bordered" id="tabla">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ACTIVO</th>
+                                    <th scope="col">FECHA</th>
+                                    <th scope="col">COSTO ($)</th>
+                                    <th scope="col">CAMBIO DE DÓLAR EN LA FECHA DE COMPRA</th>
+                                    <th scope="col">COSTO (S/)</th>
+                                    <th scope="col">UNIDADES</th>
+                                    <th scope="col">COSTO TOTAL</th>
+                                    <th scope="col">AÑOS A DEPRECIAR</th>
+                                    <th scope="col">VALOR RESIDUAL</th>
+                                    <th scope="col">DEPRECIACIÓN ANUAL</th>
+                                </tr>
+                            </thead>
+                            <tbody style="border-color: #5b9bd5">
+                                <tr class="fila-fija">
+                                    <td><input required type="text" class="form-control tamano-texto-cuerpo-lista" name="activo" id="clavedepactivoregistrar"/></td>
+                                    <td><input required type="date" class="depfecha semanal form-control tamano-texto-cuerpo-lista" name="fecha" id="clavedepafecharegistrar"/></td>
+                                    <td><input class="depcostodolar form-control tamano-texto-cuerpo-lista" name="costodolar" value="0" id="clavedepcostodolarregistrar"/></td>
+                                    <td><input class="depccambiodolar form-control tamano-texto-cuerpo-lista" name="cambiodolarfechacompra" value="0" id="clavedepcambiodolarfechacompraregistrar"></td>
+                                    <td><input class="depcostosoles form-control tamano-texto-cuerpo-lista" name="costosoles" value="0" id="clavedepcostosolesregistrar"></td>
+                                    <td><input type="number" class="depunidades form-control tamano-texto-cuerpo-lista" name="unidades" value="0" id="clavedepunidadesregistrar"></td>
+                                    <td><input readonly class="depcostototal form-control tamano-texto-cuerpo-lista" name="costototal" value="0" id="clavedepcostototalregistrar"></td>
+                                    <td><input type="number" class="depaniosdepreciar form-control tamano-texto-cuerpo-lista" name="aniosadepreciar" value="0" id="clavedepaniosadepreciarregistrar"></td>
+                                    <td><input class="depvalorresidual form-control tamano-texto-cuerpo-lista" name="valorresidual" value="0" id="clavedepvalorresidualregistrar"></td>
+                                    <td><input readonly class="depdepreciacionanual form-control tamano-texto-cuerpo-lista" name="depreciacionanual" value="0" id="clavedepdepreciacionanualregistrar"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="btn-der">
+                            <input type="submit" name="insertar" value="Insertar DEP" class="btn btn-primary" id="clavebotonaguardardep"/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,7 +130,6 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -167,4 +143,5 @@
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{asset('js/dep.js')}}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @stop

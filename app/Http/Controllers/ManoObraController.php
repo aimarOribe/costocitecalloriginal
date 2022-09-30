@@ -46,6 +46,21 @@ class ManoObraController extends Controller
         }
     }
 
+    public function obtenermanoobra(){
+        $manoobras = Manoobra::all();
+        $familias = Familia::all();
+        $modelos = Modelofamilia::all();
+        $procesos = Listaproceso::all();
+        return response()->json(
+            [
+                'manoobras' => $manoobras,
+                'familias' => $familias,
+                'modelos' => $modelos,
+                'procesos' => $procesos
+            ]
+        );
+    }
+
     public function registrarmanoobra(Request $request){
         try {
             $mensaje = "";
@@ -54,6 +69,22 @@ class ManoObraController extends Controller
             $proceso_id = $request->proceso_id;
             $tiempohora = $request->tiempohora;
             $costo = $request->costo;
+
+            if($familia_id == ""){
+                throw new Exception("Debes seleccionar una familia");
+            }
+            if($modelo_id == ""){
+                throw new Exception("Debes seleccionar un modelo");
+            }
+            if($proceso_id == ""){
+                throw new Exception("Debes seleccionar un proceso");
+            }
+            if($tiempohora == ""){
+                throw new Exception("Debes ingresar un tiempo en Horas");
+            }
+            if($costo == ""){
+                throw new Exception("Debes ingresar un costo");
+            }
 
             if(floatval($costo)){
                 $costo = floatval($costo);
@@ -71,10 +102,20 @@ class ManoObraController extends Controller
 
             $mensaje = "Mano de Obra Agregada Correctamente";
 
-            return redirect()->route('manoobra.inicio')->with('mensajemanoobra',$mensaje);
+            return response()->json(
+                [
+                    'success' => true,
+                    'mensaje' => $mensaje
+                ]
+            );
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('manoobra.inicio')->with('errorUserHandWork',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         }
     }
 
@@ -127,13 +168,23 @@ class ManoObraController extends Controller
                     } 
                 }
             }
-            return redirect()->route('manoobra.inicio')->with('mensajemanoobra',$mensaje);
+            return response()->json(
+                [
+                    'success' => true,
+                    'mensaje' => $mensaje
+                ]
+            );
         } catch (\Exception $e) {
             $error = $e->getMessage();
             if($error == "Trying to access array offset on value of type null"){
                 $error = "Todos los campos deben ser mostrados, pasa el raton sobre las familias para obtener el modelo";
             }
-            return redirect()->route('manoobra.inicio')->with('errorUserHandWork',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         } 
     }
 }

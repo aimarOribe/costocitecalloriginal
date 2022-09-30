@@ -29,7 +29,6 @@ class FamiliaController extends Controller
     }
 
     public function registrar(Request $request){
-
         try {
             $mensaje = "";
             $nombre = $request->nombre;
@@ -70,27 +69,30 @@ class FamiliaController extends Controller
     public function actualizar(Request $request){
         try {
             $mensaje = "";
-            foreach ($request->id as $ids) {
-                if($request->nombre[$ids] == "" & $request->capprosemdocenas[$ids] == "" & $request->capprodmensual[$ids] == ""){
-                    $familia = Familia::find($ids);
-                    $familia->delete();
-                    $mensaje = "Familia Eliminada Correctamente";
-                }else{
-                    $nombre = $request->nombre[$ids];
-                    $capprosemdocenas = $request->capprosemdocenas[$ids];
-                    $capprodmensual = $request->capprodmensual[$ids];
-
-                    if($nombre == ""){
-                        throw new Exception("No puedes borrar el nombre");
-                    }
-
-                    DB::table('familias')
-                        ->where('id',$ids)
-                        ->update(['nombre'=>$nombre,'capprosemdocenas'=>$capprosemdocenas,'capprodmensual'=>$capprodmensual]);
-                    $mensaje = "Familia(s) Actualizada(s) Correctamente";
-                }   
+            if(!$request->hasAny(['nombre','capprosemdocenas','capprodmensual'])){
+                $mensaje = "No hay nada que guardar";
+            }else{
+                foreach ($request->id as $ids) {
+                    if($request->nombre[$ids] == "" & $request->capprosemdocenas[$ids] == "" & $request->capprodmensual[$ids] == ""){
+                        $familia = Familia::find($ids);
+                        $familia->delete();
+                        $mensaje = "Familia Eliminada Correctamente";
+                    }else{
+                        $nombre = $request->nombre[$ids];
+                        $capprosemdocenas = $request->capprosemdocenas[$ids];
+                        $capprodmensual = $request->capprodmensual[$ids];
+    
+                        if($nombre == ""){
+                            throw new Exception("No puedes borrar el nombre");
+                        }
+    
+                        DB::table('familias')
+                            ->where('id',$ids)
+                            ->update(['nombre'=>$nombre,'capprosemdocenas'=>$capprosemdocenas,'capprodmensual'=>$capprodmensual]);
+                        $mensaje = "Familia(s) Actualizada(s) Correctamente";
+                    }   
+                }
             }
-            //return redirect()->route('familias.inicio')->with('mensajefamilia',$mensaje);
             return response()->json(
                 [
                     'success' => true,

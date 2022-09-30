@@ -23,40 +23,67 @@ class ListaUnidadMedidaConversionController extends Controller
         return view('services.unitmeasureconversion',compact('unidadesmedidaconversiones','fmmateriales','unidadesmedidas'));
     }
 
+    
+
+    public function obtenerunidadesmedidaconversion(){
+        $unidadesmedidaconversiones = Listaunidadmedidaconversion::all();
+        $fmmateriales = Fmatematerial::all();
+        $unidadesmedidas = Listaunidaddemedida::all();
+        return response()->json(
+            [
+                'unidadesmedidaconversiones' => $unidadesmedidaconversiones,
+                'fmmateriales' => $fmmateriales,
+                'unidadesmedidas' => $unidadesmedidas
+            ]
+        );
+    }
+
     public function registrarunidadesmedidaconversion(Request $request){
         try {
             $mensaje = "";
-            $material_ids = $request->material_id;
-            $unidadesmedidas_ids = $request->unidadesmedidas_id;
-            $conversiones = $request->conversion;
-            while(true){
-                $material_id = current($material_ids);
-                $unidadesmedidas_id = current($unidadesmedidas_ids);
-                $conversion = current($conversiones);
-
-                if(floatval($conversion)){
-                    $conversion = floatval($conversion);
-                }else{
-                    $conversion = 0.0;
-                }
-
-                $listaunidadconversion = new Listaunidadmedidaconversion();
-                $listaunidadconversion->listaunidadmedida_id = $unidadesmedidas_id;
-                $listaunidadconversion->material_id = $material_id;
-                $listaunidadconversion->conversion = $conversion;
-                $listaunidadconversion->save();
-                $mensaje = "Unidad(es) de Conversion Registrado Correctamente";
-
-                $material_id = next($material_ids);
-                $unidadesmedidas_id = next($unidadesmedidas_ids);
-                $conversion = next($conversiones);
-
-                if($material_id === false && $unidadesmedidas_id === false && $conversion === false) break;
+            $material_id = $request->material_id;
+            $unidadesmedidas_id = $request->unidadesmedidas_id;
+            $conversion = $request->conversion;
+            
+            if($material_id == ""){
+                throw new Exception("Debes ingresar un material");
             }
-            return redirect()->route('unidadesmedidaconversion.inicio')->with('mensajeunidadconversion',$mensaje);
+
+            if($unidadesmedidas_id == ""){
+                throw new Exception("Debes ingresar una unidad de medida");
+            }
+
+            if($conversion == ""){
+                throw new Exception("Debes ingresar una conversion en numeros o decimales");
+            }
+
+            if(floatval($conversion)){
+                $conversion = floatval($conversion);
+            }else{
+                $conversion = 0.0;
+            }
+
+            $listaunidadconversion = new Listaunidadmedidaconversion();
+            $listaunidadconversion->listaunidadmedida_id = $unidadesmedidas_id;
+            $listaunidadconversion->material_id = $material_id;
+            $listaunidadconversion->conversion = $conversion;
+            $listaunidadconversion->save();
+            $mensaje = "Unidad de Conversion Registrado Correctamente";
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'mensaje' => $mensaje
+                ]
+            );
         } catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('unidadesmedidaconversion.inicio')->with('errorUserunidadconversion',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         } 
     }
 
@@ -101,10 +128,20 @@ class ListaUnidadMedidaConversionController extends Controller
                     }
                 }
             }
-            return redirect()->route('unidadesmedidaconversion.inicio')->with('mensajeunidadconversion',$mensaje);
+            return response()->json(
+                [
+                    'success' => true,
+                    'mensaje' => $mensaje
+                ]
+            );
         }catch (\Exception $e) {
             $error = $e->getMessage();
-            return redirect()->route('unidadesmedidaconversion.inicio')->with('errorUserunidadconversion',$error);
+            return response()->json(
+                [
+                    'success' => false,
+                    'mensaje' => $error
+                ]
+            );
         }
     }
 }
